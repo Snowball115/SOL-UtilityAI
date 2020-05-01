@@ -23,14 +23,18 @@ public class UtilityAction : ScriptableObject
     {
         this.agent = agent;
 
-        Setup();
+        Enter();
     }
 
-    // Setup action
-    public virtual void Setup()
+    // Enter state
+    public virtual void Enter()
     {}
 
-    // Execute action
+    // Execute state
     public virtual void Execute()
+    {}
+
+    // Exit state
+    public virtual void Exit()
     {}
 }

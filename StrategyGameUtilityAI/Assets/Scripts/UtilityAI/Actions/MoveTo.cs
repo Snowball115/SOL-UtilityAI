@@ -19,7 +19,7 @@ public class MoveTo : UtilityAction
         UtilityScore = score;
     }
 
-    public override void Setup()
+    public override void Enter()
     {
         base.Execute();
 

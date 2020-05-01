@@ -35,10 +35,10 @@ public class DebugPanel : MonoBehaviour
     {
         nameFieldText.text = agentData.gameObject.name;
 
-        if (agentData.currentAction != null)
+        if (agentData.CurrentAction != null)
         {
-            actionNameFieldText.text = agentData.currentAction.ToString();
-            scoreFieldText.text = agentData.currentAction.UtilityScore.ToString();
+            actionNameFieldText.text = agentData.CurrentAction.ToString();
+            scoreFieldText.text = agentData.CurrentAction.UtilityScore.ToString();
         }
     }
 }

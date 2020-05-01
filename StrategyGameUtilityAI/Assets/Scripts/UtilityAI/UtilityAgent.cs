@@ -11,13 +11,13 @@ public class UtilityAgent : MonoBehaviour
     public soAgentStats AgentStats;
 
     // Agent manager component
-    public AgentManager agentManager;
+    public AgentManager AgentManager;
 
     // List of availabel actions for the agent
     public List<UtilityAction> AgentActions;
 
     // Action to use
-    public UtilityAction currentAction { get; private set; }
+    public UtilityAction CurrentAction { get; private set; }
 
     // Own update interval if no Agent Manager is available
     private readonly float customInterval = 0.2f;
@@ -38,7 +38,7 @@ public class UtilityAgent : MonoBehaviour
     void Update()
     {
         // Will be used if no Agent Manager is available
-        if (agentManager == null)
+        if (AgentManager == null)
         {
             intervalTimer += Time.deltaTime;
 
@@ -55,8 +55,8 @@ public class UtilityAgent : MonoBehaviour
     {
         if (FindObjectOfType<AgentManager>() != null)
         {
-            agentManager = FindObjectOfType<AgentManager>();
-            agentManager.AddAgentToList(this);
+            AgentManager = FindObjectOfType<AgentManager>();
+            AgentManager.AddAgentToList(this);
             return;
         }
 
@@ -71,7 +71,7 @@ public class UtilityAgent : MonoBehaviour
 
         ChooseAction();
 
-        currentAction.Execute();
+        CurrentAction.Execute();
     }
 
     // Choose action with highest utility value
@@ -94,7 +94,7 @@ public class UtilityAgent : MonoBehaviour
             deltaScore = currentScore;
 
             // Assign the best action to our current action to execute
-            currentAction = AgentActions[i];
+            CurrentAction = AgentActions[i];
         }
     }
 }
