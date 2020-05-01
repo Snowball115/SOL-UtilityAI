@@ -5,6 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// Utility Action for agents to execute
+/// TODO: Crashes without using ScriptableObject inheritance
 /// </summary>
 public class UtilityAction : ScriptableObject
 {
@@ -18,12 +19,19 @@ public class UtilityAction : ScriptableObject
     protected MonoBehaviour agentMB;
 
 
-    // Get UtilityAgent script for action
-    public void Init(MonoBehaviour agentMB)
+    public UtilityAction(MonoBehaviour agentMB, float initalScore)
     {
         this.agentMB = agentMB;
 
+        UtilityScore = initalScore;
+
         Enter();
+    }
+
+    // Get UtilityAgent script for action
+    public void Init(MonoBehaviour agentMB)
+    {
+        
     }
 
     // Enter state

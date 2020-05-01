@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(fileName = "New MoveTo", menuName = "Utility Actions/Move To")]
 public class MoveTo : UtilityAction
 {
     // Position the agent should move at
@@ -13,10 +12,9 @@ public class MoveTo : UtilityAction
     private NavMeshAgent navAgent;
 
 
-    public MoveTo(GameObject goalPos, float score)
+    public MoveTo(GameObject goalPos, MonoBehaviour mb, float initialScore) : base(mb, initialScore)
     {
         this.goalPos = goalPos;
-        UtilityScore = score;
     }
 
     public override void Enter()

@@ -12,10 +12,10 @@ public class Patrol : UtilityAction
     public List<GameObject> waypoints;
     private int waypointIndex = 0;
 
-    public Patrol(List<GameObject> waypoints, float score)
+
+    public Patrol(List<GameObject> waypoints, MonoBehaviour mb, float initialScore) : base(mb, initialScore)
     {
         this.waypoints = waypoints;
-        UtilityScore = score;
     }
 
     public override void Enter()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Main script for agent to work with Utility AI
@@ -28,11 +29,11 @@ public class UtilityAgent : MonoBehaviour
     {
         CheckForAgentManager();
 
-        // Give every action the reference to this agent
-        for (int i = 0; i < AgentActions.Count; i++)
-        {
-            AgentActions[i].Init(this);
-        }
+        //// Give every action the reference to this agent
+        //for (int i = 0; i < AgentActions.Count; i++)
+        //{
+        //    AgentActions[i].Init(this);
+        //}
     }
 
     void Update()

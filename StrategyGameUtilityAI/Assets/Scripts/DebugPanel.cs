@@ -22,6 +22,7 @@ public class DebugPanel : MonoBehaviour
     // The Utility Agents data
     private UtilityAgent agentData;
 
+
     void Start()
     {
         nameFieldText = NameField.GetComponent<Text>();
