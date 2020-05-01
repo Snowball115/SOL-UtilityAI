@@ -25,8 +25,10 @@ public class UtilityAgent : MonoBehaviour
     private float intervalTimer;
 
 
-    void Start()
+    void Awake()
     {
+        AgentActions = new List<UtilityAction>();
+
         CheckForAgentManager();
 
         //// Give every action the reference to this agent

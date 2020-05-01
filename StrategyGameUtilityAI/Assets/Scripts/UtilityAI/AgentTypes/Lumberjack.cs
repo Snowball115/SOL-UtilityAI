@@ -7,7 +7,7 @@ public class Lumberjack : UtilityAgent
     public List<GameObject> Waypoints;
 
 
-    void Awake()
+    void Start()
     {
         AgentActions.Add(new Patrol(Waypoints, this, 1));
     }

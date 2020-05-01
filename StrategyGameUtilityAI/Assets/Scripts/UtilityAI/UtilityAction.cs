@@ -5,9 +5,8 @@ using UnityEngine;
 
 /// <summary>
 /// Utility Action for agents to execute
-/// TODO: Crashes without using ScriptableObject inheritance
 /// </summary>
-public class UtilityAction : ScriptableObject
+public class UtilityAction
 {
     // The value the action has
     public float UtilityScore;
