@@ -66,8 +66,8 @@ public class UtilityAgent : MonoBehaviour
     // Update function for our agent
     public void UpdateAgent()
     {
-        // Check if actions for this agent exist
-        if (AgentActions.Count <= 0) return;
+        // Check if any actions for this agent exist
+        if (AgentActions.Count == 0) return;
 
         ChooseAction();
 

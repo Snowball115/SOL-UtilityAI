@@ -15,13 +15,13 @@ public class UtilityAction : ScriptableObject
     public List<UtilityScorer> Scorers;
 
     // The Agent this action can access
-    protected UtilityAgent agent;
+    protected MonoBehaviour agentMB;
 
 
     // Get UtilityAgent script for action
-    public void Init(UtilityAgent agent)
+    public void Init(MonoBehaviour agentMB)
     {
-        this.agent = agent;
+        this.agentMB = agentMB;
 
         Enter();
     }

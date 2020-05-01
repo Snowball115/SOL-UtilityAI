@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Lumberjack : UtilityAgent
 {
+    public List<GameObject> Waypoints;
+
     void Awake()
     {
-        AgentActions.Add(new MoveTo(GameObject.Find("PositionA"), 1));
-        AgentActions.Add(new MoveTo(GameObject.Find("PositionB"), 1));
-        AgentActions.Add(new MoveTo(GameObject.Find("PositionC"), 1));
+        AgentActions.Add(new Patrol(Waypoints, 1));
     }
 }

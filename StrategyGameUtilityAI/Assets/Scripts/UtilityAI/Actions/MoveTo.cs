@@ -23,7 +23,7 @@ public class MoveTo : UtilityAction
     {
         base.Execute();
 
-        navAgent = agent.GetComponent<NavMeshAgent>();
+        navAgent = agentMB.GetComponent<NavMeshAgent>();
     }
 
     public override void Execute()
