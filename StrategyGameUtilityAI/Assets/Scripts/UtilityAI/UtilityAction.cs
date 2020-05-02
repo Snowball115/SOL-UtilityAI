@@ -27,12 +27,6 @@ public class UtilityAction
         Enter();
     }
 
-    // Get UtilityAgent script for action
-    public void Init(MonoBehaviour agentMB)
-    {
-        
-    }
-
     // Enter state
     public virtual void Enter()
     {}

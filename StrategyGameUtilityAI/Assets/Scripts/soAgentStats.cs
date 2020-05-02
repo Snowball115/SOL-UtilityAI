@@ -11,7 +11,4 @@ public class soAgentStats : ScriptableObject
 
     // attack power
     public float attackPoints;
-
-    // how far the agent can recognize entities (e.g. trees or other npcs)
-    public float viewRange;
 }

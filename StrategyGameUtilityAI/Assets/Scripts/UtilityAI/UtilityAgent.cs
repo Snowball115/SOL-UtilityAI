@@ -8,9 +8,6 @@ using UnityEngine.Events;
 /// </summary>
 public class UtilityAgent : MonoBehaviour
 {
-    // Agent gameplay components
-    public soAgentStats AgentStats;
-
     // Agent manager component
     public AgentManager AgentManager;
 
@@ -29,13 +26,16 @@ public class UtilityAgent : MonoBehaviour
     {
         AgentActions = new List<UtilityAction>();
 
-        CheckForAgentManager();
-
         //// Give every action the reference to this agent
         //for (int i = 0; i < AgentActions.Count; i++)
         //{
         //    AgentActions[i].Init(this);
         //}
+    }
+
+    void Start()
+    {
+        CheckForAgentManager();
     }
 
     void Update()

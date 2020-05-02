@@ -8,29 +8,45 @@ public class AgentManager : MonoBehaviour
     [SerializeField] private float updateInterval;
 
     // List of active agents of one manager instance
-    public List<UtilityAgent> activeAgents;
+    public List<UtilityAgent> ActiveAgents;
 
     // Coroutine manager and ticker for update loop
     private CoroutineHelper coroutineHelper;
     private CoroutineTick ticker;
 
+
     void Awake()
     {
-        activeAgents = new List<UtilityAgent>();
+        ActiveAgents = new List<UtilityAgent>();
 
         coroutineHelper = FindObjectOfType<CoroutineHelper>();
         ticker = new CoroutineTick();
+    }
 
+    private void Start()
+    {
+        RunAI();
+    }
+
+    // Run AI process
+    public void RunAI()
+    {
         // Update all active agents in a specific interval
         coroutineHelper.Run(ticker.Tick(() => UpdateAgents(), updateInterval), "AgentUpdateLoop");
+    }
+
+    // Stop AI process
+    public void StopAI()
+    {
+        coroutineHelper.End("AgentUpdateLoop");
     }
 
     // Add agents to the active list
     public void AddAgentToList(UtilityAgent agent)
     {
-        if (!activeAgents.Contains(agent))
+        if (!ActiveAgents.Contains(agent))
         {
-            activeAgents.Add(agent);
+            ActiveAgents.Add(agent);
             return;
         }
 
@@ -40,9 +56,9 @@ public class AgentManager : MonoBehaviour
     // Remove agents from list
     public void RemoveAgent(UtilityAgent agent)
     {
-        if (activeAgents.Contains(agent))
+        if (ActiveAgents.Contains(agent))
         {
-            activeAgents.Remove(agent);
+            ActiveAgents.Remove(agent);
             return;
         }
         
@@ -52,9 +68,9 @@ public class AgentManager : MonoBehaviour
     // Update agents behaviour
     public void UpdateAgents()
     {
-        for (int i = 0; i < activeAgents.Count; i++)
+        for (int i = 0; i < ActiveAgents.Count; i++)
         {
-            activeAgents[i].UpdateAgent();
+            ActiveAgents[i].UpdateAgent();
         }
     }
 }

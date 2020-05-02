@@ -27,13 +27,13 @@ public class EnititiesSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            for (int i = 0; i < activeObjects.Count; i++)
-            {
-                CheckIfObjectsIntersect(activeObjects[i], newPos);
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    for (int i = 0; i < activeObjects.Count; i++)
+        //    {
+        //        CheckIfObjectsIntersect(activeObjects[i], newPos);
+        //    }
+        //}
     }
 
     public void GenerateEntities()
