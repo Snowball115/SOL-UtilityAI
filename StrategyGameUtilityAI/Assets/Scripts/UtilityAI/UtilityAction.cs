@@ -15,12 +15,12 @@ public class UtilityAction
     public List<UtilityScorer> Scorers;
 
     // The Agent this action can access
-    protected MonoBehaviour agentMB;
+    protected UtilityAgent agent;
 
 
-    public UtilityAction(MonoBehaviour agentMB, float initalScore)
+    public UtilityAction(UtilityAgent agent, float initalScore)
     {
-        this.agentMB = agentMB;
+        this.agent = agent;
 
         UtilityScore = initalScore;
 

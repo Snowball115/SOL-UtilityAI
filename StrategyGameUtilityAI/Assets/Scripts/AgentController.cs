@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
-    // Agent gameplay component
+    // Agent statistics component
     public soAgentStats AgentStats;
 
     // NavMeshAgent component
@@ -14,8 +14,9 @@ public class AgentController : MonoBehaviour
     // Utility AI component
     public UtilityAgent UtilityAgent { get; private set; }
 
-    // Senses of the agent
+    // Agent senses component
     public AgentSenses Senses { get; private set; }
+
 
     void Start()
     {

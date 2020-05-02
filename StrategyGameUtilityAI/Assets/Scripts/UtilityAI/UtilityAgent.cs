@@ -8,6 +8,9 @@ using UnityEngine.Events;
 /// </summary>
 public class UtilityAgent : MonoBehaviour
 {
+    // Agent gameplay component
+    public AgentController Controller;
+
     // Agent manager component
     public AgentManager AgentManager;
 
@@ -24,6 +27,8 @@ public class UtilityAgent : MonoBehaviour
 
     void Awake()
     {
+        Controller = GetComponent<AgentController>();
+
         AgentActions = new List<UtilityAction>();
 
         //// Give every action the reference to this agent

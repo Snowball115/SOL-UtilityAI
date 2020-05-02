@@ -5,15 +5,12 @@ using UnityEngine.AI;
 
 public class Patrol : UtilityAction
 {
-    // NavMeshAgent component
-    private NavMeshAgent navAgent;
-
-    // Position the agent should move at
+    // Positions where the agent should patrol
     public List<GameObject> waypoints;
     private int waypointIndex = 0;
 
 
-    public Patrol(List<GameObject> waypoints, MonoBehaviour mb, float initialScore) : base(mb, initialScore)
+    public Patrol(List<GameObject> waypoints, UtilityAgent agent, float initialScore) : base(agent, initialScore)
     {
         this.waypoints = waypoints;
     }
@@ -22,9 +19,7 @@ public class Patrol : UtilityAction
     {
         base.Execute();
 
-        navAgent = agentMB.GetComponent<NavMeshAgent>();
-
-        navAgent.autoBraking = false;
+        agent.Controller.NavAgent.autoBraking = false;
     }
 
     public override void Execute()
@@ -33,11 +28,16 @@ public class Patrol : UtilityAction
 
         if (waypoints.Count == 0) return;
 
-        if (!navAgent.pathPending && navAgent.remainingDistance < 0.5f)
+        if (!agent.Controller.NavAgent.pathPending && agent.Controller.NavAgent.remainingDistance < 0.5f)
         {
-            navAgent.destination = waypoints[waypointIndex].transform.position;
+            agent.Controller.NavAgent.destination = waypoints[waypointIndex].transform.position;
 
             waypointIndex = (waypointIndex + 1) % waypoints.Count;
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }

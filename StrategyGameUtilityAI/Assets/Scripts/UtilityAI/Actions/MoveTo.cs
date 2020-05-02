@@ -8,11 +8,8 @@ public class MoveTo : UtilityAction
     // Position the agent should move at
     public GameObject goalPos;
 
-    // NavMeshAgent component
-    private NavMeshAgent navAgent;
 
-
-    public MoveTo(GameObject goalPos, MonoBehaviour mb, float initialScore) : base(mb, initialScore)
+    public MoveTo(GameObject goalPos, UtilityAgent agent, float initialScore) : base(agent, initialScore)
     {
         this.goalPos = goalPos;
     }
@@ -20,14 +17,17 @@ public class MoveTo : UtilityAction
     public override void Enter()
     {
         base.Execute();
-
-        navAgent = agentMB.GetComponent<NavMeshAgent>();
     }
 
     public override void Execute()
     {
         base.Execute();
 
-        navAgent.destination = goalPos.transform.position;
+        agent.Controller.NavAgent.destination = goalPos.transform.position;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }
