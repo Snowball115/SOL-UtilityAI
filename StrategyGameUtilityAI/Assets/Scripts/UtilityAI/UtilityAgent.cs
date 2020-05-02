@@ -9,7 +9,7 @@ using UnityEngine.Events;
 public class UtilityAgent : MonoBehaviour
 {
     // Agent gameplay component
-    public AgentController Controller;
+    public AgentController AgentController;
 
     // Agent manager component
     public AgentManager AgentManager;
@@ -27,7 +27,7 @@ public class UtilityAgent : MonoBehaviour
 
     void Awake()
     {
-        Controller = GetComponent<AgentController>();
+        AgentController = GetComponent<AgentController>();
 
         AgentActions = new List<UtilityAction>();
 

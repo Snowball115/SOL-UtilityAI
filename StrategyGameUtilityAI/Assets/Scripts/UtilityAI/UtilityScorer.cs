@@ -11,16 +11,16 @@ public class UtilityScorer : ScriptableObject
     // The reference value it is looking at
     public UtilityValue ReferenceValue;
 
-    // Score of the consideration (should be between 0 and 1)
-    public float CurrentScore;
-
     // The curve the consideration gets influenced with
     public soAnimationCurve Curve;
+
+    // Score of the consideration (should be between 0 and 1)
+    public float CurrentScore;
 
 
     // Evaluate utility score by the given inputs
     public void EvaluateScore()
     {
-        
+        CurrentScore = Mathf.Clamp(CurrentScore, 0, 1);
     }
 }

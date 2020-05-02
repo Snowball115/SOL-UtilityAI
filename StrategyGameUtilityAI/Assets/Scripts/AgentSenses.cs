@@ -21,7 +21,7 @@ public class AgentSenses : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, ViewRange);
     }
 

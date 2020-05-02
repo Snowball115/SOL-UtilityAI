@@ -23,7 +23,7 @@ public class MoveTo : UtilityAction
     {
         base.Execute();
 
-        agent.Controller.NavAgent.destination = goalPos.transform.position;
+        agent.AgentController.NavAgent.destination = goalPos.transform.position;
     }
 
     public override void Exit()
