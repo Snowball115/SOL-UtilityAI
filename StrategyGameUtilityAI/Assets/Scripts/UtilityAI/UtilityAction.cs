@@ -27,6 +27,20 @@ public class UtilityAction
         Enter();
     }
 
+    public void EvaluateScorers()
+    {
+        float average = 0;
+
+        for (int i = 0; i < Scorers.Count; i++)
+        {
+            average += Scorers[i].CurrentScore;
+        }
+
+        average /= Scorers.Count;
+
+        UtilityScore = average;
+    }
+
     // Enter state
     public virtual void Enter()
     {}

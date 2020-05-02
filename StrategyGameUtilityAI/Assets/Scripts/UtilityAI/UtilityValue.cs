@@ -8,6 +8,9 @@ public class UtilityValue : ScriptableObject
     // Name in editor
     public string Name;
 
-    // The value a desire/consideration has
-    public float Value;
+    // Max value of our input
+    public float MaxValue;
+
+    // The current value of our input
+    public float CurrentValue;
 }

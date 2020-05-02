@@ -17,10 +17,10 @@ public class UtilityScorer : ScriptableObject
     // Score of the consideration (should be between 0 and 1)
     public float CurrentScore;
 
-
     // Evaluate utility score by the given inputs
     public void EvaluateScore()
     {
-        CurrentScore = Mathf.Clamp(CurrentScore, 0, 1);
+        // Calculate the score by reference to the Animation curve
+        CurrentScore = Curve.curve.Evaluate(ReferenceValue.CurrentValue / ReferenceValue.MaxValue);
     }
 }

@@ -19,7 +19,7 @@ public class Patrol : UtilityAction
     {
         base.Execute();
 
-        agent.AgentController.NavAgent.autoBraking = false;
+        agent.AgentController._NavAgent.autoBraking = false;
     }
 
     public override void Execute()
@@ -28,9 +28,9 @@ public class Patrol : UtilityAction
 
         if (waypoints.Count == 0) return;
 
-        if (!agent.AgentController.NavAgent.pathPending && agent.AgentController.NavAgent.remainingDistance < 0.5f)
+        if (!agent.AgentController._NavAgent.pathPending && agent.AgentController._NavAgent.remainingDistance < 0.5f)
         {
-            agent.AgentController.NavAgent.destination = waypoints[waypointIndex].transform.position;
+            agent.AgentController._NavAgent.destination = waypoints[waypointIndex].transform.position;
 
             waypointIndex = (waypointIndex + 1) % waypoints.Count;
         }
