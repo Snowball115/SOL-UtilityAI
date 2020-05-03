@@ -6,9 +6,16 @@ public class Lumberjack : UtilityAgent
 {
     public List<GameObject> Waypoints;
 
+    public UtilityScorer testScorer;
 
-    void Start()
+    protected override void Start()
     {
-        AgentActions.Add(new Patrol(Waypoints, this, 1));
+        base.Start();
+
+        MoveTo moveAction = new MoveTo(GameObject.Find("PositionB"), this, 0.1f);
+        moveAction.Scorers.Add(testScorer);
+
+        AgentActions.Add(new Patrol(Waypoints, this, 0.5f));
+        AgentActions.Add(moveAction);
     }
 }

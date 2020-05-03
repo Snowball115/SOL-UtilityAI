@@ -5,6 +5,16 @@ using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
+    public enum AgentRole
+    {
+        LUMBERJACK,
+        MINER,
+        FARMER,
+        SOLDIER
+    }
+
+    public AgentRole Role;
+
     // Agent statistics component
     public soAgentStats _AgentStats;
 

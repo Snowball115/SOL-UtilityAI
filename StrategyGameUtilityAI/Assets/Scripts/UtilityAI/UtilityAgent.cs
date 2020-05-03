@@ -27,9 +27,7 @@ public class UtilityAgent : MonoBehaviour
 
     void Awake()
     {
-        AgentController = GetComponent<AgentController>();
-
-        AgentActions = new List<UtilityAction>();
+        
 
         //// Give every action the reference to this agent
         //for (int i = 0; i < AgentActions.Count; i++)
@@ -38,12 +36,16 @@ public class UtilityAgent : MonoBehaviour
         //}
     }
 
-    void Start()
+    protected virtual void Start()
     {
+        AgentController = GetComponent<AgentController>();
+
+        AgentActions = new List<UtilityAction>();
+
         CheckForAgentManager();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         // Will be used if no Agent Manager is available
         if (AgentManager == null)
@@ -76,6 +78,12 @@ public class UtilityAgent : MonoBehaviour
     {
         // Check if any actions for this agent exist
         if (AgentActions.Count == 0) return;
+
+        // Calculate Utility Score of each action
+        for (int i = 0; i < AgentActions.Count; i++)
+        {
+            AgentActions[i].EvaluateAllScorers();
+        }
 
         ChooseAction();
 

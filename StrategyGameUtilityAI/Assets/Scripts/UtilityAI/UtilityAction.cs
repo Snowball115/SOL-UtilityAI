@@ -20,6 +20,8 @@ public class UtilityAction
 
     public UtilityAction(UtilityAgent agent, float initalScore)
     {
+        Scorers = new List<UtilityScorer>();
+
         this.agent = agent;
 
         UtilityScore = initalScore;
@@ -27,12 +29,17 @@ public class UtilityAction
         Enter();
     }
 
-    public void EvaluateScorers()
+    // Get the average value of all scorer outcomes
+    public void EvaluateAllScorers()
     {
+        if (Scorers.Count == 0) return;
+
         float average = 0;
 
         for (int i = 0; i < Scorers.Count; i++)
         {
+            Scorers[i].EvaluateScore();
+
             average += Scorers[i].CurrentScore;
         }
 
