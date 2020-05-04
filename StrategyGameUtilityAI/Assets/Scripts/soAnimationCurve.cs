@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Curve", menuName ="Utility AI/New Curve")]
+[CreateAssetMenu(menuName = "New Curve")]
 public class soAnimationCurve : ScriptableObject
 {
     public AnimationCurve curve;

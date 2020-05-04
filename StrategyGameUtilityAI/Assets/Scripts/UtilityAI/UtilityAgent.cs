@@ -98,7 +98,7 @@ public class UtilityAgent : MonoBehaviour
 
         for (int i = 0; i < AgentActions.Count; i++)
         {
-            // Get score of current chosen action
+            // Get score of every action in list
             currentScore = AgentActions[i].UtilityScore;
 
             // Check if previous score is bigger than our score we are currently looking at
@@ -106,7 +106,7 @@ public class UtilityAgent : MonoBehaviour
             // If no: We have our highest score and can finally execute it
             if (deltaScore > currentScore) continue;
 
-            // Remember the current highest score
+            // Save the current highest score
             deltaScore = currentScore;
 
             // Assign the best action to our current action to execute

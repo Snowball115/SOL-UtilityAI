@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Stats", menuName = "Create new Agent Stats")]
+[CreateAssetMenu(menuName = "Agent Stats")]
 public class soAgentStats : ScriptableObject
 {
     // health points

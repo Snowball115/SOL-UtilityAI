@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Float Reference")]
 public class soFloatReference : ScriptableObject
 {
     public float f;
