@@ -16,7 +16,7 @@ public class MoveTo : UtilityAction
 
     public override void Enter()
     {
-        base.Execute();
+        base.Enter();
     }
 
     public override void Execute()

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// Main script for agent to work with Utility AI
@@ -15,7 +14,7 @@ public class UtilityAgent : MonoBehaviour
     public AgentManager AgentManager;
 
     // List of availabel actions for the agent
-    public List<UtilityAction> AgentActions;
+    public List<UtilityAction> AgentActions;  
 
     // Action to use
     public UtilityAction CurrentAction { get; private set; }
@@ -27,8 +26,6 @@ public class UtilityAgent : MonoBehaviour
 
     void Awake()
     {
-        
-
         //// Give every action the reference to this agent
         //for (int i = 0; i < AgentActions.Count; i++)
         //{
@@ -84,7 +81,7 @@ public class UtilityAgent : MonoBehaviour
         {
             AgentActions[i].EvaluateAllScorers();
         }
-
+        
         ChooseAction();
 
         CurrentAction.Execute();

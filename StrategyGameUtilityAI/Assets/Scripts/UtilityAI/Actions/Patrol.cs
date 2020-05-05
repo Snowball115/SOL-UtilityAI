@@ -16,7 +16,7 @@ public class Patrol : UtilityAction
 
     public override void Enter()
     {
-        base.Execute();
+        base.Enter();
 
         agent.AgentController._NavAgent.autoBraking = false;
     }
