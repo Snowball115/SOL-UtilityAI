@@ -27,11 +27,15 @@ public class AgentController : MonoBehaviour
     // Agent senses component
     public AgentSenses _Senses { get; private set; }
 
+    private Blackboard bb;
 
     void Start()
     {
         _NavAgent = GetComponent<NavMeshAgent>();
         _UtilityAgent = GetComponent<UtilityAgent>();
         _Senses = GetComponent<AgentSenses>();
+
+        bb = new Blackboard();
+        bb.AddData("HQ", GameObject.Find("Headquarters"));
     }
 }

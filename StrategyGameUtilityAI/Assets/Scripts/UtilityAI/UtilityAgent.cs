@@ -14,7 +14,7 @@ public class UtilityAgent : MonoBehaviour
     public AgentManager AgentManager;
 
     // List of availabel actions for the agent
-    public List<UtilityAction> AgentActions;  
+    public List<UtilityAction> AgentActions;
 
     // Action to use
     public UtilityAction CurrentAction { get; private set; }
@@ -42,7 +42,7 @@ public class UtilityAgent : MonoBehaviour
         CheckForAgentManager();
     }
 
-    protected virtual void Update()
+    void Update()
     {
         // Will be used if no Agent Manager is available
         if (AgentManager == null)
@@ -82,14 +82,28 @@ public class UtilityAgent : MonoBehaviour
             AgentActions[i].EvaluateAllScorers();
         }
         
+        // Choose action with highest utility value
         ChooseAction();
 
+        // Call enter state of action if the action is not active
+        if (CurrentAction != null && !CurrentAction.isActive) CurrentAction.Enter();
+        //// Call exit state of old action
+        //if (CurrentAction != null && CurrentAction.isActive) CurrentAction.Exit();
+
+        // Run action
         CurrentAction.Execute();
     }
 
     // Choose action with highest utility value
     private void ChooseAction()
     {
+        // Don't iterate through list if only one action exists
+        if (AgentActions.Count == 1)
+        {
+            CurrentAction = AgentActions[0];
+            return;
+        }
+
         float currentScore = 0;
         float deltaScore = 0;
 
