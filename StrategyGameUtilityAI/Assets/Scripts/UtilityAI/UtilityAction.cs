@@ -15,9 +15,8 @@ public class UtilityAction
     // All scorers that influence the action
     public List<UtilityScorer> Scorers;
 
-    // Should the action be completed before another action begins?
-    public bool isInterruptable;
-    public bool isActive { get; private set; }
+    // Determines how long the action can be executed without being interrupted by another action
+    public float ActionCooldown;
 
     // The Agent this action can access
     protected UtilityAgent agent;
@@ -60,25 +59,9 @@ public class UtilityAction
         UtilityScore = average;
     }
 
-    // Enter state
-    public virtual void Enter()
-    {
-        isActive = true;
-
-        Debug.Log(string.Format("Enter {0}", this.GetType()));
-    }
-
-    // Execute state
+    // Execute action
     public virtual void Execute()
     {
         Debug.Log(string.Format("Running {0}", this.GetType()));
-    }
-
-    // Exit state
-    public virtual void Exit()
-    {
-        isActive = false;
-
-        Debug.Log(string.Format("Exit {0}", this.GetType()));
     }
 }

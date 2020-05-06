@@ -85,11 +85,6 @@ public class UtilityAgent : MonoBehaviour
         // Choose action with highest utility value
         ChooseAction();
 
-        // Call enter state of action if the action is not active
-        if (CurrentAction != null && !CurrentAction.isActive) CurrentAction.Enter();
-        //// Call exit state of old action
-        //if (CurrentAction != null && CurrentAction.isActive) CurrentAction.Exit();
-
         // Run action
         CurrentAction.Execute();
     }

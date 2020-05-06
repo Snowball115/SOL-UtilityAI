@@ -14,20 +14,10 @@ public class MoveTo : UtilityAction
         this.goalPos = goalPos;
     }
 
-    public override void Enter()
-    {
-        base.Enter();
-    }
-
     public override void Execute()
     {
         base.Execute();
 
         agent.AgentController._NavAgent.destination = goalPos.transform.position;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 }

@@ -14,16 +14,11 @@ public class Patrol : UtilityAction
         this.waypoints = waypoints;
     }
 
-    public override void Enter()
-    {
-        base.Enter();
-
-        agent.AgentController._NavAgent.autoBraking = false;
-    }
-
     public override void Execute()
     {
         base.Execute();
+
+        agent.AgentController._NavAgent.autoBraking = false;
 
         if (waypoints.Count == 0) return;
 
@@ -33,10 +28,5 @@ public class Patrol : UtilityAction
 
             waypointIndex = (waypointIndex + 1) % waypoints.Count;
         }
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 }
