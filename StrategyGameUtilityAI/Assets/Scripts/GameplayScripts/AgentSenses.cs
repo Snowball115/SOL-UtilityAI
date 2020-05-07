@@ -7,7 +7,7 @@ public class AgentSenses : MonoBehaviour
     // What the agent determines as visible
     public LayerMask _VisibleLayer;
 
-    // How far the agent sees objects
+    // How far the agent can see entities
     public float _ViewRange;
 
     // All visible objects stored in a list
@@ -36,8 +36,8 @@ public class AgentSenses : MonoBehaviour
         return null;
     }
 
-    // Get number of specific objects the agent should see
-    public int GetObjectsInSightCount(GameObject go)
+    // Count specific GameObjects the agent should see
+    public int CountObjectsInSight(GameObject go)
     {
         int count = 0;
 
@@ -49,13 +49,13 @@ public class AgentSenses : MonoBehaviour
         return count;
     }
 
-    // Store all visible objects the agent can see
+    // Main function to store all visible objects the agent can see
     private void GetObjectsInView()
     {
         _VisibleObjects = Physics.OverlapSphere(transform.position, _ViewRange, _VisibleLayer);
     }
 
-    // Show list of visible objects
+    // Print list of visible objects in console
     private void DebugList()
     {
         for (int i = 0; i < _VisibleObjects.Length; i++)

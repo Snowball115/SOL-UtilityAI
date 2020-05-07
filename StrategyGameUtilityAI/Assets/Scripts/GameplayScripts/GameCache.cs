@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameCache : Singleton<GameCache>
 {
-    public static Cache<string, GameObject> _GameCache = new Cache<string, GameObject>();
+    public static GenericCache<string, GameObject> _GameCache = new GenericCache<string, GameObject>();
 
 
     public void Init()

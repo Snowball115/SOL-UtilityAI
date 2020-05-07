@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Generic cache class to use for every possible data type
 /// </summary>
-public class Cache<TKey, TValue>
+public class GenericCache<TKey, TValue>
 {
     private Dictionary<TKey, TValue> cacheDict = new Dictionary<TKey, TValue>();
 

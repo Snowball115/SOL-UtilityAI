@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InitManagers : MonoBehaviour
+public class InitGameCache : MonoBehaviour
 {
     void Awake()
     {
