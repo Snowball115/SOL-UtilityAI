@@ -10,53 +10,50 @@ using UnityEngine;
 public class UtilityAction
 {
     // The value the action has
-    public float UtilityScore;
+    public float _UtilityScore;
 
     // All scorers that influence the action
-    public List<UtilityScorer> Scorers;
-
-    // Determines how long the action can be executed without being interrupted by another action
-    public float ActionCooldown;
+    public List<UtilityScorer> _Scorers;
 
     // The Agent this action can access
-    protected UtilityAgent agent;
+    protected UtilityAgent _agent;
 
 
     public UtilityAction(UtilityAgent agent, float initalScore)
     {
-        Scorers = new List<UtilityScorer>();
+        _Scorers = new List<UtilityScorer>();
 
-        this.agent = agent;
+        _agent = agent;
 
-        UtilityScore = initalScore;
+        _UtilityScore = initalScore;
     }
 
     // Get the average value of all scorer outcomes
     public void EvaluateAllScorers()
     {
         // Check if any scorers exist
-        if (Scorers.Count == 0) return;
+        if (_Scorers.Count == 0) return;
 
         // We don't have to evaluate the whole list if only one scorer exists
-        if (Scorers.Count == 1)
+        if (_Scorers.Count == 1)
         {
-            Scorers[0].EvaluateScore();
-            UtilityScore = Scorers[0].CurrentScore;
+            _Scorers[0].EvaluateScore();
+            _UtilityScore = _Scorers[0]._CurrentScore;
             return;
         }
 
         float average = 0;
 
-        for (int i = 0; i < Scorers.Count; i++)
+        for (int i = 0; i < _Scorers.Count; i++)
         {
-            Scorers[i].EvaluateScore();
+            _Scorers[i].EvaluateScore();
 
-            average += Scorers[i].CurrentScore;
+            average += _Scorers[i]._CurrentScore;
         }
 
-        average /= Scorers.Count;
+        average /= _Scorers.Count;
 
-        UtilityScore = average;
+        _UtilityScore = average;
     }
 
     // Execute action

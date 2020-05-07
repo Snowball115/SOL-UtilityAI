@@ -18,13 +18,13 @@ public class Patrol : UtilityAction
     {
         base.Execute();
 
-        agent.AgentController._NavAgent.autoBraking = false;
+        _agent._AgentController._NavAgent.autoBraking = false;
 
         if (waypoints.Count == 0) return;
 
-        if (!agent.AgentController._NavAgent.pathPending && agent.AgentController._NavAgent.remainingDistance < 0.5f)
+        if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < 0.5f)
         {
-            agent.AgentController._NavAgent.destination = waypoints[waypointIndex].transform.position;
+            _agent._AgentController._NavAgent.destination = waypoints[waypointIndex].transform.position;
 
             waypointIndex = (waypointIndex + 1) % waypoints.Count;
         }

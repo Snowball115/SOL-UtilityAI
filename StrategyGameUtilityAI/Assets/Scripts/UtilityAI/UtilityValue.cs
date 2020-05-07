@@ -2,15 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Uility Value", menuName = "Utility AI/Utility Value (Consideration)")]
-public class UtilityValue : ScriptableObject
+
+[System.Serializable]
+public class UtilityValue
 {
     // Name in editor
     public string Name;
 
     // Max value of our input
-    public float MaxValue;
+    public float _MaxValue;
 
     // The current value of our input
-    public float CurrentValue;
+    public float _CurrentValue;
+
+    // The agent where the input can get information from
+    protected UtilityAgent _agent;
+
+
+    public UtilityValue(UtilityAgent agent)
+    {
+        _agent = agent;
+    }
+
+    public virtual void UpdateCurrentValue() { }
 }

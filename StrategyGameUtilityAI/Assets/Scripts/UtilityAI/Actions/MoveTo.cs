@@ -18,6 +18,6 @@ public class MoveTo : UtilityAction
     {
         base.Execute();
 
-        agent.AgentController._NavAgent.destination = goalPos.transform.position;
+        _agent._AgentController._NavAgent.destination = goalPos.transform.position;
     }
 }

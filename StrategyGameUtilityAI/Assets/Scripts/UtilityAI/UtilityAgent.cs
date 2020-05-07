@@ -8,51 +8,51 @@ using UnityEngine;
 public class UtilityAgent : MonoBehaviour
 {
     // Agent gameplay component
-    public AgentController AgentController;
+    public AgentController _AgentController;
 
     // Agent manager component
-    public AgentManager AgentManager;
+    public AgentManager _AgentManager;
 
     // List of availabel actions for the agent
-    public List<UtilityAction> AgentActions;
+    public List<UtilityAction> _AgentActions;
 
     // Action to use
-    public UtilityAction CurrentAction { get; private set; }
+    public UtilityAction _CurrentAction { get; private set; }
 
     // Own update interval if no Agent Manager is available
-    private readonly float customInterval = 0.2f;
-    private float intervalTimer;
+    private readonly float _customInterval = 0.2f;
+    private float _intervalTimer;
 
-
-    void Awake()
-    {
-        //// Give every action the reference to this agent
-        //for (int i = 0; i < AgentActions.Count; i++)
-        //{
-        //    AgentActions[i].Init(this);
-        //}
-    }
 
     protected virtual void Start()
     {
-        AgentController = GetComponent<AgentController>();
+        _AgentController = GetComponent<AgentController>();
 
-        AgentActions = new List<UtilityAction>();
+        _AgentActions = new List<UtilityAction>();
 
         CheckForAgentManager();
+
+        //// Give every utility value object the reference to this agent
+        //for (int i = 0; i < _AgentActions.Count; i++)
+        //{
+        //    for (int j = 0; j < _AgentActions[i]._Scorers.Count; j++)
+        //    {
+        //        _AgentActions[i]._Scorers[j]._ReferenceValue._Agent = this;
+        //    }
+        //}
     }
 
     void Update()
     {
         // Will be used if no Agent Manager is available
-        if (AgentManager == null)
+        if (_AgentManager == null)
         {
-            intervalTimer += Time.deltaTime;
+            _intervalTimer += Time.deltaTime;
 
-            if (intervalTimer > customInterval)
+            if (_intervalTimer > _customInterval)
             {
                 UpdateAgent();
-                intervalTimer = 0;
+                _intervalTimer = 0;
             }
         }
     }
@@ -62,8 +62,8 @@ public class UtilityAgent : MonoBehaviour
     {
         if (FindObjectOfType<AgentManager>() != null)
         {
-            AgentManager = FindObjectOfType<AgentManager>();
-            AgentManager.AddAgentToList(this);
+            _AgentManager = FindObjectOfType<AgentManager>();
+            _AgentManager.AddAgentToList(this);
             return;
         }
 
@@ -74,38 +74,37 @@ public class UtilityAgent : MonoBehaviour
     public void UpdateAgent()
     {
         // Check if any actions for this agent exist
-        if (AgentActions.Count == 0) return;
+        if (_AgentActions.Count == 0) return;
 
         // Calculate Utility Score of each action
-        for (int i = 0; i < AgentActions.Count; i++)
+        for (int i = 0; i < _AgentActions.Count; i++)
         {
-            AgentActions[i].EvaluateAllScorers();
+            _AgentActions[i].EvaluateAllScorers();
         }
-        
-        // Choose action with highest utility value
+
         ChooseAction();
 
         // Run action
-        CurrentAction.Execute();
+        _CurrentAction.Execute();
     }
 
     // Choose action with highest utility value
     private void ChooseAction()
     {
         // Don't iterate through list if only one action exists
-        if (AgentActions.Count == 1)
+        if (_AgentActions.Count == 1)
         {
-            CurrentAction = AgentActions[0];
+            _CurrentAction = _AgentActions[0];
             return;
         }
 
         float currentScore = 0;
         float deltaScore = 0;
 
-        for (int i = 0; i < AgentActions.Count; i++)
+        for (int i = 0; i < _AgentActions.Count; i++)
         {
             // Get score of every action in list
-            currentScore = AgentActions[i].UtilityScore;
+            currentScore = _AgentActions[i]._UtilityScore;
 
             // Check if previous score is bigger than our score we are currently looking at
             // If yes: We skip to the next score until we find a score which is bigger than our current highest score
@@ -116,7 +115,7 @@ public class UtilityAgent : MonoBehaviour
             deltaScore = currentScore;
 
             // Assign the best action to our current action to execute
-            CurrentAction = AgentActions[i];
+            _CurrentAction = _AgentActions[i];
         }
     }
 }
