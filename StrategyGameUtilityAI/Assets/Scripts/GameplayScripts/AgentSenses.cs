@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,6 +45,8 @@ public class AgentSenses : MonoBehaviour
         for (int i = 0; i < _VisibleObjects.Length; i++)
         {
             if (_VisibleObjects[i] == go) count++;
+
+            if (Array.Exists(_VisibleObjects, element => element == go)) count++;
         }
 
         return count;

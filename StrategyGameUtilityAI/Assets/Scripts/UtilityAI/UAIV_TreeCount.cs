@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UAIV_TreeCount : UtilityValue
 {
-    public UAIV_TreeCount(UtilityAgent agent) : base(agent) { }
+    public UAIV_TreeCount(UtilityAgent agent, float maxInputValue) : base(agent, maxInputValue) { }
 
     public override void UpdateCurrentValue()
     {
