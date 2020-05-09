@@ -14,7 +14,7 @@ public class Lumberjack : UtilityAgent
     {
         base.Start();
 
-        UAIV_TreeCount treeCount = new UAIV_TreeCount(this, 5);
+        UAIV_TreeCount treeCount = new UAIV_TreeCount(this, 4);
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
 
         MoveTo moveAction_TreeTest = new MoveTo(GameObject.Find("PositionB"), this, 0.1f);

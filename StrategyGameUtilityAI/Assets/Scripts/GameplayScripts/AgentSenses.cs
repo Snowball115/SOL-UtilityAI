@@ -57,7 +57,19 @@ public class AgentSenses : MonoBehaviour
 
         for (int i = 0; i < _ColliderToGOList.Count; i++)
         {
-            if (_ColliderToGOList[i] == go) count++;
+            if (_ColliderToGOList[i].gameObject == go) count++;
+        }
+
+        return count;
+    }
+
+    public int CountObjectsInSight(string objectName)
+    {
+        int count = 0;
+
+        for (int i = 0; i < _VisibleObjects.Length; i++)
+        {
+            if (_VisibleObjects[i].gameObject.name == objectName) count++;
         }
 
         return count;
