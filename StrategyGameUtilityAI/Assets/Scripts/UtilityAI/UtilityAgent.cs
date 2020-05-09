@@ -31,15 +31,6 @@ public class UtilityAgent : MonoBehaviour
         _AgentActions = new List<UtilityAction>();
 
         CheckForAgentManager();
-
-        //// Give every utility value object the reference to this agent
-        //for (int i = 0; i < _AgentActions.Count; i++)
-        //{
-        //    for (int j = 0; j < _AgentActions[i]._Scorers.Count; j++)
-        //    {
-        //        _AgentActions[i]._Scorers[j]._ReferenceValue._Agent = this;
-        //    }
-        //}
     }
 
     void Update()
