@@ -82,6 +82,9 @@ public class UtilityAgent : MonoBehaviour
             _AgentActions[i].EvaluateAllScorers();
         }
 
+        // Call enter state of action if the action is not active
+        //if (CurrentAction != null && !CurrentAction.isActive) CurrentAction.Enter();
+
         ChooseAction();
 
         // Run action

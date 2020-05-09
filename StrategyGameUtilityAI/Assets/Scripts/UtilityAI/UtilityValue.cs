@@ -7,7 +7,7 @@ using UnityEngine;
 public class UtilityValue
 {
     // Name in editor
-    public string Name;
+    public string _Name;
 
     // Max value of our input on the x-axis of the animation curve
     public float _MaxValue;

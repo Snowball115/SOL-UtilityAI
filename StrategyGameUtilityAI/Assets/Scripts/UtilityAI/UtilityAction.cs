@@ -12,6 +12,9 @@ public class UtilityAction
     // The value the action has
     public float _UtilityScore;
 
+    // Determines how the action should be prioritized over other actions
+    public float _Weight;
+
     // All scorers that influence the action
     public List<UtilityScorer> _Scorers;
 
@@ -54,6 +57,9 @@ public class UtilityAction
         average /= _Scorers.Count;
 
         _UtilityScore = average;
+
+        // Apply weight if weight is not null
+        if (_Weight != 0) _UtilityScore *= _Weight;
     }
 
     // Execute action

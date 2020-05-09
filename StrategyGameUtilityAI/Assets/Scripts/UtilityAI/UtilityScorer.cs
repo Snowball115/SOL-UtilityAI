@@ -17,6 +17,7 @@ public class UtilityScorer : ScriptableObject
     // Score of the consideration (should be between 0 and 1)
     public float _CurrentScore;
 
+
     // Evaluate utility score by the given inputs
     public void EvaluateScore()
     {

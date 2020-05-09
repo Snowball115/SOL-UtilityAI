@@ -62,6 +62,7 @@ public class EnititiesSpawner : MonoBehaviour
     private void CreateEntity(GameObject go, Vector3 newPos)
     {
         go = Instantiate(go, newPos, Quaternion.identity, EntitiesParent);
+        go.name = go.name.Replace("(Clone)", "");
         activeObjects.Add(go);
     }
 

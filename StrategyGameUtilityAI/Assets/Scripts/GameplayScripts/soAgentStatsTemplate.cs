@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Agent Stats")]
-public class soAgentStats : ScriptableObject
+public class soAgentStatsTemplate : ScriptableObject
 {
     // health points
     public float healthPoints;
 
-    // movement speed
-    public float moveSpeed;
-
     // attack power
     public float attackPoints;
+
+    // movement speed
+    public float moveSpeed;
 }

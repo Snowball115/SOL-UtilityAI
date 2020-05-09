@@ -15,8 +15,8 @@ public class AgentController : MonoBehaviour
 
     public AgentRole Role;
 
-    // Agent statistics component
-    public soAgentStats _AgentStats;
+    // Agent statistics template
+    public soAgentStatsTemplate _AgentStats;
 
     // NavMeshAgent component
     public NavMeshAgent _NavAgent { get; private set; }
@@ -27,7 +27,16 @@ public class AgentController : MonoBehaviour
     // Agent senses component
     public AgentSenses _Senses { get; private set; }
 
-    private Blackboard bb;
+    // Data stored from AgentStats template
+    public float _Health;
+    public float _Attack;
+    public float _MoveSpeed;
+    public float _Food;
+    public float _Energy;
+
+    // Blackboard (Not sure if needed now)
+    private Blackboard _bb;
+
 
     void Start()
     {
@@ -35,7 +44,22 @@ public class AgentController : MonoBehaviour
         _UtilityAgent = GetComponent<UtilityAgent>();
         _Senses = GetComponent<AgentSenses>();
 
-        bb = new Blackboard();
-        bb.AddData("HQ", GameObject.Find("Headquarters"));
+        _Health = _AgentStats.healthPoints;
+        _Attack = _AgentStats.attackPoints;
+        _MoveSpeed = _AgentStats.moveSpeed;
+        _Food = 100.0f;
+        _Energy = 100.0f;
+
+        _NavAgent.speed = _MoveSpeed;
+
+        _bb = new Blackboard();
+        _bb.AddData("HQ", GameObject.Find("Headquarters"));
+    }
+
+    void Update()
+    {
+        if (_Food > 0) _Food -= 0.05f;
+
+        if (_Energy > 0) _Energy -= 0.02f;
     }
 }

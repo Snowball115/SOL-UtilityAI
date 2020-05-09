@@ -10,6 +10,7 @@ public class AgentInventory : MonoBehaviour
     // All resources the agent can carry
     [SerializeField] private List<ResourceBase> _resources;
 
+
     void Start()
     {
         _resources = new List<ResourceBase>();
