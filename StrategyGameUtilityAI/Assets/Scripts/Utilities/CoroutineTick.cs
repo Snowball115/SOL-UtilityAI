@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class CoroutineTick
 {
-    public CoroutineTick()
-    {}
+    public CoroutineTick() { }
 
     public IEnumerator Tick(Action onTick, float timeInterval)
     {

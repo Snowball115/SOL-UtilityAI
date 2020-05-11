@@ -53,6 +53,7 @@ public class UtilityAction
         {
             _Scorers[0].EvaluateScore();
             _UtilityScore = _Scorers[0]._CurrentScore;
+            if (_Weight > 0) _UtilityScore *= _Weight;
             return;
         }
 
@@ -65,14 +66,11 @@ public class UtilityAction
             average += _Scorers[i]._CurrentScore;
         }
 
+        // Get average of all scores
         average /= _Scorers.Count;
 
-        // Apply weight, if weight is not null
-        if (_Weight > 0)
-        {
-            Debug.Log("EADSD");
-            average *= _Weight;
-        }
+        // Apply weight
+        if (_Weight > 0) average *= _Weight;
 
         _UtilityScore = average;
     }
