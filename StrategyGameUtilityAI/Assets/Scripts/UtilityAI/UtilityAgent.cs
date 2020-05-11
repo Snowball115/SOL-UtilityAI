@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class UtilityAgent : MonoBehaviour
 {
+    [Header("---- Agent Data ----")]
     // Agent gameplay component
     public AgentController _AgentController;
 

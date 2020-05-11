@@ -4,31 +4,50 @@ using UnityEngine;
 
 public class Lumberjack : UtilityAgent
 {
-    public List<GameObject> Waypoints;
+    // Animation curves
+    [Header("---- Curves ----")]
+    public soAnimationCurve HealthCurve;
+    public soAnimationCurve TreeCurve;
 
-    public UtilityScorer Scorer_TreeCount;
-    public UtilityScorer Scorer_AgentHealth;
+    // Gameplay data
+    private bool _isLumberyardPlaced;
+    private Vector3 _lumberyardPos;
+
+    // Test stuff
+    public List<GameObject> Waypoints;
 
 
     protected override void Start()
     {
         base.Start();
 
-        UAIV_TreeCount treeCount = new UAIV_TreeCount(this, 4);
+        // Utility AI setup
+        // ****** VALUES ******
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
+        UAIV_TreeCount treeCount = new UAIV_TreeCount(this, 4);
+
+        // ****** SCORERS ******
+        UtilityScorer Scorer_AgentHealth = new UtilityScorer(agentHealth, HealthCurve);
+        UtilityScorer Scorer_TreeCount = new UtilityScorer(treeCount, TreeCurve);
+
+        // ****** ACTIONS ******
+        MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("PositionC"), this, 0.1f);
+        moveAction_HealthTest.AddScorer(Scorer_AgentHealth);
 
         MoveTo moveAction_TreeTest = new MoveTo(GameObject.Find("PositionB"), this, 0.1f);
-        Scorer_TreeCount._ReferenceValue = treeCount;
-        moveAction_TreeTest._Scorers.Add(Scorer_TreeCount);
-
-        MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("PositionC"), this, 0.1f);
-        Scorer_AgentHealth._ReferenceValue = agentHealth;
-        moveAction_HealthTest._Scorers.Add(Scorer_AgentHealth);
+        moveAction_TreeTest.AddScorer(Scorer_TreeCount);
 
         Patrol patrolAction = new Patrol(Waypoints, this, 0.5f);
 
+        // ****** REGISTER ACTIONS ******
         _AgentActions.Add(patrolAction);
         _AgentActions.Add(moveAction_TreeTest);
         _AgentActions.Add(moveAction_HealthTest);
+    }
+
+    public void PlaceLumberyard(Vector3 targetPos)
+    {
+        _isLumberyardPlaced = true;
+        GameObject go = Instantiate(GameCache._GameCache.GetData("Lumberyard"));
     }
 }

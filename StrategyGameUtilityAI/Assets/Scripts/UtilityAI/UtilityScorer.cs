@@ -5,8 +5,8 @@ using UnityEngine;
 /// <summary>
 /// Decision/Consideration factor that influences the Utility Action
 /// </summary>
-[CreateAssetMenu(fileName = "New Uility Scorer", menuName = "Utility AI/Utility Scorer")]
-public class UtilityScorer : ScriptableObject
+[System.Serializable]
+public class UtilityScorer
 {
     // The reference value the scorer is looking at
     public UtilityValue _ReferenceValue;
@@ -18,13 +18,24 @@ public class UtilityScorer : ScriptableObject
     public float _CurrentScore;
 
 
-    // Evaluate utility score by the given inputs
+    public UtilityScorer(UtilityValue value)
+    {
+        _ReferenceValue = value;
+    }
+
+    public UtilityScorer(UtilityValue value, soAnimationCurve curve)
+    {
+        _ReferenceValue = value;
+        _Curve = curve;
+    }
+
+    // Evaluate utility score based on the given input
     public void EvaluateScore()
     {
         // Update reference value input
         _ReferenceValue.UpdateCurrentValue();
 
-        // Calculate the score by reference to the Animation curve
+        // Calculate the score based on the animation curve and input value
         _CurrentScore = _Curve.curve.Evaluate(_ReferenceValue._CurrentValue / _ReferenceValue._MaxValue);
     }
 }

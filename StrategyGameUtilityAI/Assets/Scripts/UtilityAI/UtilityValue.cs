@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// Input for the Utility Scorer
+/// </summary>
 [System.Serializable]
 public class UtilityValue
 {
@@ -23,6 +25,8 @@ public class UtilityValue
     {
         _agent = agent;
         _MaxValue = maxInputValue;
+
+        _Name = this.GetType().ToString();
     }
 
     public virtual void UpdateCurrentValue() { }

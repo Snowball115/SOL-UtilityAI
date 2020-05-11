@@ -9,6 +9,9 @@ using UnityEngine;
 [System.Serializable]
 public class UtilityAction
 {
+    // Name in editor
+    public string _Name;
+
     // The value the action has
     public float _UtilityScore;
 
@@ -29,6 +32,14 @@ public class UtilityAction
         _agent = agent;
 
         _UtilityScore = initalScore;
+
+        _Name = this.GetType().ToString();
+    }
+
+    // Add scorer to this action
+    public void AddScorer(UtilityScorer scorer)
+    {
+        _Scorers.Add(scorer);
     }
 
     // Get the average value of all scorer outcomes
@@ -56,10 +67,14 @@ public class UtilityAction
 
         average /= _Scorers.Count;
 
-        _UtilityScore = average;
+        // Apply weight, if weight is not null
+        if (_Weight > 0)
+        {
+            Debug.Log("EADSD");
+            average *= _Weight;
+        }
 
-        // Apply weight if weight is not null
-        if (_Weight != 0) _UtilityScore *= _Weight;
+        _UtilityScore = average;
     }
 
     // Execute action

@@ -12,7 +12,7 @@ public class GameCache : Singleton<GameCache>
         _GameCache.Add("Tree", Resources.Load<GameObject>("Tree"));
         _GameCache.Add("Ore", Resources.Load<GameObject>("Ore"));
         _GameCache.Add("Field", Resources.Load<GameObject>("Field"));
-        _GameCache.Add("WoodWarehouse", Resources.Load<GameObject>("WoodWarehouse"));
+        _GameCache.Add("Lumberyard", Resources.Load<GameObject>("Lumberyard"));
         _GameCache.Add("Mine", Resources.Load<GameObject>("Mine"));
     }
 }

@@ -13,13 +13,7 @@ public class AgentSenses : MonoBehaviour
 
     // Storing all visible objects
     public Collider[] _VisibleObjects;
-    private List<GameObject> _ColliderToGOList;
 
-
-    void Start()
-    {
-        _ColliderToGOList = new List<GameObject>();
-    }
 
     void FixedUpdate()
     {
@@ -48,21 +42,17 @@ public class AgentSenses : MonoBehaviour
     {
         int count = 0;
 
-        //for (int i = 0; i < _VisibleObjects.Length; i++)
-        //{
-        //    if (_VisibleObjects[i] == go.GetComponent<Collider>()) count++;
-
-        //    if (Array.Exists(_VisibleObjects, element => element == go)) count++;
-        //}
-
-        for (int i = 0; i < _ColliderToGOList.Count; i++)
+        for (int i = 0; i < _VisibleObjects.Length; i++)
         {
-            if (_ColliderToGOList[i].gameObject == go) count++;
+            //if (_VisibleObjects[i] == go.GetComponent<Collider>()) count++;
+
+            if (Array.Exists(_VisibleObjects, element => element == go)) count++;
         }
 
         return count;
     }
 
+    // Count specific GameObjects the agent should see, but search with string
     public int CountObjectsInSight(string objectName)
     {
         int count = 0;
@@ -78,14 +68,7 @@ public class AgentSenses : MonoBehaviour
     // Main function to store all visible objects the agent can see
     private void GetObjectsInView()
     {
-        _ColliderToGOList.Clear();
-
         _VisibleObjects = Physics.OverlapSphere(transform.position, _ViewRange, _VisibleLayer);
-
-        for (int i = 0; i < _VisibleObjects.Length; i++)
-        {
-            _ColliderToGOList.Add(_VisibleObjects[i].gameObject);
-        }
     }
 
     // Print list of visible objects in console
