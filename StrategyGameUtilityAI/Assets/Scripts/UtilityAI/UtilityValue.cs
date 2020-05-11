@@ -25,7 +25,6 @@ public class UtilityValue
     {
         _agent = agent;
         _MaxValue = maxInputValue;
-
         _Name = this.GetType().ToString();
     }
 
