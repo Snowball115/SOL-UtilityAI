@@ -66,6 +66,9 @@ public class AgentController : MonoBehaviour
 
         _bb = new Blackboard();
         _bb.AddData("HQ", GameObject.Find("Headquarters"));
+
+        if (agentTeam == AgentTeams.BLUE) GetComponent<MeshRenderer>().material.color = Color.blue;
+        else GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
     void Update()
