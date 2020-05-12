@@ -38,7 +38,7 @@ public class Lumberjack : UtilityAgent
         MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("PositionC"), this, 0.0f);
         moveAction_HealthTest.AddScorer(Scorer_AgentHealth);
 
-        RoamAround roamAction_SearchTrees = new RoamAround(0.1f, this, 0.1f);
+        RoamAround roamAction_SearchTrees = new RoamAround(this, 0.1f);
         //roamAction_SearchTrees.AddScorer(Scorer_TreeCount);
 
         // ****** REGISTER ACTIONS ******

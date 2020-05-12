@@ -28,7 +28,6 @@ public class UtilityAgent : MonoBehaviour
     protected virtual void Start()
     {
         _AgentController = GetComponent<AgentController>();
-
         _AgentActions = new List<UtilityAction>();
 
         CheckForAgentManager();
