@@ -5,6 +5,14 @@ using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
+    public enum AgentTeams
+    {
+        BLUE,
+        RED
+    }
+
+    public AgentTeams agentTeam;
+
     public enum AgentRole
     {
         LUMBERJACK,

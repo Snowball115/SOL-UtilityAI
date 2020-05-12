@@ -10,6 +10,7 @@ public class AgentManager : MonoBehaviour
     // List of active agents of one manager instance
     public List<UtilityAgent> _ActiveAgents;
 
+    // Timer and bool to control the update loop
     private float intervalTimer;
     private bool isActive;
 

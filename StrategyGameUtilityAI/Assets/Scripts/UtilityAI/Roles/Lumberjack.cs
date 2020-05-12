@@ -16,9 +16,6 @@ public class Lumberjack : UtilityAgent
     private bool _isLumberyardPlaced;
     private Vector3 _lumberyardPos;
 
-    // Test stuff
-    public List<GameObject> Waypoints;
-
 
     protected override void Start()
     {
