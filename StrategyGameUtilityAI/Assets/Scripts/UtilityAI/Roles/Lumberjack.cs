@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Lumberjack agent role
+/// </summary>
 public class Lumberjack : UtilityAgent
 {
     // Animation curves
@@ -22,6 +25,7 @@ public class Lumberjack : UtilityAgent
         base.Start();
 
         // Utility AI setup
+
         // ****** VALUES ******
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
         UAIV_TreeCount treeCount = new UAIV_TreeCount(this, 4);
@@ -31,17 +35,14 @@ public class Lumberjack : UtilityAgent
         UtilityScorer Scorer_TreeCount = new UtilityScorer(treeCount, TreeCurve);
 
         // ****** ACTIONS ******
-        MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("PositionC"), this, 0.1f);
+        MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("PositionC"), this, 0.0f);
         moveAction_HealthTest.AddScorer(Scorer_AgentHealth);
 
-        MoveTo moveAction_TreeTest = new MoveTo(GameObject.Find("PositionB"), this, 0.1f);
-        moveAction_TreeTest.AddScorer(Scorer_TreeCount);
-
-        Patrol patrolAction = new Patrol(Waypoints, this, 0.5f);
+        RoamAround roamAction_SearchTrees = new RoamAround(0.1f, this, 0.1f);
+        //roamAction_SearchTrees.AddScorer(Scorer_TreeCount);
 
         // ****** REGISTER ACTIONS ******
-        _AgentActions.Add(patrolAction);
-        _AgentActions.Add(moveAction_TreeTest);
+        _AgentActions.Add(roamAction_SearchTrees);
         _AgentActions.Add(moveAction_HealthTest);
     }
 
@@ -49,5 +50,6 @@ public class Lumberjack : UtilityAgent
     {
         _isLumberyardPlaced = true;
         GameObject go = Instantiate(GameCache._GameCache.GetData("Lumberyard"));
+        _lumberyardPos = go.transform.position;
     }
 }

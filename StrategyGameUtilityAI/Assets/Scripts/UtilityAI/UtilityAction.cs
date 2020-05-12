@@ -25,14 +25,18 @@ public class UtilityAction
     protected UtilityAgent _agent;
 
 
+    public UtilityAction(UtilityAgent agent)
+    {
+        _Scorers = new List<UtilityScorer>();
+        _agent = agent;
+        _Name = this.GetType().ToString();
+    }
+
     public UtilityAction(UtilityAgent agent, float initalScore)
     {
         _Scorers = new List<UtilityScorer>();
-
         _agent = agent;
-
         _UtilityScore = initalScore;
-
         _Name = this.GetType().ToString();
     }
 

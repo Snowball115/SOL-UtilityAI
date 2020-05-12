@@ -27,6 +27,9 @@ public class AgentController : MonoBehaviour
     // Agent senses component
     public AgentSenses _Senses { get; private set; }
 
+    // Agent inventory component
+    public AgentInventory _Inventory { get; private set; }
+
     // Data stored from AgentStats template
     public float _Health;
     public float _Attack;
@@ -43,12 +46,13 @@ public class AgentController : MonoBehaviour
         _NavAgent = GetComponent<NavMeshAgent>();
         _UtilityAgent = GetComponent<UtilityAgent>();
         _Senses = GetComponent<AgentSenses>();
+        _Inventory = GetComponent<AgentInventory>();
 
-        _Health = _AgentStats.healthPoints;
-        _Attack = _AgentStats.attackPoints;
-        _MoveSpeed = _AgentStats.moveSpeed;
-        _Food = 100.0f;
-        _Energy = 100.0f;
+        _Health = _AgentStats.HealthPoints;
+        _Attack = _AgentStats.AttackPoints;
+        _MoveSpeed = _AgentStats.MoveSpeed;
+        _Food = _AgentStats.FoodPoints; ;
+        _Energy = _AgentStats.EnergyPoints;
 
         _NavAgent.speed = _MoveSpeed;
 

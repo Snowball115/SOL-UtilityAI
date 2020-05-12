@@ -8,19 +8,15 @@ public class AgentManager : MonoBehaviour
     [SerializeField] private float updateInterval;
 
     // List of active agents of one manager instance
-    public List<UtilityAgent> ActiveAgents;
+    public List<UtilityAgent> _ActiveAgents;
 
-    // Coroutine manager and ticker for update loop
-    private CoroutineHelper coroutineHelper;
-    private CoroutineTick ticker;
+    private float intervalTimer;
+    private bool isActive;
 
 
     void Awake()
     {
-        ActiveAgents = new List<UtilityAgent>();
-
-        coroutineHelper = FindObjectOfType<CoroutineHelper>();
-        ticker = new CoroutineTick();
+        _ActiveAgents = new List<UtilityAgent>();
     }
 
     private void Start()
@@ -28,25 +24,39 @@ public class AgentManager : MonoBehaviour
         RunAI();
     }
 
+    // Update all agents in a specific interval
+    private void Update()
+    {
+        if (isActive)
+        {
+            intervalTimer += Time.deltaTime;
+
+            if (intervalTimer > updateInterval)
+            {
+                UpdateAgents();
+                intervalTimer = 0;
+            } 
+        }
+    }
+
     // Run AI process
     public void RunAI()
     {
-        // Update all active agents in a specific interval
-        coroutineHelper.Run(ticker.Tick(() => UpdateAgents(), updateInterval), "AgentUpdateLoop");
+        isActive = true;
     }
 
     // Stop AI process
     public void StopAI()
     {
-        coroutineHelper.End("AgentUpdateLoop");
+        isActive = false;
     }
 
     // Add agents to the active list
     public void AddAgentToList(UtilityAgent agent)
     {
-        if (!ActiveAgents.Contains(agent))
+        if (!_ActiveAgents.Contains(agent))
         {
-            ActiveAgents.Add(agent);
+            _ActiveAgents.Add(agent);
             return;
         }
 
@@ -56,9 +66,9 @@ public class AgentManager : MonoBehaviour
     // Remove agents from list
     public void RemoveAgent(UtilityAgent agent)
     {
-        if (ActiveAgents.Contains(agent))
+        if (_ActiveAgents.Contains(agent))
         {
-            ActiveAgents.Remove(agent);
+            _ActiveAgents.Remove(agent);
             return;
         }
         
@@ -68,9 +78,9 @@ public class AgentManager : MonoBehaviour
     // Update agents behaviour
     public void UpdateAgents()
     {
-        for (int i = 0; i < ActiveAgents.Count; i++)
+        for (int i = 0; i < _ActiveAgents.Count; i++)
         {
-            ActiveAgents[i].UpdateAgent();
+            _ActiveAgents[i].UpdateAgent();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Input for the Utility Scorer
+/// Input for the Utility Scorer (e.g. Agent's health)
 /// </summary>
 [System.Serializable]
 public class UtilityValue
