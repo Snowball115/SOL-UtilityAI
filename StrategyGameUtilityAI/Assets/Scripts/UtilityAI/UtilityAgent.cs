@@ -112,6 +112,7 @@ public class UtilityAgent : MonoBehaviour
             // Save the current highest score
             deltaScore = currentScore;
 
+            // Save old action
             _oldAction = _CurrentAction;
 
             // Assign the best action to our current action to execute

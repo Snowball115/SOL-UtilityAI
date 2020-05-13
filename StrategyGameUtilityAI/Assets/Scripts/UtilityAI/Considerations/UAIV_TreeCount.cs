@@ -10,7 +10,6 @@ public class UAIV_TreeCount : UtilityValue
     {
         base.UpdateCurrentValue();
 
-        //_CurrentValue = _agent._AgentController._Senses.CountObjectsInSight(GameCache._GameCache.GetData("Tree"));
-        _CurrentValue = _agent._AgentController._Senses.CountObjectsInSight("Tree");
+        _CurrentValue = _agent._AgentController._Senses.CountObjectsInSight_ByTag(GameCache._GameCache.GetData("Tree"));
     }
 }

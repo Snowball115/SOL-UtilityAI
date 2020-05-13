@@ -19,13 +19,18 @@ public class SearchForResource : UtilityAction
     {
         base.Execute();
 
-        if (_agent._AgentController._Senses.CountObjectsInSight(targetName) >= 4) SetWeight(-1);
-
         if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < 0.5f)
         {
             Vector3 agentPos = _agent.transform.position;
             Vector3 randomPos = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f, Random.Range(-10.0f, 10.0f));
             _agent._AgentController._NavAgent.destination = agentPos + randomPos;
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        SetWeight(-1);
     }
 }

@@ -38,28 +38,14 @@ public class AgentSenses : MonoBehaviour
     }
 
     // Count specific GameObjects the agent should see
-    public int CountObjectsInSight(GameObject go)
+    public int CountObjectsInSight_ByTag(GameObject go)
     {
         int count = 0;
 
         for (int i = 0; i < _VisibleObjects.Length; i++)
         {
-            //if (_VisibleObjects[i] == go.GetComponent<Collider>()) count++;
-
-            if (Array.Exists(_VisibleObjects, element => element == go)) count++;
-        }
-
-        return count;
-    }
-
-    // Count specific GameObjects the agent should see, but search with string
-    public int CountObjectsInSight(string objectName)
-    {
-        int count = 0;
-
-        for (int i = 0; i < _VisibleObjects.Length; i++)
-        {
-            if (_VisibleObjects[i].gameObject.name == objectName) count++;
+            // Searching by tag because other methods somehow don't work
+            if (_VisibleObjects[i].gameObject.tag == go.tag) count++;
         }
 
         return count;

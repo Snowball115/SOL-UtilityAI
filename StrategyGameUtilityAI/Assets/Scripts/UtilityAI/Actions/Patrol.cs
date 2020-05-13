@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Patrol between waypoints
+/// </summary>
 public class Patrol : UtilityAction
 {
     // Positions where the agent should patrol
@@ -14,11 +17,16 @@ public class Patrol : UtilityAction
         this.waypoints = waypoints;
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        _agent._AgentController._NavAgent.autoBraking = false;
+    }
+
     public override void Execute()
     {
         base.Execute();
-
-        _agent._AgentController._NavAgent.autoBraking = false;
 
         if (waypoints.Count == 0) return;
 

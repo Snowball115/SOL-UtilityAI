@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class GenericCache<TKey, TValue>
 {
-    private Dictionary<TKey, TValue> cacheDict = new Dictionary<TKey, TValue>();
+    private readonly Dictionary<TKey, TValue> cacheDict = new Dictionary<TKey, TValue>();
 
 
     public void DebugDict()

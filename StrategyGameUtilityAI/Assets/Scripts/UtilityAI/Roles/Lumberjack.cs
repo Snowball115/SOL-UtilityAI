@@ -47,4 +47,9 @@ public class Lumberjack : UtilityAgent
         _AgentActions.Add(roamAction_SearchTrees);
         _AgentActions.Add(moveAction_HealthTest);
     }
+
+    void Update()
+    {
+        Debug.Log(_AgentController._Senses.CountObjectsInSight_ByTag(GameCache._GameCache.GetData("Tree")));
+    }
 }
