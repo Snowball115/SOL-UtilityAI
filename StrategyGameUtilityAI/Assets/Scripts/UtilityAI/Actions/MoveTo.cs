@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Move agent to position
+/// </summary>
 public class MoveTo : UtilityAction
 {
     // Position the agent should move at
