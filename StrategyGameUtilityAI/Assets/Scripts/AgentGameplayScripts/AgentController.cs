@@ -45,28 +45,26 @@ public class AgentController : MonoBehaviour
     public float _Food;
     public float _Energy;
 
-    // Blackboard (Not sure if needed now)
-    private Blackboard _bb;
 
-
-    void Start()
+    void Awake()
     {
         _NavAgent = GetComponent<NavMeshAgent>();
         _UtilityAgent = GetComponent<UtilityAgent>();
         _Senses = GetComponent<AgentSenses>();
         _Inventory = GetComponent<AgentInventory>();
+    }
 
+    void Start()
+    {
         _Health = _AgentStats.HealthPoints;
         _Attack = _AgentStats.AttackPoints;
         _MoveSpeed = _AgentStats.MoveSpeed;
-        _Food = _AgentStats.FoodPoints; ;
+        _Food = _AgentStats.FoodPoints;
         _Energy = _AgentStats.EnergyPoints;
 
         _NavAgent.speed = _MoveSpeed;
 
-        _bb = new Blackboard();
-        _bb.AddData("HQ", GameObject.Find("Headquarters"));
-
+        // Change material colour depending on the player team
         if (agentTeam == AgentTeams.BLUE) GetComponent<MeshRenderer>().material.color = Color.blue;
         else GetComponent<MeshRenderer>().material.color = Color.red;
     }

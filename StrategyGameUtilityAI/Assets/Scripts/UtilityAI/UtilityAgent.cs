@@ -19,6 +19,7 @@ public class UtilityAgent : MonoBehaviour
 
     // Action to use
     public UtilityAction _CurrentAction { get; private set; }
+    private UtilityAction _oldAction;
 
     // Own update interval if no Agent Manager is available
     private readonly float _customInterval = 0.2f;
@@ -73,10 +74,13 @@ public class UtilityAgent : MonoBehaviour
             _AgentActions[i].EvaluateAllScorers();
         }
 
-        // Call enter state of action if the action is not active
-        //if (CurrentAction != null && !CurrentAction.isActive) CurrentAction.Enter();
+        // Call enter state of current action if the action is not active
+        if (_CurrentAction != null && !_CurrentAction.isActive) _CurrentAction.Enter();
 
         ChooseAction();
+
+        // Exit old action
+        if (_oldAction != null && _oldAction != _CurrentAction && _oldAction.isActive) _oldAction.Exit();
 
         // Run action
         _CurrentAction.Execute();
@@ -107,6 +111,8 @@ public class UtilityAgent : MonoBehaviour
 
             // Save the current highest score
             deltaScore = currentScore;
+
+            _oldAction = _CurrentAction;
 
             // Assign the best action to our current action to execute
             _CurrentAction = _AgentActions[i];

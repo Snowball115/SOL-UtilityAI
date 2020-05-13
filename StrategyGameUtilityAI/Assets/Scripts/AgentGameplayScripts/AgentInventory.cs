@@ -16,6 +16,19 @@ public class AgentInventory : MonoBehaviour
         _resources = new List<ResourceBase>();
     }
 
+    // Count amount of objects in inventory
+    public int GetCurrentInventorySize()
+    {
+        int count = 0;
+
+        for (int i = 0; i < _resources.Count; i++)
+        {
+            if (_resources[i] != null) count++;
+        }
+
+        return count;
+    }
+
     // Add resource to inventory
     public void Add(ResourceBase resourceItem)
     {

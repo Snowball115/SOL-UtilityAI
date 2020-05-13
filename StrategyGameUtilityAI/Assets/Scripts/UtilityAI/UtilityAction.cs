@@ -22,6 +22,8 @@ public class UtilityAction
     // The Agent this action can access
     protected UtilityAgent _agent;
 
+    public bool isActive { get; private set; }
+
 
     public UtilityAction(UtilityAgent agent)
     {
@@ -36,6 +38,12 @@ public class UtilityAction
         _agent = agent;
         _UtilityScore = initalScore;
         _Name = this.GetType().ToString();
+    }
+
+    // Change weight of action
+    public void SetWeight(int weight)
+    {
+        _Weight = weight;
     }
 
     // Add scorer to this action
@@ -77,9 +85,25 @@ public class UtilityAction
         _UtilityScore = average;
     }
 
+    // Enter action
+    public virtual void Enter()
+    {
+        isActive = true;
+
+        Debug.Log(string.Format("Enter {0}", this.GetType().ToString()));
+    }
+
     // Execute action
     public virtual void Execute()
     {
-        Debug.Log(string.Format("Running {0}", this.GetType()));
+        Debug.Log(string.Format("Running {0}", this.GetType().ToString()));
+    }
+
+    // Exit action
+    public virtual void Exit()
+    {
+        isActive = false;
+
+        Debug.Log(string.Format("Exit {0}", this.GetType().ToString()));
     }
 }

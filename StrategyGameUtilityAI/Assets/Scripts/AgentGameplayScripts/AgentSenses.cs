@@ -65,6 +65,19 @@ public class AgentSenses : MonoBehaviour
         return count;
     }
 
+    // Get closest entity of a specific type
+    public GameObject GetClosestObject(string objectName)
+    {
+        GameObject go = null;
+
+        for (int i = 0; i < _VisibleObjects.Length; i++)
+        {
+
+        }
+
+        return go;
+    }
+
     // Main function to store all visible objects the agent can see
     private void GetObjectsInView()
     {
