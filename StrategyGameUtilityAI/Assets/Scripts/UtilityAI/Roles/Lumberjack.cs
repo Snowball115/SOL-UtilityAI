@@ -50,6 +50,6 @@ public class Lumberjack : UtilityAgent
 
     void Update()
     {
-        Debug.Log(_AgentController._Senses.CountObjectsInSight_ByTag(GameCache._GameCache.GetData("Tree")));
+        GameObject go = _AgentController._Senses.GetClosestObject(GameCache._GameCache.GetData("Tree"));
     }
 }

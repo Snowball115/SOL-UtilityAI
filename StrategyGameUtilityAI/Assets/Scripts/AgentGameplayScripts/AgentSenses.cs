@@ -14,6 +14,10 @@ public class AgentSenses : MonoBehaviour
     // Storing all visible objects
     public Collider[] _VisibleObjects;
 
+    // Closest entity for the agent
+    private GameObject closestObj;
+    private Collider closestObjCol;
+
 
     void FixedUpdate()
     {
@@ -24,6 +28,13 @@ public class AgentSenses : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, _ViewRange);
+
+        if (closestObj != null)
+        {
+            Gizmos.color = Color.red;
+            //Gizmos.DrawWireSphere(closestObj.transform.position + Vector3.up * 2.0f, 2.0f);
+            Gizmos.DrawWireCube(closestObj.transform.position + Vector3.up, new Vector3(2, 1, 2));
+        }
     }
 
     // Get a specific object from array
@@ -45,23 +56,32 @@ public class AgentSenses : MonoBehaviour
         for (int i = 0; i < _VisibleObjects.Length; i++)
         {
             // Searching by tag because other methods somehow don't work
-            if (_VisibleObjects[i].gameObject.tag == go.tag) count++;
+            if (go.CompareTag(_VisibleObjects[i].gameObject.tag)) count++;
         }
 
         return count;
     }
 
     // Get closest entity of a specific type
-    public GameObject GetClosestObject(string objectName)
+    public GameObject GetClosestObject(GameObject go)
     {
-        GameObject go = null;
+        float distance = 0;
+        float tmpDistance = Mathf.Infinity;
 
         for (int i = 0; i < _VisibleObjects.Length; i++)
         {
+            distance = (transform.position - _VisibleObjects[i].transform.position).sqrMagnitude;
 
+            if (distance < tmpDistance && go.CompareTag(_VisibleObjects[i].gameObject.tag))
+            {
+                tmpDistance = distance;
+                closestObjCol = _VisibleObjects[i];
+            }
         }
 
-        return go;
+        closestObj = closestObjCol.gameObject;
+
+        return closestObj;
     }
 
     // Main function to store all visible objects the agent can see
