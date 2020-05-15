@@ -5,9 +5,13 @@ using UnityEngine;
 public class ChopTree : UtilityAction
 {
     private GameObject closestTree;
+    private float miningRange;
 
 
-    public ChopTree(float miningRange, UtilityAgent agent, float initialScore) : base(agent, initialScore) { }
+    public ChopTree(float miningRange, UtilityAgent agent, float initialScore) : base(agent, initialScore)
+    {
+        this.miningRange = miningRange;
+    }
 
     public override void Execute()
     {
@@ -25,6 +29,11 @@ public class ChopTree : UtilityAction
         // Move to closest tree and chop it
         closestTree = _agent._AgentController._Senses.GetClosestObject(GameCache._Cache.GetData("Tree"));
 
+        if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < miningRange)
+        {
+            _agent._AgentController._NavAgent.destination = closestTree.transform.position;
 
+            _agent._AgentController._Inventory.Add(closestTree.GetComponent<ResourceBase>().GetMined());
+        }
     }
 }

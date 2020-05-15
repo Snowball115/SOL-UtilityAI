@@ -17,17 +17,18 @@ public class ResourceBase : MonoBehaviour
     // How many resources can be farmed from this entity
     public int _ResourcePoints;
 
-    public ResourceBase GetMined(int miningPower)
+
+    public ResourceBase GetMined()
     {
         if (_ResourcePoints <= 0) DestroyEntity();
 
-        _ResourcePoints -= miningPower;
+        _ResourcePoints -= 1;
 
         return this;
     }
 
     private void DestroyEntity()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }

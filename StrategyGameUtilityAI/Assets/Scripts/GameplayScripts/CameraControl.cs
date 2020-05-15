@@ -8,7 +8,7 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     private float yaw;
-    private bool isRotationLocked;
+
 
     private void MoveCamera(Vector3 targetPos)
     {
@@ -23,10 +23,8 @@ public class CameraControl : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) MoveCamera(-transform.right);
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) MoveCamera(transform.right);
 
-        if (Input.GetKeyDown(KeyCode.Space)) isRotationLocked = !isRotationLocked;
-
         // Rotate camera with mouse
-        if (!isRotationLocked)
+        if (Input.GetMouseButton(1))
         {
             yaw += Input.GetAxis("Mouse X") * 5;
             transform.eulerAngles = new Vector3(40.0f, yaw, 0.0f);

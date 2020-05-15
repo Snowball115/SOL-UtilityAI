@@ -47,13 +47,13 @@ public class AgentInventory : MonoBehaviour
         }
     }
 
-    // Transfer item to another item list
-    public void TransferItem(ResourceBase resourceItem, List<ResourceBase> targetInventory)
+    // Transfer item to player inventory
+    public void TransferItem(ResourceBase resourceItem, PlayerInventory targetInventory)
     {
         if (_resources.Count > 0 && _resources.Contains(resourceItem))
         {
             Remove(resourceItem);
-            targetInventory.Add(resourceItem);
+            targetInventory.AddResource(resourceItem);
         }
     }
 }
