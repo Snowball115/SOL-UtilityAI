@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public List<GameObject> _PlayerBuildings;
 
     // Player inventory
-    private PlayerInventory _playerInventory;
+    public PlayerInventory _playerInventory { get; private set; }
 
 
     void Awake()
