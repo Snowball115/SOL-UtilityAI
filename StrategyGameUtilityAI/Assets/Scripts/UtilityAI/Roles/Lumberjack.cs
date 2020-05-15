@@ -19,7 +19,6 @@ public class Lumberjack : UtilityAgent
 
     // Is a lumberyard placed by the agent?
     public bool isLumberyardPlaced { get; set; }
-    public Vector3 closestLumberyardPos { get; set; }
 
 
     protected override void Start()
@@ -49,6 +48,8 @@ public class Lumberjack : UtilityAgent
         roamAction_SearchTrees.AddScorer(scorer_LumberyardBoolCheck);
 
         ChopTree chopTreeAction = new ChopTree(0.5f, this, 0.5f);
+
+        DeliverResources deliverResourceAction = new DeliverResources("Lumberyard", this, 0.0f);
 
         MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("TestPos"), this, 0.0f);
         moveAction_HealthTest.AddScorer(scorer_AgentHealth);

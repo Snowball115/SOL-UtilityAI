@@ -13,9 +13,9 @@ public class ChopTree : UtilityAction
         this.miningRange = miningRange;
     }
 
-    public override void Execute()
+    public override void Enter()
     {
-        base.Execute();
+        base.Enter();
 
         // First check if a lumberyard is placed, if not build one
         if (!_agent.GetComponent<Lumberjack>().isLumberyardPlaced)
@@ -25,6 +25,11 @@ public class ChopTree : UtilityAction
             go.name = go.name.Replace("(Clone)", "");
             _agent._AgentController._PlayerOwner._PlayerBuildings.Add(go);
         }
+    }
+
+    public override void Execute()
+    {
+        base.Execute();
 
         // Move to closest tree and chop it
         closestTree = _agent._AgentController._Senses.GetClosestObject(GameCache._Cache.GetData("Tree"));

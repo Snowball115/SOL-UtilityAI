@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class ResourceBuilding : Building
 {
-    public float _LifePoints;
+    public void test()
+    {
+
+    }
 }
