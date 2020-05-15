@@ -32,8 +32,7 @@ public class ChopTree : UtilityAction
         if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < miningRange)
         {
             _agent._AgentController._NavAgent.destination = closestTree.transform.position;
-
-            _agent._AgentController._Inventory.Add(closestTree.GetComponent<ResourceBase>().GetMined());
+            _agent._AgentController._Inventory.Add(closestTree.GetComponent<EntityController>().GetMined());
         }
     }
 }

@@ -17,4 +17,11 @@ public class Enums : MonoBehaviour
         FARMER,
         SOLDIER
     }
+
+    public enum ResourceType
+    {
+        WOOD,
+        ORE,
+        FOOD
+    }
 }

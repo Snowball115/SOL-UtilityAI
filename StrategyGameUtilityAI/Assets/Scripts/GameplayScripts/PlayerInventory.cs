@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour
     public int FoodCount;
 
     private List<ResourceBase> resources;
-    private ResourceBase.ResourceType type;
+    private Enums.ResourceType type;
 
 
     void Awake()
@@ -26,15 +26,15 @@ public class PlayerInventory : MonoBehaviour
             {
                 switch (type)
                 {
-                    case ResourceBase.ResourceType.WOOD:
+                    case Enums.ResourceType.WOOD:
                         WoodCount++;
                         break;
 
-                    case ResourceBase.ResourceType.ORE:
+                    case Enums.ResourceType.ORE:
                         OreCount++;
                         break;
 
-                    case ResourceBase.ResourceType.FOOD:
+                    case Enums.ResourceType.FOOD:
                         FoodCount++;
                         break;
                 }
