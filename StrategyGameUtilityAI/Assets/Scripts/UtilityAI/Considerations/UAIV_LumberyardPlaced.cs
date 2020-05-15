@@ -6,20 +6,20 @@ using UnityEngine;
 /// <summary>
 /// Check if a bool is true or not
 /// </summary>
-public class UAIV_BoolCheck : UtilityValue
+public class UAIV_LumberyardPlaced : UtilityValue
 {
-    private bool boolToCheck;
+    private Lumberjack agent;
 
 
-    public UAIV_BoolCheck(bool boolToCheck, UtilityAgent agent, float maxInputValue) : base(agent, maxInputValue)
+    public UAIV_LumberyardPlaced(UtilityAgent agent, float maxInputValue) : base(agent, maxInputValue)
     {
-        this.boolToCheck = boolToCheck;
+        this.agent = agent.GetComponent<Lumberjack>();
     }
 
     public override void UpdateCurrentValue()
     {
         base.UpdateCurrentValue();
 
-        _CurrentValue = Convert.ToInt16(boolToCheck);
+        _CurrentValue = agent.isLumberyardPlaced ? 1 : 0;
     }
 }

@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     // Transform that holds all instantiated agents
     public Transform _AgentParentHolder;
 
+    // Tranform that hold all instantiated buildings
+    public Transform _BuildingParentHolder;
+
     // Agents owned by the player
     public List<GameObject> _PlayerAgents;
 

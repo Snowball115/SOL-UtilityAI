@@ -14,7 +14,7 @@ public class ChopTree : UtilityAction
         if (!_agent.GetComponent<Lumberjack>().isLumberyardPlaced)
         {
             _agent.GetComponent<Lumberjack>().isLumberyardPlaced = true;
-            GameObject go = MonoBehaviour.Instantiate(GameCache._GameCache.GetData("Lumberyard"), _agent.transform.position - Vector3.up, Quaternion.identity);
+            GameObject go = MonoBehaviour.Instantiate(GameCache._GameCache.GetData("Lumberyard"), _agent.transform.position - Vector3.up, Quaternion.identity, _agent._AgentController._PlayerOwner._BuildingParentHolder);
             go.name = go.name.Replace("(Clone)", "");
             _agent._AgentController._PlayerOwner._PlayerBuildings.Add(go);
         }

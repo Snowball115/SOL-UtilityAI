@@ -15,7 +15,7 @@ public class Lumberjack : UtilityAgent
     public soAnimationCurve _InventorySizeCurve;
 
     // Blackboard (Cache) for agent
-    public GenericCache<string, object> _Blackboard { get; private set; }
+    //public GenericCache<string, object> _Blackboard { get; private set; }
 
     // Is a lumberyard placed by the agent?
     public bool isLumberyardPlaced { get; set; }
@@ -26,14 +26,14 @@ public class Lumberjack : UtilityAgent
     {
         base.Start();
 
-        _Blackboard = new GenericCache<string, object>();
-        _Blackboard.Add("isLumberyardPlaced", isLumberyardPlaced);
+        //_Blackboard = new GenericCache<string, object>();
+        //_Blackboard.Add("isLumberyardPlaced", isLumberyardPlaced);
 
         // Utility AI setup
 
         // ****** VALUES ******
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
-        UAIV_BoolCheck lumberyardPlaced = new UAIV_BoolCheck(isLumberyardPlaced, this, 1);
+        UAIV_LumberyardPlaced lumberyardPlaced = new UAIV_LumberyardPlaced(this, 1);
         UAIV_TreeCount treeCount = new UAIV_TreeCount(this, 4);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
 
@@ -71,7 +71,14 @@ public class Lumberjack : UtilityAgent
     {
         if (!isLumberyardPlaced)
         {
-            
+            for (int i = 0; i < _AgentController._PlayerOwner._PlayerBuildings.Count; i++)
+            {
+                if (_AgentController._PlayerOwner._PlayerBuildings[i].CompareTag(GameCache._GameCache.GetData("Lumberyard").tag))
+                {
+                    isLumberyardPlaced = true;
+                }
+            }
         }
     }
+
 }
