@@ -29,7 +29,7 @@ public class Lumberjack : UtilityAgent
         //_Blackboard = new GenericCache<string, object>();
         //_Blackboard.Add("isLumberyardPlaced", isLumberyardPlaced);
 
-        // Utility AI setup
+        // -- Utility AI setup --
 
         // ****** VALUES ******
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
@@ -61,8 +61,6 @@ public class Lumberjack : UtilityAgent
 
     void Update()
     {
-        //GameObject go = _AgentController._Senses.GetClosestObject(GameCache._GameCache.GetData("Tree"));
-
         CheckForLumberyard();
     }
 
@@ -73,7 +71,7 @@ public class Lumberjack : UtilityAgent
         {
             for (int i = 0; i < _AgentController._PlayerOwner._PlayerBuildings.Count; i++)
             {
-                if (_AgentController._PlayerOwner._PlayerBuildings[i].CompareTag(GameCache._GameCache.GetData("Lumberyard").tag))
+                if (_AgentController._PlayerOwner._PlayerBuildings[i].CompareTag(GameCache._Cache.GetData("Lumberyard").tag))
                 {
                     isLumberyardPlaced = true;
                 }

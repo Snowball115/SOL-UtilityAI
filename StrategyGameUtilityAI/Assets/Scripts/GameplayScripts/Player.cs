@@ -33,12 +33,12 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        SpawnAgent(GameCache._GameCache.GetData("Agent-Lumberjack"), _AgentSpawnPos.position);
-        SpawnAgent(GameCache._GameCache.GetData("Agent-Lumberjack"), _AgentSpawnPos.position);
-        //SpawnAgent(GameCache._GameCache.GetData("Agent-Miner"), _AgentSpawnPos.position);
-        //SpawnAgent(GameCache._GameCache.GetData("Agent-Miner"), _AgentSpawnPos.position);
-        //SpawnAgent(GameCache._GameCache.GetData("Agent-Farmer"), _AgentSpawnPos.position);
-        //SpawnAgent(GameCache._GameCache.GetData("Agent-Farmer"), _AgentSpawnPos.position);
+        SpawnAgent(GameCache._Cache.GetData("Agent-Lumberjack"), _AgentSpawnPos.position);
+        SpawnAgent(GameCache._Cache.GetData("Agent-Lumberjack"), _AgentSpawnPos.position);
+        //SpawnAgent(GameCache._Cache.GetData("Agent-Miner"), _AgentSpawnPos.position);
+        //SpawnAgent(GameCache._Cache.GetData("Agent-Miner"), _AgentSpawnPos.position);
+        //SpawnAgent(GameCache._Cache.GetData("Agent-Farmer"), _AgentSpawnPos.position);
+        //SpawnAgent(GameCache._Cache.GetData("Agent-Farmer"), _AgentSpawnPos.position);
     }
 
     // Spawn an agent for this player
