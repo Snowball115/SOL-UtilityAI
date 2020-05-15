@@ -22,6 +22,7 @@ public class UtilityAction
     // The Agent this action can access
     protected UtilityAgent _agent;
 
+    // Check if action is active
     public bool isActive { get; private set; }
 
 
@@ -69,6 +70,7 @@ public class UtilityAction
 
         float average = 0;
 
+        // Get average of all scores
         for (int i = 0; i < _Scorers.Count; i++)
         {
             _Scorers[i].EvaluateScore();
@@ -76,11 +78,10 @@ public class UtilityAction
             average += _Scorers[i]._CurrentScore;
         }
 
-        // Get average of all scores
         average /= _Scorers.Count;
 
         // Apply weight
-        if (_Weight > 0) average *= _Weight;
+        if (_Weight != 0) average *= _Weight;
 
         _UtilityScore = average;
     }

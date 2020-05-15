@@ -9,6 +9,9 @@ public class GameCache : Singleton<GameCache>
 
     public void Init()
     {
+        _GameCache.Add("Agent-Lumberjack", Resources.Load<GameObject>("Agent-Lumberjack"));
+        _GameCache.Add("Agent-Miner", Resources.Load<GameObject>("Agent-Miner"));
+        _GameCache.Add("Agent-Farmer", Resources.Load<GameObject>("Agent-Farmer"));
         _GameCache.Add("Tree", Resources.Load<GameObject>("Tree"));
         _GameCache.Add("Ore", Resources.Load<GameObject>("Ore"));
         _GameCache.Add("Field", Resources.Load<GameObject>("Field"));

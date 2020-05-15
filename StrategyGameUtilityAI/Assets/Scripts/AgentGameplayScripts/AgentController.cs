@@ -9,6 +9,9 @@ public class AgentController : MonoBehaviour
 
     public Enums.AgentRoles Role;
 
+    // The player to which this agent belongs
+    public Player _PlayerOwner;
+
     // Agent statistics template
     public soAgentStatsTemplate _AgentStats;
 

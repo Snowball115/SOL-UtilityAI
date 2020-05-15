@@ -32,7 +32,6 @@ public class AgentSenses : MonoBehaviour
         if (closestObj != null)
         {
             Gizmos.color = Color.red;
-            //Gizmos.DrawWireSphere(closestObj.transform.position + Vector3.up * 2.0f, 2.0f);
             Gizmos.DrawWireCube(closestObj.transform.position + Vector3.up, new Vector3(2, 1, 2));
         }
     }

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Generic cache class to use for every possible data type
+/// Generic cache to use for every possible data type
 /// </summary>
 public class GenericCache<TKey, TValue>
 {

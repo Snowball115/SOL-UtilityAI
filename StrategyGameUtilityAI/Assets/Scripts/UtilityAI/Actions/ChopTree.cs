@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class ChopTree : UtilityAction
 {
-    private GameObject closestTree;
-    private Vector3 lumberyardPos;
-    private bool isLumberyardPlaced;
-
-
     public ChopTree(float miningRange, UtilityAgent agent, float initialScore) : base(agent, initialScore) { }
 
     public override void Execute()
     {
         base.Execute();
 
-        if (!isLumberyardPlaced)
+        // First check if a lumberyard is placed, if not build one
+        if (!_agent.GetComponent<Lumberjack>().isLumberyardPlaced)
         {
-            isLumberyardPlaced = true;
-            GameObject go = MonoBehaviour.Instantiate(GameCache._GameCache.GetData("Lumberyard"));
-            lumberyardPos = go.transform.position;
+            _agent.GetComponent<Lumberjack>().isLumberyardPlaced = true;
+            GameObject go = MonoBehaviour.Instantiate(GameCache._GameCache.GetData("Lumberyard"), _agent.transform.position - Vector3.up, Quaternion.identity);
+            go.name = go.name.Replace("(Clone)", "");
+            _agent._AgentController._PlayerOwner._PlayerBuildings.Add(go);
         }
-
-        
     }
 }
