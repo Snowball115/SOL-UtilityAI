@@ -32,9 +32,11 @@ public class DeliverResources : UtilityAction
     {
         base.Execute();
 
-        if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < 0.5f)
+        _agent._AgentController._NavAgent.destination = lumberyardPos;
+
+        if (_agent._AgentController._NavAgent.remainingDistance < 0.5f)
         {
-            _agent._AgentController._NavAgent.destination = lumberyardPos;
+            
             //_agent._AgentController._Inventory.Add(closestTree.GetComponent<EntityController>().GetMined());
         }
     }

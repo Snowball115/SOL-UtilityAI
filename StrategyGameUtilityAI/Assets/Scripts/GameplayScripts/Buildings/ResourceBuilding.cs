@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ResourceBuilding : Building
 {
-    public void test()
+    // Transfer resource to player inventory
+    public void AddToPlayerInventory(ResourceBase resource)
     {
-
+        _PlayerOwner._playerInventory.AddResource(resource);
     }
 }

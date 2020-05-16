@@ -50,6 +50,7 @@ public class Lumberjack : UtilityAgent
         ChopTree chopTreeAction = new ChopTree(0.5f, this, 0.5f);
 
         DeliverResources deliverResourceAction = new DeliverResources("Lumberyard", this, 0.0f);
+        deliverResourceAction.AddScorer(scorer_InventorySize);
 
         MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("TestPos"), this, 0.0f);
         moveAction_HealthTest.AddScorer(scorer_AgentHealth);
@@ -57,6 +58,7 @@ public class Lumberjack : UtilityAgent
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchTrees);
         _AgentActions.Add(chopTreeAction);
+        _AgentActions.Add(deliverResourceAction);
         _AgentActions.Add(moveAction_HealthTest);
     }
 
