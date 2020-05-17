@@ -34,8 +34,8 @@ public class FarmField : UtilityAction
     {
         base.Execute();
 
-        // Move to farm and start farming (GIVES FOR ONE FRAME A NULL REFERENCE ERROR - WHY???)
-        _agent._AgentController._NavAgent.destination = farmPos.transform.position;
+        // Move to farm and start farming (GIVES FOR EXACTLY ONE FRAME A NULL REFERENCE ERROR - WHY???)
+        if (farmPos != null) _agent._AgentController._NavAgent.destination = farmPos.transform.position;
 
         if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < miningRange)
         {
