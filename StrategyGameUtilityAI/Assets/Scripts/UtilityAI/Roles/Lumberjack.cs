@@ -14,9 +14,6 @@ public class Lumberjack : UtilityAgent
     public soAnimationCurve _TreeCountCurve;
     public soAnimationCurve _InventorySizeCurve;
 
-    // Blackboard (Cache) for agent
-    //public GenericCache<string, object> _Blackboard { get; private set; }
-
     // Is a lumberyard placed by the agent?
     public bool isLumberyardPlaced { get; set; }
 
@@ -25,15 +22,13 @@ public class Lumberjack : UtilityAgent
     {
         base.Start();
 
-        //_Blackboard = new GenericCache<string, object>();
-        //_Blackboard.Add("isLumberyardPlaced", isLumberyardPlaced);
-
-        // -- Utility AI setup --
+        // Utility AI setup
 
         // ****** VALUES ******
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
+        UAIV_AgentFood agentFood = new UAIV_AgentFood(this, 100);
         UAIV_LumberyardPlaced lumberyardPlaced = new UAIV_LumberyardPlaced(this, 1);
-        UAIV_TreeCount treeCount = new UAIV_TreeCount(this, 4);
+        UAIV_ResourceCount treeCount = new UAIV_ResourceCount(GameCache._Cache.GetData("Tree").tag, this, 4);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
 
         // ****** SCORERS ******
@@ -47,9 +42,9 @@ public class Lumberjack : UtilityAgent
         roamAction_SearchTrees.AddScorer(scorer_TreeCount);
         roamAction_SearchTrees.AddScorer(scorer_LumberyardBoolCheck);
 
-        ChopTree chopTreeAction = new ChopTree(0.5f, this, 0.5f);
+        ChopTree chopTreeAction = new ChopTree(this, 0.5f);
 
-        DeliverResources deliverResourceAction = new DeliverResources("Lumberyard", this, 0.0f);
+        DeliverResources deliverResourceAction = new DeliverResources(GameCache._Cache.GetData("Lumberyard").tag, this, 0.0f);
         deliverResourceAction.AddScorer(scorer_InventorySize);
 
         MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("TestPos"), this, 0.0f);
@@ -67,7 +62,7 @@ public class Lumberjack : UtilityAgent
         CheckForLumberyard();
     }
 
-    // Check if an lumberyard is already placed, so it don't need to placed again
+    // Check if an lumberyard is already placed, so it don't need to be placed again
     private void CheckForLumberyard()
     {
         if (!isLumberyardPlaced)

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChopTree : UtilityAction
+public class MineOre : UtilityAction
 {
-    private GameObject closestTree;
+    private GameObject closestOre;
     private float miningRange = 1.5f;
 
 
-    public ChopTree(UtilityAgent agent, float initialScore) : base(agent, initialScore) { }
+    public MineOre(UtilityAgent agent, float initialScore) : base(agent, initialScore) { }
 
     public override void Enter()
     {
@@ -18,10 +18,10 @@ public class ChopTree : UtilityAction
         _agent._AgentController._NavAgent.stoppingDistance = miningRange - 0.1f;
 
         // Check if a lumberyard is placed, if not build one
-        if (!_agent.GetComponent<Lumberjack>().isLumberyardPlaced)
+        if (!_agent.GetComponent<Miner>().isMinePlaced)
         {
-            _agent.GetComponent<Lumberjack>().isLumberyardPlaced = true;
-            GameObject go = MonoBehaviour.Instantiate(GameCache._Cache.GetData("Lumberyard"), _agent.transform.position - Vector3.up, Quaternion.identity, _agent._AgentController._PlayerOwner._BuildingParentHolder);
+            _agent.GetComponent<Miner>().isMinePlaced = true;
+            GameObject go = MonoBehaviour.Instantiate(GameCache._Cache.GetData("Mine"), _agent.transform.position - Vector3.up, Quaternion.identity, _agent._AgentController._PlayerOwner._BuildingParentHolder);
             go.name = go.name.Replace("(Clone)", "");
             go.GetComponent<Building>()._PlayerOwner = _agent._AgentController._PlayerOwner;
             _agent._AgentController._PlayerOwner._PlayerBuildings.Add(go);
@@ -32,14 +32,14 @@ public class ChopTree : UtilityAction
     {
         base.Execute();
 
-        // Move to closest tree and chop it
-        closestTree = _agent._AgentController._Senses.GetClosestObject(GameCache._Cache.GetData("Tree"));
+        // Move to closest ore and mine it
+        closestOre = _agent._AgentController._Senses.GetClosestObject(GameCache._Cache.GetData("Ore"));
 
-        _agent._AgentController._NavAgent.destination = closestTree.transform.position;
+        _agent._AgentController._NavAgent.destination = closestOre.transform.position;
 
         if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < miningRange)
         {
-            _agent._AgentController._Inventory.Add(closestTree.GetComponent<EntityController>().GetMined());
+            _agent._AgentController._Inventory.Add(closestOre.GetComponent<EntityController>().GetMined());
         }
     }
 

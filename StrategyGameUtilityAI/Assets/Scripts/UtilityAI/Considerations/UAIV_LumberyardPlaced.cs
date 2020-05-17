@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Check if a bool is true or not
+/// Check if mine is placed or not
 /// </summary>
 public class UAIV_LumberyardPlaced : UtilityValue
 {

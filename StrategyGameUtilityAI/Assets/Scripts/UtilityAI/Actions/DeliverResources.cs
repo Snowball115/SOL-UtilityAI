@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Let the agent deliver its resources to a target position
+/// </summary>
 public class DeliverResources : UtilityAction
 {
-    private Vector3 lumberyardPos;
-    private string buildingTag;
+    private Vector3 deliverPos;
+    private readonly string buildingTag;
 
 
     public DeliverResources(string buildingTag, UtilityAgent agent, float initialScore) : base(agent, initialScore)
@@ -17,13 +20,13 @@ public class DeliverResources : UtilityAction
     {
         base.Enter();
 
-        GameObject lumberyard = GameCache._Cache.GetData(buildingTag);
+        GameObject buidling = GameCache._Cache.GetData(buildingTag);
 
         for (int i = 0; i < _agent._AgentController._PlayerOwner._PlayerBuildings.Count; i++)
         {
-            if (lumberyard.CompareTag(_agent._AgentController._PlayerOwner._PlayerBuildings[i].tag))
+            if (buidling.CompareTag(_agent._AgentController._PlayerOwner._PlayerBuildings[i].tag))
             {
-                lumberyardPos = _agent._AgentController._PlayerOwner._PlayerBuildings[i].transform.position;
+                deliverPos = _agent._AgentController._PlayerOwner._PlayerBuildings[i].transform.position;
             }
         }
     }
@@ -32,12 +35,11 @@ public class DeliverResources : UtilityAction
     {
         base.Execute();
 
-        _agent._AgentController._NavAgent.destination = lumberyardPos;
+        _agent._AgentController._NavAgent.destination = deliverPos;
 
         if (_agent._AgentController._NavAgent.remainingDistance < 0.5f)
         {
-            
-            //_agent._AgentController._Inventory.Add(closestTree.GetComponent<EntityController>().GetMined());
+            _agent._AgentController._Inventory.TransferItems(_agent._AgentController._PlayerOwner._playerInventory);
         }
     }
 }

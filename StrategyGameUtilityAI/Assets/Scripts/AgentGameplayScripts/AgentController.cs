@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
-    public Enums.Teams Team;
+    public Enums.Teams _Team;
 
-    public Enums.AgentRoles Role;
+    public Enums.AgentRoles _Role;
 
     // The player to which this agent belongs
     public Player _PlayerOwner;
@@ -54,7 +54,7 @@ public class AgentController : MonoBehaviour
         _NavAgent.speed = _MoveSpeed;
 
         // Change material colour depending on the player team
-        if (Team == Enums.Teams.BLUE) GetComponent<MeshRenderer>().material.color = Color.blue;
+        if (_Team == Enums.Teams.BLUE) GetComponent<MeshRenderer>().material.color = Color.blue;
         else GetComponent<MeshRenderer>().material.color = Color.red;
     }
 

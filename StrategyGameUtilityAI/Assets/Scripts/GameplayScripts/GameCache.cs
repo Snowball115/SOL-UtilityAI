@@ -14,8 +14,9 @@ public class GameCache : Singleton<GameCache>
         _Cache.Add("Agent-Farmer", Resources.Load<GameObject>("Agent-Farmer"));
         _Cache.Add("Tree", Resources.Load<GameObject>("Tree"));
         _Cache.Add("Ore", Resources.Load<GameObject>("Ore"));
-        _Cache.Add("Field", Resources.Load<GameObject>("Field"));
+        _Cache.Add("Farm", Resources.Load<GameObject>("Farm"));
         _Cache.Add("Lumberyard", Resources.Load<GameObject>("Lumberyard"));
         _Cache.Add("Mine", Resources.Load<GameObject>("Mine"));
+        _Cache.Add("Headquarters", Resources.Load<GameObject>("Headquarters"));
     }
 }

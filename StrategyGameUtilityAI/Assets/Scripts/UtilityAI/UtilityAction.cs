@@ -91,13 +91,13 @@ public class UtilityAction
     {
         isActive = true;
 
-        Debug.Log(string.Format("Enter {0}", this.GetType().ToString()));
+        //Debug.Log(string.Format("Enter {0}", this.GetType().ToString()));
     }
 
     // Execute action
     public virtual void Execute()
     {
-        Debug.Log(string.Format("Running {0}", this.GetType().ToString()));
+        //Debug.Log(string.Format("Running {0}", this.GetType().ToString()));
     }
 
     // Exit action
@@ -105,6 +105,6 @@ public class UtilityAction
     {
         isActive = false;
 
-        Debug.Log(string.Format("Exit {0}", this.GetType().ToString()));
+        //Debug.Log(string.Format("Exit {0}", this.GetType().ToString()));
     }
 }

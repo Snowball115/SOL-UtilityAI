@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AgentSenses : MonoBehaviour
 {
@@ -26,14 +27,20 @@ public class AgentSenses : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        // Show view range
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, _ViewRange);
 
+        // Show mining target object
         if (closestObj != null)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(closestObj.transform.position + Vector3.up, new Vector3(2, 1, 2));
         }
+
+        // Show NavAgent destination
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(GetComponent<NavMeshAgent>().destination + Vector3.up, 2.0f);
     }
 
     // Get a specific object from array
@@ -41,7 +48,7 @@ public class AgentSenses : MonoBehaviour
     {
         for (int i = 0; i < _VisibleObjects.Length; i++)
         {
-            if (_VisibleObjects[i].gameObject == go) return go;
+            if (_VisibleObjects[i].gameObject == go) return _VisibleObjects[i].gameObject;
         }
 
         return null;
@@ -87,14 +94,5 @@ public class AgentSenses : MonoBehaviour
     private void GetObjectsInView()
     {
         _VisibleObjects = Physics.OverlapSphere(transform.position, _ViewRange, _VisibleLayer);
-    }
-
-    // Print list of visible objects in console
-    private void DebugList()
-    {
-        for (int i = 0; i < _VisibleObjects.Length; i++)
-        {
-            Debug.Log(_VisibleObjects[i]);
-        }
     }
 }

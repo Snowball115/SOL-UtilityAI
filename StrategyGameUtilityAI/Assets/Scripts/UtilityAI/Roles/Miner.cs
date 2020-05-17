@@ -2,17 +2,71 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Miner : MonoBehaviour
+public class Miner : UtilityAgent
 {
-    // Start is called before the first frame update
-    void Start()
+    // Animation curves
+    [Header("---- Curves ----")]
+    public soAnimationCurve _HealthCurve;
+    public soAnimationCurve _MinePlacedCurve;
+    public soAnimationCurve _OreCountCurve;
+    public soAnimationCurve _InventorySizeCurve;
+
+    // Is a mine placed by the agent?
+    public bool isMinePlaced { get; set; }
+
+
+    protected override void Start()
     {
-        
+        base.Start();
+
+        // Utility AI setup
+
+        // ****** VALUES ******
+        UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
+        UAIV_AgentFood agentFood = new UAIV_AgentFood(this, 100);
+        UAIV_MinePlaced minePlaced = new UAIV_MinePlaced(this, 1);
+        UAIV_ResourceCount oreCount = new UAIV_ResourceCount(GameCache._Cache.GetData("Ore").tag, this, 1);
+        UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
+
+        // ****** SCORERS ******
+        UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
+        UtilityScorer scorer_OreBoolCheck = new UtilityScorer(minePlaced, _MinePlacedCurve);
+        UtilityScorer scorer_OreCount = new UtilityScorer(oreCount, _OreCountCurve);
+        UtilityScorer scorer_InventorySize = new UtilityScorer(inventorySize, _InventorySizeCurve);
+
+        // ****** ACTIONS ******
+        RoamAround roamAction_SearchOres = new RoamAround(this, 1.0f);
+        roamAction_SearchOres.AddScorer(scorer_OreCount);
+        roamAction_SearchOres.AddScorer(scorer_OreBoolCheck);
+
+        MineOre mineOreAction = new MineOre(this, 0.5f);
+
+        DeliverResources deliverResourceAction = new DeliverResources(GameCache._Cache.GetData("Mine").tag, this, 0.0f);
+        deliverResourceAction.AddScorer(scorer_InventorySize);
+
+        // ****** REGISTER ACTIONS ******
+        _AgentActions.Add(roamAction_SearchOres);
+        _AgentActions.Add(mineOreAction);
+        _AgentActions.Add(deliverResourceAction);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        CheckForMine();
+    }
+
+    // Check if an mine is already placed, so it don't need to be placed again
+    private void CheckForMine()
+    {
+        if (!isMinePlaced)
+        {
+            for (int i = 0; i < _AgentController._PlayerOwner._PlayerBuildings.Count; i++)
+            {
+                if (_AgentController._PlayerOwner._PlayerBuildings[i].CompareTag(GameCache._Cache.GetData("Mine").tag))
+                {
+                    isMinePlaced = true;
+                }
+            }
+        }
     }
 }

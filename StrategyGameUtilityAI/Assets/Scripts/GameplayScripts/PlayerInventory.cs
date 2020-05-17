@@ -9,7 +9,6 @@ public class PlayerInventory : MonoBehaviour
     public int FoodCount;
 
     private List<ResourceBase> resources;
-    private Enums.ResourceType type;
 
 
     void Awake()
@@ -17,40 +16,35 @@ public class PlayerInventory : MonoBehaviour
         resources = new List<ResourceBase>();
     }
 
-    // Update inventory content count
-    void Update()
-    {
-        if (resources.Count > 0)
-        {
-            for (int i = 0; i < resources.Count; i++)
-            {
-                switch (type)
-                {
-                    case Enums.ResourceType.WOOD:
-                        WoodCount++;
-                        break;
-
-                    case Enums.ResourceType.ORE:
-                        OreCount++;
-                        break;
-
-                    case Enums.ResourceType.FOOD:
-                        FoodCount++;
-                        break;
-                }
-            }
-        }
-    }
-
     // Add resource to list
     public void AddResource(ResourceBase resource)
     {
         resources.Add(resource);
+        UpdateResourceCount(resource);
     }
 
     // Remove resource from list
     public void Remove(ResourceBase resource)
     {
         if (resources.Count > 0) resources.Remove(resource);
+        UpdateResourceCount(resource);
+    }
+
+    // Show available resources
+    private void UpdateResourceCount(ResourceBase resource)
+    {
+        WoodCount = 0;
+        OreCount = 0;
+        FoodCount = 0;
+
+        if (resources.Count > 0)
+        {
+            for (int i = 0; i < resources.Count; i++)
+            {
+                if (resource._Type == Enums.ResourceType.WOOD) WoodCount++;
+                else if (resource._Type == Enums.ResourceType.ORE) OreCount++;
+                else if (resource._Type == Enums.ResourceType.FOOD) FoodCount++;
+            }
+        }
     }
 }
