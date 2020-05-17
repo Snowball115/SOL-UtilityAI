@@ -42,8 +42,8 @@ public class PlayerInventory : MonoBehaviour
             for (int i = 0; i < resources.Count; i++)
             {
                 if (resource._Type == Enums.ResourceType.WOOD) WoodCount++;
-                else if (resource._Type == Enums.ResourceType.ORE) OreCount++;
-                else if (resource._Type == Enums.ResourceType.FOOD) FoodCount++;
+                if (resource._Type == Enums.ResourceType.ORE) OreCount++;
+                if (resource._Type == Enums.ResourceType.FOOD) FoodCount++;
             }
         }
     }

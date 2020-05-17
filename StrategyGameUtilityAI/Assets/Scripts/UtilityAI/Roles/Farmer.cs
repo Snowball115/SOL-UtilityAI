@@ -25,7 +25,7 @@ public class Farmer : UtilityAgent
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
         UAIV_AgentFood agentFood = new UAIV_AgentFood(this, 100);
         UAIV_FarmPlaced farmPlaced = new UAIV_FarmPlaced(this, 1);
-        UAIV_DistanceTo distanceToHQ = new UAIV_DistanceTo(_AgentController._PlayerOwner.GetBuilding_ByTag(GameCache._Cache.GetData("Headquarters").tag), this, 20);
+        UAIV_DistanceTo distanceToHQ = new UAIV_DistanceTo(_AgentController._PlayerOwner.GetBuilding_ByTag(GameCache._Cache.GetData("Headquarters").tag), this, 25);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
 
         // ****** SCORERS ******
@@ -39,18 +39,20 @@ public class Farmer : UtilityAgent
         roamAction_SearchFarmSpot.AddScorer(scorer_DistanceToHQ);
         roamAction_SearchFarmSpot.AddScorer(scorer_FarmBoolCheck);
 
+        FarmField farmFieldAction = new FarmField(this, 0.5f);
+
         DeliverResources deliverResourceAction = new DeliverResources(GameCache._Cache.GetData("Headquarters").tag, this, 0.0f);
         deliverResourceAction.AddScorer(scorer_InventorySize);
 
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchFarmSpot);
+        _AgentActions.Add(farmFieldAction);
+        _AgentActions.Add(deliverResourceAction);
     }
 
     void Update()
     {
         CheckForFarm();
-
-        //Debug.Log((_AgentController._PlayerOwner.GetBuilding_ByTag("Headquarters").transform.position - transform.position).magnitude);
     }
 
     // Check if a farm is already placed, so it don't need to be placed again

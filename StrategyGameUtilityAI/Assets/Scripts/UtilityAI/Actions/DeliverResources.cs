@@ -37,7 +37,7 @@ public class DeliverResources : UtilityAction
 
         _agent._AgentController._NavAgent.destination = deliverPos;
 
-        if (_agent._AgentController._NavAgent.remainingDistance < 0.5f)
+        if (_agent._AgentController._NavAgent.remainingDistance < 1.0f)
         {
             _agent._AgentController._Inventory.TransferItems(_agent._AgentController._PlayerOwner._playerInventory);
         }
