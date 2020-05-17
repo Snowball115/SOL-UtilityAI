@@ -25,7 +25,7 @@ public class Farmer : UtilityAgent
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
         UAIV_AgentFood agentFood = new UAIV_AgentFood(this, 100);
         UAIV_FarmPlaced farmPlaced = new UAIV_FarmPlaced(this, 1);
-        UAIV_DistanceTo distanceToHQ = new UAIV_DistanceTo(_AgentController._PlayerOwner.GetBuilding_ByTag(GameCache._Cache.GetData("Headquarters").tag), this, 25);
+        UAIV_DistanceTo distanceToHQ = new UAIV_DistanceTo(_AgentController._PlayerOwner.GetBuilding_ByTag(GameCache._Cache.GetData("Headquarters").tag), this, 22);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
 
         // ****** SCORERS ******

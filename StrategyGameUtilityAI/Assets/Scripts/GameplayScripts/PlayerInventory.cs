@@ -27,24 +27,22 @@ public class PlayerInventory : MonoBehaviour
     public void Remove(ResourceBase resource)
     {
         if (resources.Count > 0) resources.Remove(resource);
-        UpdateResourceCount(resource);
+        SubstractResourceCount(resource);
     }
 
-    // Show available resources
+    // Update resource count
     private void UpdateResourceCount(ResourceBase resource)
     {
-        WoodCount = 0;
-        OreCount = 0;
-        FoodCount = 0;
+        if (resource._Type == Enums.ResourceType.WOOD) WoodCount++;
+        if (resource._Type == Enums.ResourceType.ORE) OreCount++;
+        if (resource._Type == Enums.ResourceType.FOOD) FoodCount++;
+    }
 
-        if (resources.Count > 0)
-        {
-            for (int i = 0; i < resources.Count; i++)
-            {
-                if (resource._Type == Enums.ResourceType.WOOD) WoodCount++;
-                if (resource._Type == Enums.ResourceType.ORE) OreCount++;
-                if (resource._Type == Enums.ResourceType.FOOD) FoodCount++;
-            }
-        }
+    // Update resource count, if removed
+    private void SubstractResourceCount(ResourceBase resource)
+    {
+        if (resource._Type == Enums.ResourceType.WOOD) WoodCount--;
+        if (resource._Type == Enums.ResourceType.ORE) OreCount--;
+        if (resource._Type == Enums.ResourceType.FOOD) FoodCount--;
     }
 }
