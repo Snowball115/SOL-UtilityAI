@@ -65,8 +65,8 @@ public class AgentController : MonoBehaviour
 
     void Update()
     {
-        if (_AgentData.Food > 0) _AgentData.Food -= 0.05f;
+        if (_AgentData.Food > 0) _AgentData.Food -= 0.01f;
 
-        if (_AgentData.Energy > 0) _AgentData.Energy -= 0.02f;
+        //if (_AgentData.Energy > 0) _AgentData.Energy -= 0.02f;
     }
 }

@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     // Player inventory
     public PlayerInventory _playerInventory { get; private set; }
 
+    // Max and current soldiers count
+    public int _maxSoldiers { get; private set; }
+    public int _CurrentSoldiersCount;
+
 
     void Awake()
     {
@@ -47,7 +51,12 @@ public class Player : MonoBehaviour
         StartCoroutine(SpawnDelayed(6.0f, GameCache._Cache.GetData("Agent-Farmer"), _AgentSpawnPos.position));
     }
 
-    // Spawning with delay
+    void Update()
+    {
+        //CheckIfSoldierCanSpawn();
+    }
+
+    // Spawn agent with delay
     public IEnumerator SpawnDelayed(float seconds, GameObject agent, Vector3 spawnPos)
     {
         yield return new WaitForSeconds(seconds);
@@ -62,6 +71,15 @@ public class Player : MonoBehaviour
         go.GetComponent<AgentController>()._PlayerOwner = this;
         go.name = go.name.Replace("(Clone)", "");
         _PlayerAgents.Add(go);
+    }
+
+    // Instantiate a building
+    public void ConstructBuilding(GameObject building, Vector3 targetPos)
+    {
+        GameObject go = Instantiate(building, targetPos - Vector3.up, Quaternion.identity, _BuildingParentHolder);
+        go.name = go.name.Replace("(Clone)", "");
+        go.GetComponent<Building>()._PlayerOwner = this;
+        _PlayerBuildings.Add(go);
     }
 
     // Add resource to inventory
@@ -88,5 +106,13 @@ public class Player : MonoBehaviour
         }
 
         return null;
+    }
+
+    private void CheckIfSoldierCanSpawn()
+    {
+        while (_CurrentSoldiersCount <= _maxSoldiers)
+        {
+            //if ()
+        }
     }
 }

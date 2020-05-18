@@ -77,7 +77,7 @@ public class EnititiesSpawner : MonoBehaviour
     {
         for (int i = 0; i < activeObjects.Count; i++)
         {
-            if (!go.GetComponent<BoxCollider>().bounds.Intersects(activeObjects[i].GetComponent<BoxCollider>().bounds))
+            if (go.GetComponent<BoxCollider>().bounds.Intersects(activeObjects[i].GetComponent<BoxCollider>().bounds))
             {
                 PlaceEntity(go, newPos);
             }

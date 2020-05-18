@@ -24,10 +24,8 @@ public class MineOre : UtilityAction
         if (!_agent.GetComponent<Miner>().isMinePlaced)
         {
             _agent.GetComponent<Miner>().isMinePlaced = true;
-            GameObject go = MonoBehaviour.Instantiate(GameCache._Cache.GetData("Mine"), _agent.transform.position - Vector3.up, Quaternion.identity, _agent._AgentController._PlayerOwner._BuildingParentHolder);
-            go.name = go.name.Replace("(Clone)", "");
-            go.GetComponent<Building>()._PlayerOwner = _agent._AgentController._PlayerOwner;
-            _agent._AgentController._PlayerOwner._PlayerBuildings.Add(go);
+
+            _agent._AgentController._PlayerOwner.ConstructBuilding(GameCache._Cache.GetData("Mine"), _agent.transform.position);
         }
     }
 

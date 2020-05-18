@@ -11,13 +11,17 @@ public class CapturePoint : MonoBehaviour
     public Enums.Teams _CurrentCapturerTeam;
 
     // Progress that controls if a CP is captured
-    private float captureProgress;
+    public float captureProgress;
     private readonly float captureLimit = 100.0f;
 
     private MeshRenderer flagRenderer;
     private LineRenderer lineRenderer;
-    private int segments = 40;
+    private int segments = 20;
 
+    private bool isCaptured;
+    private bool isContested;
+
+    private List<GameObject> agentsInTrigger;
 
     void Start()
     {
@@ -27,28 +31,38 @@ public class CapturePoint : MonoBehaviour
         lineRenderer.useWorldSpace = false;
         lineRenderer.widthMultiplier = 0.25f;
         DrawCircle();
+
+        agentsInTrigger = new List<GameObject>();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Check if only one team is capturing CP
-
-        while (captureProgress < captureLimit)
+        if (other.GetComponent<Soldier>())
         {
-            captureProgress++;
-            return;
-        }
+            // Check if only one team is capturing CP
+            agentsInTrigger.Add(other.gameObject);
+            _CurrentCapturerTeam = other.GetComponent<Soldier>()._AgentController._Team;
+            
 
-        if (_CurrentCapturerTeam == Enums.Teams.BLUE)
-        {
-            flagRenderer.material.color = Color.blue;
-        }
-        else
-        {
-            flagRenderer.material.color = Color.red;
-        }
+            if (isContested) return;
 
-        _TeamOwner = other.GetComponent<Soldier>()._AgentController._PlayerOwner;
+            while (captureProgress < captureLimit)
+            {
+                captureProgress++;
+                return;
+            }
+
+            if (_CurrentCapturerTeam == Enums.Teams.BLUE)
+            {
+                flagRenderer.material.color = Color.blue;
+            }
+            else
+            {
+                flagRenderer.material.color = Color.red;
+            }
+
+            _TeamOwner = other.GetComponent<Soldier>()._AgentController._PlayerOwner;
+        }
     }
 
     private void DrawCircle()

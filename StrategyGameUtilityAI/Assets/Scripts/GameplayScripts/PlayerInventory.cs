@@ -45,9 +45,6 @@ public class PlayerInventory : MonoBehaviour
                 FoodCount++;
                 break;
         }
-        //if (resource._Type == Enums.ResourceType.WOOD) WoodCount++;
-        //if (resource._Type == Enums.ResourceType.ORE) OreCount++;
-        //if (resource._Type == Enums.ResourceType.FOOD) FoodCount++;
     }
 
     // Update resource count, if removed
@@ -65,8 +62,5 @@ public class PlayerInventory : MonoBehaviour
                 FoodCount--;
                 break;
         }
-        //if (resource._Type == Enums.ResourceType.WOOD) WoodCount--;
-        //if (resource._Type == Enums.ResourceType.ORE) OreCount--;
-        //if (resource._Type == Enums.ResourceType.FOOD) FoodCount--;
     }
 }
