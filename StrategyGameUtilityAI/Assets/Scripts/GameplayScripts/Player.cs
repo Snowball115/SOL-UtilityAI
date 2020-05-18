@@ -39,12 +39,19 @@ public class Player : MonoBehaviour
     void Start()
     {
         // Spawn 2 agents of each role
-        SpawnAgent(GameCache._Cache.GetData("Agent-Lumberjack"), _AgentSpawnPos.position);
-        SpawnAgent(GameCache._Cache.GetData("Agent-Lumberjack"), _AgentSpawnPos.position);
-        SpawnAgent(GameCache._Cache.GetData("Agent-Miner"), _AgentSpawnPos.position);
-        SpawnAgent(GameCache._Cache.GetData("Agent-Miner"), _AgentSpawnPos.position);
-        SpawnAgent(GameCache._Cache.GetData("Agent-Farmer"), _AgentSpawnPos.position);
-        SpawnAgent(GameCache._Cache.GetData("Agent-Farmer"), _AgentSpawnPos.position);
+        StartCoroutine(SpawnDelayed(1.0f, GameCache._Cache.GetData("Agent-Lumberjack"), _AgentSpawnPos.position));
+        StartCoroutine(SpawnDelayed(2.0f, GameCache._Cache.GetData("Agent-Lumberjack"), _AgentSpawnPos.position));
+        StartCoroutine(SpawnDelayed(3.0f, GameCache._Cache.GetData("Agent-Miner"), _AgentSpawnPos.position));
+        StartCoroutine(SpawnDelayed(4.0f, GameCache._Cache.GetData("Agent-Miner"), _AgentSpawnPos.position));
+        StartCoroutine(SpawnDelayed(5.0f, GameCache._Cache.GetData("Agent-Farmer"), _AgentSpawnPos.position));
+        StartCoroutine(SpawnDelayed(6.0f, GameCache._Cache.GetData("Agent-Farmer"), _AgentSpawnPos.position));
+    }
+
+    // Spawning with delay
+    public IEnumerator SpawnDelayed(float seconds, GameObject agent, Vector3 spawnPos)
+    {
+        yield return new WaitForSeconds(seconds);
+        SpawnAgent(agent, spawnPos);
     }
 
     // Spawn an agent for this player

@@ -10,6 +10,6 @@ public class UAIV_AgentHealth : UtilityValue
     {
         base.UpdateCurrentValue();
 
-        _CurrentValue = _agent._AgentController._Health;
+        _CurrentValue = _agent._AgentController._AgentData.Health;
     }
 }

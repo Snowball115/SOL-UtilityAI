@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Action for farming fields
+/// </summary>
 public class FarmField : UtilityAction
 {
     private GameObject farmPos;
@@ -17,7 +20,7 @@ public class FarmField : UtilityAction
         // Agent should not run into the tree when chopping it
         _agent._AgentController._NavAgent.stoppingDistance = miningRange - 0.1f;
 
-        // Check if a lumberyard is placed, if not build one
+        // Check if a farm is placed, if not build one
         if (!_agent.GetComponent<Farmer>().isFarmPlaced)
         {
             _agent.GetComponent<Farmer>().isFarmPlaced = true;
@@ -34,7 +37,7 @@ public class FarmField : UtilityAction
     {
         base.Execute();
 
-        // Move to farm and start farming (GIVES FOR EXACTLY ONE FRAME A NULL REFERENCE ERROR - WHY???)
+        // Move to farm and start farming (GIVES FOR EXACTLY ONE FRAME A NULL REFERENCE ERROR - WHY?)
         if (farmPos == null) return;
         _agent._AgentController._NavAgent.destination = farmPos.transform.position;
 

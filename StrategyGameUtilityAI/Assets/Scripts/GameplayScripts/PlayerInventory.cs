@@ -33,16 +33,40 @@ public class PlayerInventory : MonoBehaviour
     // Update resource count
     private void UpdateResourceCount(ResourceBase resource)
     {
-        if (resource._Type == Enums.ResourceType.WOOD) WoodCount++;
-        if (resource._Type == Enums.ResourceType.ORE) OreCount++;
-        if (resource._Type == Enums.ResourceType.FOOD) FoodCount++;
+        switch (resource._Type)
+        {
+            case Enums.ResourceType.WOOD:
+                WoodCount++;
+                break;
+            case Enums.ResourceType.ORE:
+                OreCount++;
+                break;
+            case Enums.ResourceType.FOOD:
+                FoodCount++;
+                break;
+        }
+        //if (resource._Type == Enums.ResourceType.WOOD) WoodCount++;
+        //if (resource._Type == Enums.ResourceType.ORE) OreCount++;
+        //if (resource._Type == Enums.ResourceType.FOOD) FoodCount++;
     }
 
     // Update resource count, if removed
     private void SubstractResourceCount(ResourceBase resource)
     {
-        if (resource._Type == Enums.ResourceType.WOOD) WoodCount--;
-        if (resource._Type == Enums.ResourceType.ORE) OreCount--;
-        if (resource._Type == Enums.ResourceType.FOOD) FoodCount--;
+        switch (resource._Type)
+        {
+            case Enums.ResourceType.WOOD:
+                WoodCount--;
+                break;
+            case Enums.ResourceType.ORE:
+                OreCount--;
+                break;
+            case Enums.ResourceType.FOOD:
+                FoodCount--;
+                break;
+        }
+        //if (resource._Type == Enums.ResourceType.WOOD) WoodCount--;
+        //if (resource._Type == Enums.ResourceType.ORE) OreCount--;
+        //if (resource._Type == Enums.ResourceType.FOOD) FoodCount--;
     }
 }

@@ -28,11 +28,16 @@ public class AgentController : MonoBehaviour
     public AgentInventory _Inventory { get; private set; }
 
     // Data stored from AgentStats template
-    public float _Health;
-    public float _Attack;
-    public float _MoveSpeed;
-    public float _Food;
-    public float _Energy;
+    public struct AgentData
+    {
+        public float Health;
+        public float Attack;
+        public float MoveSpeed;
+        public float Food;
+        public float Energy;
+    };
+
+    public AgentData _AgentData;
 
 
     void Awake()
@@ -45,13 +50,13 @@ public class AgentController : MonoBehaviour
 
     void Start()
     {
-        _Health = _AgentStats.HealthPoints;
-        _Attack = _AgentStats.AttackPoints;
-        _MoveSpeed = _AgentStats.MoveSpeed;
-        _Food = _AgentStats.FoodPoints;
-        _Energy = _AgentStats.EnergyPoints;
+        _AgentData.Health = _AgentStats.HealthPoints;
+        _AgentData.Attack = _AgentStats.AttackPoints;
+        _AgentData.MoveSpeed = _AgentStats.MoveSpeed;
+        _AgentData.Food = _AgentStats.FoodPoints;
+        _AgentData.Energy = _AgentStats.EnergyPoints;
 
-        _NavAgent.speed = _MoveSpeed;
+        _NavAgent.speed = _AgentData.MoveSpeed;
 
         // Change material colour depending on the player team
         if (_Team == Enums.Teams.BLUE) GetComponent<MeshRenderer>().material.color = Color.blue;
@@ -60,8 +65,8 @@ public class AgentController : MonoBehaviour
 
     void Update()
     {
-        if (_Food > 0) _Food -= 0.05f;
+        if (_AgentData.Food > 0) _AgentData.Food -= 0.05f;
 
-        if (_Energy > 0) _Energy -= 0.02f;
+        if (_AgentData.Energy > 0) _AgentData.Energy -= 0.02f;
     }
 }

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Action for chopping trees
+/// </summary>
 public class ChopTree : UtilityAction
 {
     private GameObject closestTree;

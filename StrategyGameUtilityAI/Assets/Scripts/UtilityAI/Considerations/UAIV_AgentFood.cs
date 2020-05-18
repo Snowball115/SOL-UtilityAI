@@ -10,6 +10,6 @@ public class UAIV_AgentFood : UtilityValue
     {
         base.UpdateCurrentValue();
 
-        _CurrentValue = _agent._AgentController._Food;
+        _CurrentValue = _agent._AgentController._AgentData.Food;
     }
 }

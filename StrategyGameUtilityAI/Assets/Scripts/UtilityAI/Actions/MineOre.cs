@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Action for mining ores
+/// </summary>
 public class MineOre : UtilityAction
 {
     private GameObject closestOre;
@@ -14,10 +17,10 @@ public class MineOre : UtilityAction
     {
         base.Enter();
 
-        // Agent should not run into the tree when chopping it
+        // Agent should not run into the ore when mining it
         _agent._AgentController._NavAgent.stoppingDistance = miningRange - 0.1f;
 
-        // Check if a lumberyard is placed, if not build one
+        // Check if a mine is placed, if not build one
         if (!_agent.GetComponent<Miner>().isMinePlaced)
         {
             _agent.GetComponent<Miner>().isMinePlaced = true;

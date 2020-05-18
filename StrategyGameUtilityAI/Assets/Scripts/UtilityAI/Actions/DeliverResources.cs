@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Let the agent deliver its resources to a target position
+/// Let the agent deliver his resources to a target position
 /// </summary>
 public class DeliverResources : UtilityAction
 {
