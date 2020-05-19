@@ -16,12 +16,15 @@ public class CapturePoint : MonoBehaviour
 
     private MeshRenderer flagRenderer;
     private LineRenderer lineRenderer;
-    private int segments = 20;
+    private readonly int segments = 40;
 
+    // Check if CP is captured by a team
     private bool isCaptured;
+
+    // Check if two factions are fighting in the CP's radius
     private bool isContested;
 
-    private List<GameObject> agentsInTrigger;
+    public List<GameObject> agentsInTrigger;
 
     void Start()
     {
@@ -30,9 +33,18 @@ public class CapturePoint : MonoBehaviour
         lineRenderer.positionCount = segments + 1;
         lineRenderer.useWorldSpace = false;
         lineRenderer.widthMultiplier = 0.25f;
+        lineRenderer.material.color = Color.white;
         DrawCircle();
 
         agentsInTrigger = new List<GameObject>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Soldier>())
+        {
+            agentsInTrigger.Add(other.gameObject);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -40,11 +52,12 @@ public class CapturePoint : MonoBehaviour
         if (other.GetComponent<Soldier>())
         {
             // Check if only one team is capturing CP
-            agentsInTrigger.Add(other.gameObject);
             _CurrentCapturerTeam = other.GetComponent<Soldier>()._AgentController._Team;
             
 
             if (isContested) return;
+
+            lineRenderer.material.color = Color.yellow;
 
             while (captureProgress < captureLimit)
             {
@@ -62,6 +75,16 @@ public class CapturePoint : MonoBehaviour
             }
 
             _TeamOwner = other.GetComponent<Soldier>()._AgentController._PlayerOwner;
+
+            lineRenderer.material.color = Color.white;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Soldier>() && agentsInTrigger.Contains(other.gameObject))
+        {
+            agentsInTrigger.Remove(other.gameObject);
         }
     }
 
