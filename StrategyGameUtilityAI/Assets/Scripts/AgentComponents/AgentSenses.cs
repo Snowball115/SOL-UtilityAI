@@ -68,6 +68,42 @@ public class AgentSenses : MonoBehaviour
         return count;
     }
 
+    // Count all enemy agent soldiers in area
+    public int CountEnemySoldiersInSight()
+    {
+        Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
+
+        int count = 0;
+
+        for (int i = 0; i < _VisibleObjects.Length; i++)
+        {
+            if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
+            {
+                if (_VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam) count++;
+            }
+        }
+
+        return count;
+    }
+
+    // Count all friendly agent soldiers in area
+    public int CountFriendlySoldiersInSight()
+    {
+        Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
+
+        int count = 0;
+
+        for (int i = 0; i < _VisibleObjects.Length; i++)
+        {
+            if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
+            {
+                if (_VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team == playerTeam) count++;
+            }
+        }
+
+        return count;
+    }
+
     // Get closest entity of a specific type
     public GameObject GetClosestObject(GameObject go)
     {

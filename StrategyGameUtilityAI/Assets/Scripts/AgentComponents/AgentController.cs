@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
 {
+    // The team of this agent
     public Enums.Teams _Team;
 
     public Enums.AgentRoles _Role;
@@ -28,6 +29,7 @@ public class AgentController : MonoBehaviour
     public AgentInventory _Inventory { get; private set; }
 
     // Data stored from AgentStats template
+    [System.Serializable]
     public struct AgentData
     {
         public float Health;

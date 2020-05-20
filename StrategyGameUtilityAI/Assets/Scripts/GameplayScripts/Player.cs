@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public  PlayerInventory _PlayerInventory;
 
     // Max and current soldiers count
-    public int _MaxSoldiers { get; private set; }
+    private readonly int _maxSoldiers = 10;
     public int _CurrentSoldiersCount;
 
 
@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         CheckIfSoldierCanSpawn(100, 100, 100);
-        UpdateSoldierCount();
     }
 
     // Spawn agent with delay
@@ -87,15 +86,15 @@ public class Player : MonoBehaviour
     }
 
     // Add resource to inventory
-    public void AddToInventory(ResourceBase resource)
+    public void AddToInventory(Enums.ResourceType resource)
     {
-        _PlayerInventory.AddResource(resource);
+        _PlayerInventory.AddResource(new ResourceBase(resource));
     }
 
     // Remove resource from inventory
-    public void RemoveFromInventory(ResourceBase resource)
+    public void RemoveFromInventory(Enums.ResourceType resource)
     {
-        _PlayerInventory.Remove(resource);
+        _PlayerInventory.Remove(new ResourceBase(resource));
     }
 
     // Return a specific building from building list
@@ -115,14 +114,15 @@ public class Player : MonoBehaviour
     // Spawn soldiers if enough resources are available
     private void CheckIfSoldierCanSpawn(float woodCost, float oreCost, float foodCost)
     {
-        if (_CurrentSoldiersCount <= _MaxSoldiers)
+        if (_CurrentSoldiersCount < _maxSoldiers)
         {
             if (_PlayerInventory.WoodCount >= woodCost && _PlayerInventory.OreCount >= oreCost && _PlayerInventory.FoodCount >= foodCost)
             {
-                for (int i = 0; i < woodCost; i++) RemoveFromInventory(new ResourceBase(Enums.ResourceType.WOOD));
-                for (int i = 0; i < oreCost; i++) RemoveFromInventory(new ResourceBase(Enums.ResourceType.ORE));
-                for (int i = 0; i < foodCost; i++) RemoveFromInventory(new ResourceBase(Enums.ResourceType.FOOD));
+                for (int i = 0; i < woodCost; i++) RemoveFromInventory(Enums.ResourceType.WOOD);
+                for (int i = 0; i < oreCost; i++) RemoveFromInventory(Enums.ResourceType.ORE);
+                for (int i = 0; i < foodCost; i++) RemoveFromInventory(Enums.ResourceType.FOOD);
                 SpawnAgent(GameCache._Cache.GetData("Agent-Soldier"), _AgentSpawnPos.position);
+                UpdateSoldierCount();
             }
         }
     }

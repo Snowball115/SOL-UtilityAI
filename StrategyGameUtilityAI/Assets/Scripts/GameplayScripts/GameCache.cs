@@ -13,6 +13,7 @@ public class GameCache : Singleton<GameCache>
     private static CapturePoint[] _capturePointsInScene;
     public static List<GameObject> _CapturePointsList;
 
+
     public void Init()
     {
         // Store prefabs in cache

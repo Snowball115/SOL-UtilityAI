@@ -20,11 +20,11 @@ public class DeliverResources : UtilityAction
     {
         base.Enter();
 
-        GameObject buidling = GameCache._Cache.GetData(buildingTag);
+        GameObject building = GameCache._Cache.GetData(buildingTag);
 
         for (int i = 0; i < _agent._AgentController._PlayerOwner._PlayerBuildings.Count; i++)
         {
-            if (buidling.CompareTag(_agent._AgentController._PlayerOwner._PlayerBuildings[i].tag))
+            if (building.CompareTag(_agent._AgentController._PlayerOwner._PlayerBuildings[i].tag))
             {
                 deliverPos = _agent._AgentController._PlayerOwner._PlayerBuildings[i].transform.position;
             }

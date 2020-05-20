@@ -18,11 +18,6 @@ public class UtilityScorer
     public float _CurrentScore;
 
 
-    public UtilityScorer(UtilityValue value)
-    {
-        _ReferenceValue = value;
-    }
-
     public UtilityScorer(UtilityValue value, soAnimationCurve curve)
     {
         _ReferenceValue = value;

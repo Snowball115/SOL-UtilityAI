@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Generic cache to store data and load it later
+/// Generic cache to store and load data
 /// </summary>
 public class GenericCache<TKey, TValue>
 {
@@ -13,22 +13,6 @@ public class GenericCache<TKey, TValue>
     public void Add(TKey key, TValue value)
     {
         if (!ContainsKey(key)) cacheDict.Add(key, value);
-
-        else Debug.LogWarning("[CACHE] Can't add Key that already exists! Consider using ModifyData() instead.");
-    }
-
-    // Remove item
-    public void Remove(TKey key)
-    {
-        if (ContainsKey(key)) cacheDict.Remove(key);
-
-        else Debug.LogWarning("[CACHE] No key to remove!");
-    }
-
-    // Modify an existing value of a key
-    public void ModifyData(TKey key, TValue newValue)
-    {
-        cacheDict[key] = newValue;
     }
 
     // Get value from key
@@ -38,7 +22,7 @@ public class GenericCache<TKey, TValue>
 
         if (cacheDict.TryGetValue(key, out tmp)) return tmp;
 
-        Debug.LogWarning(string.Format("[CACHE] Data {0} not found", key));
+        Debug.LogWarning(string.Format("Data {0} not found", key));
 
         return tmp;
     }

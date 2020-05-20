@@ -52,7 +52,7 @@ public class AgentInventory : MonoBehaviour
     {
         while (_resources.Count > 0)
         {
-            targetInventory.AddToInventory(_resources[0]);
+            targetInventory.AddToInventory(_resources[0]._Type);
             Remove(_resources[0]);
         }
     }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +18,10 @@ public class CapturePoint : MonoBehaviour
     [SerializeField] private float captureProgress;
     private readonly float captureLimit = 10.0f;
 
+    // All agents that are trying to capture the CP
+    public List<GameObject> agentsInTrigger;
+
+    // Flag and circle graphics
     private MeshRenderer flagRenderer;
     private LineRenderer lineRenderer;
     private readonly int circlePoints = 40;
@@ -29,7 +32,6 @@ public class CapturePoint : MonoBehaviour
     // Check if two factions are fighting in the CP's radius
     private bool isContested;
 
-    public List<GameObject> agentsInTrigger;
 
     void Start()
     {
@@ -90,6 +92,7 @@ public class CapturePoint : MonoBehaviour
             ProgressBar.SetActive(true);
             lineRenderer.material.color = Color.green;
 
+            // Capturing progress
             while (captureProgress < captureLimit)
             {
                 captureProgress += Time.deltaTime;
@@ -99,6 +102,7 @@ public class CapturePoint : MonoBehaviour
             captureProgress = 0f;
             isCaptured = true;
 
+            // Set flag color
             switch (_CurrentCapturerTeam)
             {
                 case Enums.Teams.BLUE:
@@ -110,7 +114,12 @@ public class CapturePoint : MonoBehaviour
                     break;
             }
 
+            // Remove flag from the possession of the previous player
+            if (_TeamOwner != null) _TeamOwner._CapturedCPs.Remove(this.gameObject);
+
+            // Save player that captured the flag
             _TeamOwner = other.GetComponent<Soldier>()._AgentController._PlayerOwner;
+            _TeamOwner._CapturedCPs.Add(this.gameObject);
 
             ProgressBar.SetActive(false);
             lineRenderer.material.color = Color.white;
