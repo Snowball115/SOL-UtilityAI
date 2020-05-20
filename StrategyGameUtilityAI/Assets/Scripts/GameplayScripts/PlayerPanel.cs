@@ -50,14 +50,14 @@ public class PlayerPanel : MonoBehaviour
 
     void Update()
     {
-        blueWoodText.text = playerBlue._playerInventory.WoodCount.ToString();
-        blueOreText.text = playerBlue._playerInventory.OreCount.ToString();
-        blueFoodText.text = playerBlue._playerInventory.FoodCount.ToString();
+        blueWoodText.text = playerBlue._PlayerInventory.WoodCount.ToString();
+        blueOreText.text = playerBlue._PlayerInventory.OreCount.ToString();
+        blueFoodText.text = playerBlue._PlayerInventory.FoodCount.ToString();
         blueSoldierText.text = playerBlue._CurrentSoldiersCount.ToString();
 
-        redWoodText.text = playerRed._playerInventory.WoodCount.ToString();
-        redOreText.text = playerRed._playerInventory.OreCount.ToString();
-        redFoodText.text = playerRed._playerInventory.FoodCount.ToString();
+        redWoodText.text = playerRed._PlayerInventory.WoodCount.ToString();
+        redOreText.text = playerRed._PlayerInventory.OreCount.ToString();
+        redFoodText.text = playerRed._PlayerInventory.FoodCount.ToString();
         redSoldierText.text = playerRed._CurrentSoldiersCount.ToString();
     }
 }

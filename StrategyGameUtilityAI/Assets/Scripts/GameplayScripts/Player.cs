@@ -25,17 +25,20 @@ public class Player : MonoBehaviour
     // Buildings owned by the player
     public List<GameObject> _PlayerBuildings;
 
+    // All captured CPs by the player
+    public List<GameObject> _CapturedCPs;
+
     // Player inventory
-    public PlayerInventory _playerInventory { get; private set; }
+    public  PlayerInventory _PlayerInventory;
 
     // Max and current soldiers count
-    public int _maxSoldiers { get; private set; }
+    public int _MaxSoldiers { get; private set; }
     public int _CurrentSoldiersCount;
 
 
     void Awake()
     {
-        _playerInventory = GetComponent<PlayerInventory>();
+        _PlayerInventory = GetComponent<PlayerInventory>();
 
         _PlayerBuildings.Add(_PlayerHeadquarters);
     }
@@ -53,7 +56,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //CheckIfSoldierCanSpawn();
+        CheckIfSoldierCanSpawn(100, 100, 100);
+        UpdateSoldierCount();
     }
 
     // Spawn agent with delay
@@ -85,13 +89,13 @@ public class Player : MonoBehaviour
     // Add resource to inventory
     public void AddToInventory(ResourceBase resource)
     {
-        _playerInventory.AddResource(resource);
+        _PlayerInventory.AddResource(resource);
     }
 
     // Remove resource from inventory
     public void RemoveFromInventory(ResourceBase resource)
     {
-        _playerInventory.Remove(resource);
+        _PlayerInventory.Remove(resource);
     }
 
     // Return a specific building from building list
@@ -108,11 +112,29 @@ public class Player : MonoBehaviour
         return null;
     }
 
-    private void CheckIfSoldierCanSpawn()
+    // Spawn soldiers if enough resources are available
+    private void CheckIfSoldierCanSpawn(float woodCost, float oreCost, float foodCost)
     {
-        while (_CurrentSoldiersCount <= _maxSoldiers)
+        if (_CurrentSoldiersCount <= _MaxSoldiers)
         {
-            //if ()
+            if (_PlayerInventory.WoodCount >= woodCost && _PlayerInventory.OreCount >= oreCost && _PlayerInventory.FoodCount >= foodCost)
+            {
+                for (int i = 0; i < woodCost; i++) RemoveFromInventory(new ResourceBase(Enums.ResourceType.WOOD));
+                for (int i = 0; i < oreCost; i++) RemoveFromInventory(new ResourceBase(Enums.ResourceType.ORE));
+                for (int i = 0; i < foodCost; i++) RemoveFromInventory(new ResourceBase(Enums.ResourceType.FOOD));
+                SpawnAgent(GameCache._Cache.GetData("Agent-Soldier"), _AgentSpawnPos.position);
+            }
+        }
+    }
+
+    // Update active player soldiers count
+    private void UpdateSoldierCount()
+    {
+        _CurrentSoldiersCount = 0;
+
+        for (int i = 0; i < _PlayerAgents.Count; i++)
+        {
+            if (_PlayerAgents[i].gameObject.GetComponent<Soldier>()) _CurrentSoldiersCount++;
         }
     }
 }

@@ -48,11 +48,11 @@ public class AgentInventory : MonoBehaviour
     }
 
     // Transfer item to player inventory
-    public void TransferItems(PlayerInventory targetInventory)
+    public void TransferItems(Player targetInventory)
     {
         while (_resources.Count > 0)
         {
-            targetInventory.AddResource(_resources[0]);
+            targetInventory.AddToInventory(_resources[0]);
             Remove(_resources[0]);
         }
     }

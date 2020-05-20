@@ -2,22 +2,14 @@
 using UnityEngine;
 
 /// <summary>
-/// Generic cache to use for every possible data type
+/// Generic cache to store data and load it later
 /// </summary>
 public class GenericCache<TKey, TValue>
 {
     private readonly Dictionary<TKey, TValue> cacheDict = new Dictionary<TKey, TValue>();
 
 
-    public void DebugDict()
-    {
-        foreach (KeyValuePair<TKey, TValue> entry in cacheDict)
-        {
-            Debug.Log(string.Format("{0} {1}", entry.Key, entry.Value));
-        }
-    }
-
-    // Adds entry to Dictionary
+    // Add item
     public void Add(TKey key, TValue value)
     {
         if (!ContainsKey(key)) cacheDict.Add(key, value);
@@ -25,7 +17,7 @@ public class GenericCache<TKey, TValue>
         else Debug.LogWarning("[CACHE] Can't add Key that already exists! Consider using ModifyData() instead.");
     }
 
-    // Removes entry from Dictionary
+    // Remove item
     public void Remove(TKey key)
     {
         if (ContainsKey(key)) cacheDict.Remove(key);
