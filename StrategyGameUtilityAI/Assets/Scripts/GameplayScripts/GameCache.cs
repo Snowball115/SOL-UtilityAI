@@ -27,7 +27,8 @@ public class GameCache : Singleton<GameCache>
         _Cache.Add("Lumberyard", Resources.Load<GameObject>("Lumberyard"));
         _Cache.Add("Mine", Resources.Load<GameObject>("Mine"));
         _Cache.Add("Headquarters", Resources.Load<GameObject>("Headquarters"));
-
+        _Cache.Add("CapturePoint", Resources.Load<GameObject>("CapturePoint"));
+        
         // Get all CapturePoints in scene
         _capturePointsInScene = MonoBehaviour.FindObjectsOfType<CapturePoint>();
         _CapturePointsList = new List<GameObject>();

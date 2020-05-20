@@ -40,18 +40,18 @@ public class AgentSenses : MonoBehaviour
 
         // Show NavAgent destination
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(GetComponent<NavMeshAgent>().destination + Vector3.up, 2.0f);
+        Gizmos.DrawWireSphere(GetComponent<NavMeshAgent>().destination + Vector3.up, 1.5f);
     }
 
-    // Get a specific object from array
-    public GameObject GetObject(GameObject go)
+    // Get a specific object from array by tag
+    public bool ContainsObject(GameObject go)
     {
         for (int i = 0; i < _VisibleObjects.Length; i++)
         {
-            if (_VisibleObjects[i].gameObject == go) return _VisibleObjects[i].gameObject;
+            if (go.CompareTag(_VisibleObjects[i].gameObject.tag)) return true;
         }
 
-        return null;
+        return false;
     }
 
     // Count specific GameObjects the agent should see

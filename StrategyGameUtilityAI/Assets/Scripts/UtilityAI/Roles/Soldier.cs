@@ -30,12 +30,12 @@ public class Soldier : UtilityAgent
         UtilityScorer scorer_enemyCount = new UtilityScorer(enemySoldierCount, _EnemyAgentsCurve);
 
         // ****** ACTIONS ******
-        Patrol patrolCPsAction = new Patrol(capturePointsInScene, this, 0.5f);
-        patrolCPsAction.AddScorer(scorer_friendlyCount);
-        patrolCPsAction.AddScorer(scorer_enemyCount);
+        CaptureFlags captureFlagsAction = new CaptureFlags(capturePointsInScene, this, 0.5f);
+        captureFlagsAction.AddScorer(scorer_friendlyCount);
+        captureFlagsAction.AddScorer(scorer_enemyCount);
 
         // ****** REGISTER ACTIONS ******
-        _AgentActions.Add(patrolCPsAction);
+        _AgentActions.Add(captureFlagsAction);
     }
 
     private void SortAllCapturePoints()
