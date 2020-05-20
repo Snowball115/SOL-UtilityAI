@@ -11,6 +11,7 @@ public class CaptureFlags : UtilityAction
     public List<GameObject> waypoints;
     private int waypointIndex = 0;
 
+    // Nearest flag the agent can see
     private GameObject nearestFlag;
 
 
@@ -32,7 +33,7 @@ public class CaptureFlags : UtilityAction
 
         if (waypoints.Count == 0) return;
 
-        // Get nearest flag
+        // Check if a flag is near
         if (_agent._AgentController._Senses.ContainsObject(GameCache._Cache.GetData("CapturePoint")))
         {
             nearestFlag = _agent._AgentController._Senses.GetClosestObject(GameCache._Cache.GetData("CapturePoint"));
@@ -52,5 +53,12 @@ public class CaptureFlags : UtilityAction
 
             waypointIndex = (waypointIndex + 1) % waypoints.Count;
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        _agent._AgentController._NavAgent.autoBraking = true;
     }
 }
