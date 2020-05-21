@@ -7,6 +7,7 @@ public class Miner : UtilityAgent
     // Animation curves
     [Header("---- Curves ----")]
     public soAnimationCurve _HealthCurve;
+    public soAnimationCurve _FoodCurve;
     public soAnimationCurve _MinePlacedCurve;
     public soAnimationCurve _OreCountCurve;
     public soAnimationCurve _InventorySizeCurve;
@@ -30,6 +31,7 @@ public class Miner : UtilityAgent
 
         // ****** SCORERS ******
         UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
+        UtilityScorer scorer_AgentFood = new UtilityScorer(agentFood, _FoodCurve);
         UtilityScorer scorer_OreBoolCheck = new UtilityScorer(minePlaced, _MinePlacedCurve);
         UtilityScorer scorer_OreCount = new UtilityScorer(oreCount, _OreCountCurve);
         UtilityScorer scorer_InventorySize = new UtilityScorer(inventorySize, _InventorySizeCurve);
@@ -44,14 +46,21 @@ public class Miner : UtilityAgent
         DeliverResources deliverResourceAction = new DeliverResources(GameCache._Cache.GetData("Mine").tag, this, 0.0f);
         deliverResourceAction.AddScorer(scorer_InventorySize);
 
+        EatFood eatFoodAction = new EatFood(this, 0.0f);
+        eatFoodAction.AddScorer(scorer_AgentFood);
+        eatFoodAction.SetWeight(2);
+
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchOres);
         _AgentActions.Add(mineOreAction);
         _AgentActions.Add(deliverResourceAction);
+        _AgentActions.Add(eatFoodAction);
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         CheckForMine();
     }
 

@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        CheckIfSoldierCanSpawn(100, 100, 100);
+        CheckIfSoldierCanSpawn(100, 100, 50);
     }
 
     // Spawn agent with delay

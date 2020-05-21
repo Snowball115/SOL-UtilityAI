@@ -89,6 +89,7 @@ public class CapturePoint : MonoBehaviour
             // Don't capture again if CP is already captured by the team that's standing in the CP
             if (isCaptured && _CurrentCapturerTeam == _TeamOwner._PlayerTeam) return;
 
+            // Show progress bar and set line to green
             ProgressBar.SetActive(true);
             lineRenderer.material.color = Color.green;
 
@@ -107,10 +108,12 @@ public class CapturePoint : MonoBehaviour
             {
                 case Enums.Teams.BLUE:
                     flagRenderer.material.color = Color.blue;
+                    lineRenderer.material.color = Color.blue;
                     break;
 
                 case Enums.Teams.RED:
                     flagRenderer.material.color = Color.red;
+                    lineRenderer.material.color = Color.red;
                     break;
             }
 
@@ -122,7 +125,6 @@ public class CapturePoint : MonoBehaviour
             _TeamOwner._CapturedCPs.Add(this.gameObject);
 
             ProgressBar.SetActive(false);
-            lineRenderer.material.color = Color.white;
         }
     }
 
@@ -132,10 +134,26 @@ public class CapturePoint : MonoBehaviour
         {
             agentsInTrigger.Remove(other.gameObject);
 
-            if (agentsInTrigger.Count == 0) lineRenderer.material.color = Color.white;
+            if (_TeamOwner == null)
+            {
+                lineRenderer.material.color = Color.white;
+                return;
+            }
+
+            switch (_TeamOwner._PlayerTeam)
+            {
+                case Enums.Teams.BLUE:
+                    lineRenderer.material.color = Color.blue;
+                    break;
+
+                case Enums.Teams.RED:
+                    lineRenderer.material.color = Color.red;
+                    break;   
+            }
         }
     }
 
+    // Let the LineRenderer draw a circle around the CP
     private void DrawCircle()
     {
         float xPos, zPos;

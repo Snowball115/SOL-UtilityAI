@@ -12,9 +12,7 @@ public class Enums : MonoBehaviour
 
     public enum AgentRoles
     {
-        LUMBERJACK,
-        MINER,
-        FARMER,
+        CIVILIAN,
         SOLDIER
     }
 

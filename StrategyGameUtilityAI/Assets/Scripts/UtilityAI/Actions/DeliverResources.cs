@@ -7,8 +7,10 @@ using UnityEngine;
 /// </summary>
 public class DeliverResources : UtilityAction
 {
+    private GameObject building;
     private Vector3 deliverPos;
     private readonly string buildingTag;
+    private readonly float reachingDistance = 1.5f;
 
 
     public DeliverResources(string buildingTag, UtilityAgent agent, float initialScore) : base(agent, initialScore)
@@ -20,8 +22,9 @@ public class DeliverResources : UtilityAction
     {
         base.Enter();
 
-        GameObject building = GameCache._Cache.GetData(buildingTag);
+        building = GameCache._Cache.GetData(buildingTag);
 
+        // Get delivery position
         for (int i = 0; i < _agent._AgentController._PlayerOwner._PlayerBuildings.Count; i++)
         {
             if (building.CompareTag(_agent._AgentController._PlayerOwner._PlayerBuildings[i].tag))
@@ -35,9 +38,10 @@ public class DeliverResources : UtilityAction
     {
         base.Execute();
 
+        // Walk towards delivery position
         _agent._AgentController._NavAgent.destination = deliverPos;
 
-        if (_agent._AgentController._NavAgent.remainingDistance < 1.0f)
+        if ((deliverPos - _agent.transform.position).magnitude < reachingDistance)
         {
             _agent._AgentController._Inventory.TransferItems(_agent._AgentController._PlayerOwner);
         }

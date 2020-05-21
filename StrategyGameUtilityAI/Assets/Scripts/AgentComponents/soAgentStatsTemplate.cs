@@ -9,6 +9,9 @@ public class soAgentStatsTemplate : ScriptableObject
     // attack power
     public float AttackPoints;
 
+    // attack range
+    public float AttackRange;
+
     // movement speed
     public float MoveSpeed;
 

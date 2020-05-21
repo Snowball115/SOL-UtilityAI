@@ -7,6 +7,7 @@ public class Farmer : UtilityAgent
     // Animation curves
     [Header("---- Curves ----")]
     public soAnimationCurve _HealthCurve;
+    public soAnimationCurve _FoodCurve;
     public soAnimationCurve _FarmPlacedCurve;
     public soAnimationCurve _DistanceToHQCurve;
     public soAnimationCurve _InventorySizeCurve;
@@ -30,6 +31,7 @@ public class Farmer : UtilityAgent
 
         // ****** SCORERS ******
         UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
+        UtilityScorer scorer_AgentFood = new UtilityScorer(agentFood, _FoodCurve);
         UtilityScorer scorer_FarmBoolCheck = new UtilityScorer(farmPlaced, _FarmPlacedCurve);
         UtilityScorer scorer_DistanceToHQ = new UtilityScorer(distanceToHQ, _DistanceToHQCurve);
         UtilityScorer scorer_InventorySize = new UtilityScorer(inventorySize, _InventorySizeCurve);
@@ -44,14 +46,21 @@ public class Farmer : UtilityAgent
         DeliverResources deliverResourceAction = new DeliverResources(GameCache._Cache.GetData("Headquarters").tag, this, 0.0f);
         deliverResourceAction.AddScorer(scorer_InventorySize);
 
+        EatFood eatFoodAction = new EatFood(this, 0.0f);
+        eatFoodAction.AddScorer(scorer_AgentFood);
+        eatFoodAction.SetWeight(2);
+
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchFarmSpot);
         _AgentActions.Add(farmFieldAction);
         _AgentActions.Add(deliverResourceAction);
+        _AgentActions.Add(eatFoodAction);
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         CheckForFarm();
     }
 

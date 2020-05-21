@@ -10,6 +10,7 @@ public class Lumberjack : UtilityAgent
     // Animation curves
     [Header("---- Curves ----")]
     public soAnimationCurve _HealthCurve;
+    public soAnimationCurve _FoodCurve;
     public soAnimationCurve _LumberyardPlacedCurve;
     public soAnimationCurve _TreeCountCurve;
     public soAnimationCurve _InventorySizeCurve;
@@ -33,6 +34,7 @@ public class Lumberjack : UtilityAgent
 
         // ****** SCORERS ******
         UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
+        UtilityScorer scorer_AgentFood = new UtilityScorer(agentFood, _FoodCurve);
         UtilityScorer scorer_LumberyardBoolCheck = new UtilityScorer(lumberyardPlaced, _LumberyardPlacedCurve);
         UtilityScorer scorer_TreeCount = new UtilityScorer(treeCount, _TreeCountCurve);
         UtilityScorer scorer_InventorySize = new UtilityScorer(inventorySize, _InventorySizeCurve);
@@ -47,18 +49,21 @@ public class Lumberjack : UtilityAgent
         DeliverResources deliverResourceAction = new DeliverResources(GameCache._Cache.GetData("Lumberyard").tag, this, 0.0f);
         deliverResourceAction.AddScorer(scorer_InventorySize);
 
-        MoveTo moveAction_HealthTest = new MoveTo(GameObject.Find("TestPos"), this, 0.0f);
-        moveAction_HealthTest.AddScorer(scorer_AgentHealth);
+        EatFood eatFoodAction = new EatFood(this, 0.0f);
+        eatFoodAction.AddScorer(scorer_AgentFood);
+        eatFoodAction.SetWeight(2);
 
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchTrees);
         _AgentActions.Add(chopTreeAction);
         _AgentActions.Add(deliverResourceAction);
-        _AgentActions.Add(moveAction_HealthTest);
+        _AgentActions.Add(eatFoodAction);
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         CheckForLumberyard();
     }
 

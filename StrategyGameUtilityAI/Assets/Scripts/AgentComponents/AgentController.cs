@@ -8,6 +8,7 @@ public class AgentController : MonoBehaviour
     // The team of this agent
     public Enums.Teams _Team;
 
+    // Civilian or Soldier
     public Enums.AgentRoles _Role;
 
     // The player to which this agent belongs
@@ -34,6 +35,7 @@ public class AgentController : MonoBehaviour
     {
         public float Health;
         public float Attack;
+        public float AttackRange;
         public float MoveSpeed;
         public float Food;
         public float Energy;
@@ -52,8 +54,10 @@ public class AgentController : MonoBehaviour
 
     void Start()
     {
+        // Assign values from the template to the data
         _AgentData.Health = _AgentStats.HealthPoints;
         _AgentData.Attack = _AgentStats.AttackPoints;
+        _AgentData.AttackRange = _AgentStats.AttackRange;
         _AgentData.MoveSpeed = _AgentStats.MoveSpeed;
         _AgentData.Food = _AgentStats.FoodPoints;
         _AgentData.Energy = _AgentStats.EnergyPoints;
@@ -67,8 +71,40 @@ public class AgentController : MonoBehaviour
 
     void Update()
     {
-        if (_AgentData.Food > 0) _AgentData.Food -= 0.01f;
+        // Slowly consume food
+        if (_Role == Enums.AgentRoles.CIVILIAN && _AgentData.Food > 0) _AgentData.Food -= 0.005f;
 
         //if (_AgentData.Energy > 0) _AgentData.Energy -= 0.02f;
+    }
+
+    // Agent eats food
+    public void EatFood()
+    {
+        while (_AgentData.Food <= 100.0f)
+        {
+            _AgentData.Food++;
+            _PlayerOwner.RemoveFromInventory(Enums.ResourceType.FOOD);
+        }
+    }
+
+    // Attack enemy soldier
+    public void Attack(float attackPower, GameObject target)
+    {
+        target.GetComponent<AgentController>().GetHurt(attackPower);
+    }
+
+    // Retrieve damage
+    public void GetHurt(float damage)
+    {
+        _AgentData.Health -= damage;
+
+        if (_AgentData.Health <= 0) Die();
+    }
+
+    // Destroy agent on death
+    private void Die()
+    {
+        _PlayerOwner._PlayerAgents.Remove(this.gameObject);
+        Destroy(this.gameObject);
     }
 }

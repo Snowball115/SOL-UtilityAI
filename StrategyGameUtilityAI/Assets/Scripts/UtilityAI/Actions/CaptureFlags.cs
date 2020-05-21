@@ -13,6 +13,7 @@ public class CaptureFlags : UtilityAction
 
     // Nearest flag the agent can see
     private GameObject nearestFlag;
+    private GameObject flagPrefab;
 
 
     public CaptureFlags(List<GameObject> waypoints, UtilityAgent agent, float initialScore) : base(agent, initialScore)
@@ -25,6 +26,8 @@ public class CaptureFlags : UtilityAction
         base.Enter();
 
         _agent._AgentController._NavAgent.autoBraking = false;
+
+        flagPrefab = GameCache._Cache.GetData("CapturePoint");
     }
 
     public override void Execute()
@@ -34,9 +37,9 @@ public class CaptureFlags : UtilityAction
         if (waypoints.Count == 0) return;
 
         // Check if a flag is near
-        if (_agent._AgentController._Senses.ContainsObject(GameCache._Cache.GetData("CapturePoint")))
+        if (_agent._AgentController._Senses.ContainsObject(flagPrefab))
         {
-            nearestFlag = _agent._AgentController._Senses.GetClosestObject(GameCache._Cache.GetData("CapturePoint"));
+            nearestFlag = _agent._AgentController._Senses.GetClosestObject(flagPrefab);
 
             // Capture the flag if its not captured
             if (nearestFlag.GetComponent<CapturePoint>()._TeamOwner != _agent._AgentController._PlayerOwner)

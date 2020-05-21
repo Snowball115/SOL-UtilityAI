@@ -26,8 +26,11 @@ public class PlayerInventory : MonoBehaviour
     // Remove resource from list
     public void Remove(ResourceBase resource)
     {
-        if (resources.Count > 0) resources.Remove(resource);
-        SubstractResourceCount(resource);
+        if (resources.Count > 0)
+        {
+            resources.Remove(resource);
+            SubstractResourceCount(resource);
+        }
     }
 
     // Update resource count

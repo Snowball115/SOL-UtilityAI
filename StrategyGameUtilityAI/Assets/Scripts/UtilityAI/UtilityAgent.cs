@@ -34,7 +34,7 @@ public class UtilityAgent : MonoBehaviour
         CheckForAgentManager();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         // Will be used if no Agent Manager is available
         if (_AgentManager == null)
@@ -74,10 +74,10 @@ public class UtilityAgent : MonoBehaviour
             _AgentActions[i].EvaluateAllScorers();
         }
 
-        // Call enter state of current action if the action is not active
-        if (_CurrentAction != null && !_CurrentAction.isActive) _CurrentAction.Enter();
-
         ChooseAction();
+
+        // Call enter state of current action if the action is not active
+        if (!_CurrentAction.isActive) _CurrentAction.Enter();
 
         // Exit old action
         if (_oldAction != null && _oldAction != _CurrentAction && _oldAction.isActive) _oldAction.Exit();
