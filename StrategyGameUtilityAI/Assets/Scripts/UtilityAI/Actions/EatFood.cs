@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EatFood : UtilityAction
 {
@@ -27,10 +25,5 @@ public class EatFood : UtilityAction
         {
             _agent._AgentController.EatFood();
         }
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 }

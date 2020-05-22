@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AttackEnemy : UtilityAction
 {
@@ -27,17 +25,16 @@ public class AttackEnemy : UtilityAction
         // Check if a enemy is near
         if (_agent._AgentController._Senses.ContainsObject(enemyPrefab))
         {
-            closestEnemy = _agent._AgentController._Senses.GetClosestObject(enemyPrefab);
+            closestEnemy = _agent._AgentController._Senses.GetClosestEnemy();
+
+            if (closestEnemy == null) return;
+
+            _agent._AgentController._NavAgent.destination = closestEnemy.transform.position;
 
             // Attack enemy if he is close enough
-            if (closestEnemy.GetComponent<AgentController>()._Team != _agent._AgentController._Team)
+            if ((closestEnemy.transform.position - _agent.transform.position).magnitude < _agent._AgentController._AgentData.AttackRange)
             {
-                _agent._AgentController._NavAgent.destination = closestEnemy.transform.position;
-
-                while ((closestEnemy.transform.position - _agent.transform.position).magnitude < _agent._AgentController._AgentData.AttackRange)
-                {
-                    _agent._AgentController.Attack(_agent._AgentController._AgentData.Attack, closestEnemy);
-                }
+                _agent._AgentController.Attack(_agent._AgentController._AgentData.Attack, closestEnemy);
             }
         }
     }

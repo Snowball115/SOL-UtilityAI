@@ -36,7 +36,7 @@ public class AgentManager : MonoBehaviour
             {
                 UpdateAgents();
                 intervalTimer = 0;
-            } 
+            }
         }
     }
 

@@ -52,6 +52,12 @@ public class CapturePoint : MonoBehaviour
     void Update()
     {
         progressBarImage.fillAmount = captureProgress / captureLimit;
+
+        // Remove agent if he dies while staying in the CPs trigger radius
+        for (int i = 0; i < agentsInTrigger.Count; i++)
+        {
+            if (agentsInTrigger[i] == null) agentsInTrigger.RemoveAt(i);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,7 +70,7 @@ public class CapturePoint : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<Soldier>())
+        if (other.GetComponent<Soldier>() && other != null)
         {
             // Get the current team that captures the CP
             _CurrentCapturerTeam = other.GetComponent<Soldier>()._AgentController._Team;

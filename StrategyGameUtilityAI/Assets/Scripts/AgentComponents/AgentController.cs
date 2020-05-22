@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class AgentController : MonoBehaviour
@@ -71,7 +69,7 @@ public class AgentController : MonoBehaviour
 
     void Update()
     {
-        // Slowly consume food
+        // Slowly consume food (only civilians)
         if (_Role == Enums.AgentRoles.CIVILIAN && _AgentData.Food > 0) _AgentData.Food -= 0.005f;
 
         //if (_AgentData.Energy > 0) _AgentData.Energy -= 0.02f;
@@ -80,7 +78,7 @@ public class AgentController : MonoBehaviour
     // Agent eats food
     public void EatFood()
     {
-        while (_AgentData.Food <= 100.0f)
+        while (_AgentData.Food <= 100.0f && _PlayerOwner._PlayerInventory.FoodCount > 0)
         {
             _AgentData.Food++;
             _PlayerOwner.RemoveFromInventory(Enums.ResourceType.FOOD);
@@ -101,9 +99,10 @@ public class AgentController : MonoBehaviour
         if (_AgentData.Health <= 0) Die();
     }
 
-    // Destroy agent on death
+    // Destroy agent on death (also remove from agent manager and player agents list)
     private void Die()
     {
+        _UtilityAgent._AgentManager.RemoveAgent(_UtilityAgent);
         _PlayerOwner._PlayerAgents.Remove(this.gameObject);
         Destroy(this.gameObject);
     }

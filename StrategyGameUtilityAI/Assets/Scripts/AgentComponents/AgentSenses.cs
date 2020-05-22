@@ -40,7 +40,7 @@ public class AgentSenses : MonoBehaviour
 
         // Show NavAgent destination
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(GetComponent<NavMeshAgent>().destination + Vector3.up, 1.5f);
+        Gizmos.DrawSphere(GetComponent<NavMeshAgent>().destination, 1.0f);
     }
 
     // Get a specific object from array by tag
@@ -54,7 +54,23 @@ public class AgentSenses : MonoBehaviour
         return false;
     }
 
-    // Count specific GameObjects the agent should see
+    // Get a specific object from array by tag and compare team
+    public bool ContainsEnemyInSight()
+    {
+        Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
+
+        for (int i = 0; i < _VisibleObjects.Length; i++)
+        {
+            if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
+            {
+                if (_VisibleObjects[i].gameObject.GetComponent<AgentController>()._Team != playerTeam) return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Count specific GameObjects the agent should seie.
     public int CountObjectsInSight_ByTag(GameObject go)
     {
         int count = 0;
@@ -102,6 +118,48 @@ public class AgentSenses : MonoBehaviour
         }
 
         return count;
+    }
+
+    public GameObject GetClosestEnemy()
+    {
+        Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
+
+        for (int i = 0; i < _VisibleObjects.Length; i++)
+        {
+            if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
+            {
+                if (_VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam) closestObjCol = _VisibleObjects[i];
+            }
+        }
+
+        closestObj = closestObjCol.gameObject;
+
+        return closestObj;
+    }
+
+    public GameObject GetClosestEnemy(GameObject go)
+    {
+        Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
+
+        float distance = 0;
+        float tmpDistance = Mathf.Infinity;
+
+        for (int i = 0; i < _VisibleObjects.Length; i++)
+        {
+            distance = (transform.position - _VisibleObjects[i].transform.position).sqrMagnitude;
+
+            if (distance < tmpDistance &&
+                go.CompareTag(_VisibleObjects[i].gameObject.tag) &&
+                _VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam)
+            {
+                tmpDistance = distance;
+                closestObjCol = _VisibleObjects[i];
+            }
+        }
+
+        closestObj = closestObjCol.gameObject;
+
+        return closestObj;
     }
 
     // Get closest entity of a specific type

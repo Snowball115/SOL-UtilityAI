@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Soldier : UtilityAgent
@@ -9,6 +8,7 @@ public class Soldier : UtilityAgent
     public soAnimationCurve _HealthCurve;
     public soAnimationCurve _FriendlyAgentsCurve;
     public soAnimationCurve _EnemyAgentsCurve;
+    public soAnimationCurve _AttackDesire;
 
     private List<GameObject> capturePointsInScene;
 
@@ -23,27 +23,33 @@ public class Soldier : UtilityAgent
 
         // ****** VALUES ******
         UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
-        UAIV_SoldierFriendlyCount friendlySoldierCount = new UAIV_SoldierFriendlyCount(this, 3);
+        UAIV_SoldierFriendlyCount friendlySoldierCount = new UAIV_SoldierFriendlyCount(this, 4);
         UAIV_SoldierEnemyCount enemySoldierCount = new UAIV_SoldierEnemyCount(this, 3);
+        UAIV_DistanceToEnemy distanceToEnemy = new UAIV_DistanceToEnemy(this, _AgentController._Senses._ViewRange);
 
         // ****** SCORERS ******
         UtilityScorer scorer_agentHealth = new UtilityScorer(agentHealth, _HealthCurve);
         UtilityScorer scorer_friendlyCount = new UtilityScorer(friendlySoldierCount, _FriendlyAgentsCurve);
         UtilityScorer scorer_enemyCount = new UtilityScorer(enemySoldierCount, _EnemyAgentsCurve);
+        UtilityScorer scorer_distanceToEnemy = new UtilityScorer(distanceToEnemy, _AttackDesire);
 
         // ****** ACTIONS ******
         //WaitForTroops waitForTroopsAction = new WaitForTroops(this, 0.0f);
 
         CaptureFlags captureFlagsAction = new CaptureFlags(capturePointsInScene, this, 0.5f);
-        captureFlagsAction.AddScorer(scorer_friendlyCount);
-        captureFlagsAction.AddScorer(scorer_enemyCount);
+        //captureFlagsAction.AddScorer(scorer_friendlyCount);
 
         AttackEnemy attackEnemyAction = new AttackEnemy(this, 0.0f);
+        //attackEnemyAction.AddScorer(scorer_friendlyCount);
+        //attackEnemyAction.AddScorer(scorer_enemyCount);
+        attackEnemyAction.AddScorer(scorer_distanceToEnemy);
 
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(captureFlagsAction);
+        _AgentActions.Add(attackEnemyAction);
     }
 
+    // Agent saves all CapturePoints on the map
     private void GetAllCapturePoints()
     {
         capturePointsInScene = new List<GameObject>();
