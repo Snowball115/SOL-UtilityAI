@@ -51,13 +51,14 @@ public class CapturePoint : MonoBehaviour
 
     void Update()
     {
-        progressBarImage.fillAmount = captureProgress / captureLimit;
-
         // Remove agent if he dies while staying in the CPs trigger radius
         for (int i = 0; i < agentsInTrigger.Count; i++)
         {
             if (agentsInTrigger[i] == null) agentsInTrigger.RemoveAt(i);
         }
+
+        // Update capture progress bar
+        if (ProgressBar.activeInHierarchy) progressBarImage.fillAmount = captureProgress / captureLimit;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,13 +76,16 @@ public class CapturePoint : MonoBehaviour
             // Get the current team that captures the CP
             _CurrentCapturerTeam = other.GetComponent<Soldier>()._AgentController._Team;
 
+            // Don't capture again if CP is already captured by the team that's standing in the CP
+            if (isCaptured && _CurrentCapturerTeam == _TeamOwner._PlayerTeam) return;
+
             // Check if only one team is capturing CP
             if (agentsInTrigger.Count > 1)
             {
                 for (int i = 0; i < agentsInTrigger.Count; i++)
                 {
                     // Check if opposite team is trying to capture flag while staying at CP
-                    if (agentsInTrigger[i].GetComponent<AgentController>()._Team != _CurrentCapturerTeam)
+                    if (agentsInTrigger[i].GetComponent<AgentController>()._Team != _CurrentCapturerTeam && other.gameObject != null)
                     {
                         isContested = true;
                         lineRenderer.material.color = Color.yellow;
@@ -91,9 +95,6 @@ public class CapturePoint : MonoBehaviour
             }
 
             isContested = false;
-
-            // Don't capture again if CP is already captured by the team that's standing in the CP
-            if (isCaptured && _CurrentCapturerTeam == _TeamOwner._PlayerTeam) return;
 
             // Show progress bar and set line to green
             ProgressBar.SetActive(true);

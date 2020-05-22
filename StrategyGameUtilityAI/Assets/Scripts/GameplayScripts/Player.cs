@@ -134,7 +134,8 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < _PlayerAgents.Count; i++)
         {
-            if (_PlayerAgents[i].gameObject.GetComponent<Soldier>()) _CurrentSoldiersCount++;
+            if (_PlayerAgents[i].gameObject.GetComponent<Soldier>()) 
+                _CurrentSoldiersCount++;
         }
     }
 }
