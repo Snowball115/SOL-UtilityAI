@@ -71,7 +71,7 @@ public class CapturePoint : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<Soldier>() && other != null)
+        if (other.GetComponent<Soldier>() && other.gameObject != null)
         {
             // Get the current team that captures the CP
             _CurrentCapturerTeam = other.GetComponent<Soldier>()._AgentController._Team;
@@ -85,7 +85,7 @@ public class CapturePoint : MonoBehaviour
                 for (int i = 0; i < agentsInTrigger.Count; i++)
                 {
                     // Check if opposite team is trying to capture flag while staying at CP
-                    if (agentsInTrigger[i].GetComponent<AgentController>()._Team != _CurrentCapturerTeam && other.gameObject != null)
+                    if (agentsInTrigger[i].GetComponent<AgentController>()._Team != _CurrentCapturerTeam && agentsInTrigger[i].GetComponent<AgentController>() != null)
                     {
                         isContested = true;
                         lineRenderer.material.color = Color.yellow;

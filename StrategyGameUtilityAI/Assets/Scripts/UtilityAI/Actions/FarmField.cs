@@ -8,7 +8,7 @@ using UnityEngine;
 public class FarmField : UtilityAction
 {
     private GameObject farmPos;
-    private float miningRange = 1.5f;
+    private float miningRange = 2.5f;
 
 
     public FarmField(UtilityAgent agent, float initialScore) : base(agent, initialScore) { }
@@ -18,7 +18,7 @@ public class FarmField : UtilityAction
         base.Enter();
 
         // Agent should not run into the tree when chopping it
-        _agent._AgentController._NavAgent.stoppingDistance = miningRange - 0.1f;
+        _agent._AgentController._NavAgent.stoppingDistance = miningRange - 0.2f;
 
         // Check if a farm is placed, if not build one
         if (!_agent.GetComponent<Farmer>().isFarmPlaced)

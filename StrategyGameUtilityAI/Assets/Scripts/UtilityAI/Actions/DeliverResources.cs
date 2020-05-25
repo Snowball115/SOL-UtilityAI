@@ -8,7 +8,7 @@ public class DeliverResources : UtilityAction
     private GameObject building;
     private Vector3 deliverPos;
     private readonly string buildingTag;
-    private readonly float reachingDistance = 1.5f;
+    private readonly float reachingDistance = 5.0f;
 
 
     public DeliverResources(string buildingTag, UtilityAgent agent, float initialScore) : base(agent, initialScore)
@@ -39,7 +39,7 @@ public class DeliverResources : UtilityAction
         // Walk towards delivery position
         _agent._AgentController._NavAgent.destination = deliverPos;
 
-        if ((deliverPos - _agent.transform.position).magnitude < reachingDistance)
+        if ((deliverPos - _agent.transform.position).sqrMagnitude < reachingDistance)
         {
             _agent._AgentController._Inventory.TransferItems(_agent._AgentController._PlayerOwner);
         }

@@ -8,7 +8,7 @@ using UnityEngine;
 public class MineOre : UtilityAction
 {
     private GameObject closestOre;
-    private float miningRange = 1.5f;
+    private float miningRange = 2.5f;
 
 
     public MineOre(UtilityAgent agent, float initialScore) : base(agent, initialScore) { }
@@ -18,7 +18,7 @@ public class MineOre : UtilityAction
         base.Enter();
 
         // Agent should not run into the ore when mining it
-        _agent._AgentController._NavAgent.stoppingDistance = miningRange - 0.1f;
+        _agent._AgentController._NavAgent.stoppingDistance = miningRange - 0.2f;
 
         // Check if a mine is placed, if not build one
         if (!_agent.GetComponent<Miner>().isMinePlaced)

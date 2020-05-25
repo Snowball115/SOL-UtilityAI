@@ -3,7 +3,7 @@
 public class EatFood : UtilityAction
 {
     private GameObject playerHQ;
-    private readonly float reachingHQDistance = 1.5f;
+    private readonly float reachingHQDistance = 5.0f;
 
 
     public EatFood(UtilityAgent agent, float initialScore) : base(agent, initialScore) { }
@@ -21,7 +21,7 @@ public class EatFood : UtilityAction
 
         _agent._AgentController._NavAgent.destination = playerHQ.transform.position;
 
-        if ((playerHQ.transform.position - _agent.transform.position).magnitude < reachingHQDistance)
+        if ((playerHQ.transform.position - _agent.transform.position).sqrMagnitude < reachingHQDistance)
         {
             _agent._AgentController.EatFood();
         }

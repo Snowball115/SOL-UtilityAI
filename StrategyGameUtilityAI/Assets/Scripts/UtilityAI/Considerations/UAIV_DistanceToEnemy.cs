@@ -17,7 +17,7 @@ public class UAIV_DistanceToEnemy : UtilityValue
         {
             closestEnemy = _agent._AgentController._Senses.GetClosestEnemy();
 
-            _CurrentValue = (closestEnemy.transform.position - _agent.transform.position).magnitude;
+            _CurrentValue = (closestEnemy.transform.position - _agent.transform.position).sqrMagnitude;
         }
         else
         {
