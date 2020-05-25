@@ -57,6 +57,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         CheckIfSoldierCanSpawn(100, 100, 50);
+
+        UpdateSoldierCount();
     }
 
     // Spawn agent with delay
@@ -122,7 +124,6 @@ public class Player : MonoBehaviour
                 for (int i = 0; i < oreCost; i++) RemoveFromInventory(Enums.ResourceType.ORE);
                 for (int i = 0; i < foodCost; i++) RemoveFromInventory(Enums.ResourceType.FOOD);
                 SpawnAgent(GameCache._Cache.GetData("Agent-Soldier"), _AgentSpawnPos.position);
-                UpdateSoldierCount();
             }
         }
     }
@@ -134,8 +135,7 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < _PlayerAgents.Count; i++)
         {
-            if (_PlayerAgents[i].gameObject.GetComponent<Soldier>()) 
-                _CurrentSoldiersCount++;
+            if (_PlayerAgents[i].gameObject.GetComponent<Soldier>()) _CurrentSoldiersCount++;
         }
     }
 }

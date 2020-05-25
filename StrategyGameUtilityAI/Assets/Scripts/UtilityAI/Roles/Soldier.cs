@@ -40,13 +40,17 @@ public class Soldier : UtilityAgent
         //captureFlagsAction.AddScorer(scorer_friendlyCount);
 
         AttackEnemy attackEnemyAction = new AttackEnemy(this, 0.0f);
-        //attackEnemyAction.AddScorer(scorer_friendlyCount);
-        //attackEnemyAction.AddScorer(scorer_enemyCount);
         attackEnemyAction.AddScorer(scorer_distanceToEnemy);
+
+        Flee fleeAction = new Flee(this, 0.0f);
+        fleeAction.AddScorer(scorer_agentHealth);
+        fleeAction.AddScorer(scorer_enemyCount);
+        fleeAction.AddScorer(scorer_friendlyCount);
 
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(captureFlagsAction);
         _AgentActions.Add(attackEnemyAction);
+        _AgentActions.Add(fleeAction);
     }
 
     // Agent saves all CapturePoints on the map
