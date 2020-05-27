@@ -19,9 +19,7 @@ public class UAIV_DistanceToEnemy : UtilityValue
 
             _CurrentValue = (closestEnemy.transform.position - _agent.transform.position).magnitude;
         }
-        else
-        {
-            _CurrentValue = _MaxValue;
-        }
+
+        else _CurrentValue = _MaxValue;
     }
 }

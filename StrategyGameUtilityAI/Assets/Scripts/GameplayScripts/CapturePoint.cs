@@ -71,8 +71,6 @@ public class CapturePoint : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<Soldier>() == null) return;
-
         if (other.GetComponent<Soldier>())
         {
             // Get the current team that captures the CP
@@ -126,14 +124,16 @@ public class CapturePoint : MonoBehaviour
                     break;
             }
 
+            ProgressBar.SetActive(false);
+
+            if (other.GetComponent<Soldier>() == null) return;
+
             // Remove flag from the possession of the previous player
             if (_TeamOwner != null) _TeamOwner._CapturedCPs.Remove(this.gameObject);
 
             // Save player that captured the flag
             _TeamOwner = other.GetComponent<Soldier>()._AgentController._PlayerOwner;
             _TeamOwner._CapturedCPs.Add(this.gameObject);
-
-            ProgressBar.SetActive(false);
         }
     }
 
