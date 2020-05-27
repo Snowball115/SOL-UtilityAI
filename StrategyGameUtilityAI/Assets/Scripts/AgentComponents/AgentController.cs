@@ -90,14 +90,16 @@ public class AgentController : MonoBehaviour
     {
         if (_AgentData.Health < _AgentStats.HealthPoints)
         {
-            _AgentData.Health += 0.5f;
+            _AgentData.Health += 1.0f;
         }
     }
 
-    // Attack enemy soldier
+    // Attack enemy soldier or building
     public void Attack(float attackPower, GameObject target)
     {
-        target.GetComponent<AgentController>().GetHurt(attackPower);
+        if (target.GetComponent<Building>()) target.GetComponent<Building>().GetDamaged(attackPower);
+
+        else target.GetComponent<AgentController>().GetHurt(attackPower);
     }
 
     // Retrieve damage

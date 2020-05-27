@@ -1,6 +1,6 @@
-﻿public class UAIV_FlagCount : UtilityValue
+﻿public class UAIV_FriendlyFlagsCount : UtilityValue
 {
-    public UAIV_FlagCount(UtilityAgent agent, float maxInputValue) : base(agent, maxInputValue) { }
+    public UAIV_FriendlyFlagsCount(UtilityAgent agent, float maxInputValue) : base(agent, maxInputValue) { }
 
     public override void UpdateCurrentValue()
     {

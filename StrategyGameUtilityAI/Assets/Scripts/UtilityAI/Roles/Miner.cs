@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Miner agent role
+/// </summary>
 public class Miner : UtilityAgent
 {
     // Animation curves

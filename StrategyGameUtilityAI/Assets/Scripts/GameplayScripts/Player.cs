@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     // The headquarters of this player faction
     public GameObject _PlayerHeadquarters;
 
+    // Enemy player for AI to know
+    public GameObject _EnemyPlayer;
+
     // Player team/faction
     public Enums.Teams _PlayerTeam;
 
@@ -29,10 +32,10 @@ public class Player : MonoBehaviour
     public List<GameObject> _CapturedCPs;
 
     // Player inventory
-    public  PlayerInventory _PlayerInventory;
+    public PlayerInventory _PlayerInventory;
 
     // Max and current soldiers count
-    private readonly int _maxSoldiers = 10;
+    public int _MaxSoldiers { get; private set; }
     public int _CurrentSoldiersCount;
 
 
@@ -41,6 +44,8 @@ public class Player : MonoBehaviour
         _PlayerInventory = GetComponent<PlayerInventory>();
 
         _PlayerBuildings.Add(_PlayerHeadquarters);
+
+        _MaxSoldiers = 10;
     }
 
     void Start()
@@ -116,7 +121,7 @@ public class Player : MonoBehaviour
     // Spawn soldiers if enough resources are available
     private void CheckIfSoldierCanSpawn(float woodCost, float oreCost, float foodCost)
     {
-        if (_CurrentSoldiersCount < _maxSoldiers)
+        if (_CurrentSoldiersCount < _MaxSoldiers)
         {
             if (_PlayerInventory.WoodCount >= woodCost && _PlayerInventory.OreCount >= oreCost && _PlayerInventory.FoodCount >= foodCost)
             {

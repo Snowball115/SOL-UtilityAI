@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Farmer agent role
+/// </summary>
 public class Farmer : UtilityAgent
 {
     // Animation curves

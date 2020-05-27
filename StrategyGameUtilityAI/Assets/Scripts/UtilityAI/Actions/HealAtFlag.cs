@@ -6,7 +6,7 @@ public class HealAtFlag : UtilityAction
 {
     private GameObject closestFlag;
     private GameObject flagPrefab;
-    private float distanceToHeal = 15.0f;
+    private float distanceToHeal = 5.0f;
 
 
     public HealAtFlag(UtilityAgent agent, float initialScore) : base(agent, initialScore) { }
@@ -16,6 +16,8 @@ public class HealAtFlag : UtilityAction
         base.Enter();
 
         _agent._AgentController._NavAgent.autoBraking = true;
+
+        _agent._AgentController._NavAgent.stoppingDistance = 0.0f;
 
         flagPrefab = GameCache._Cache.GetData("CapturePoint");
     }
