@@ -28,6 +28,8 @@ public class AttackHQ : UtilityAction
 
         enemyHQ = enemyPlayer.GetComponent<Player>()._PlayerHeadquarters;
 
+        if (enemyHQ == null) return;
+
         _agent._AgentController._NavAgent.destination = enemyHQ.transform.position;
 
         // Attack if HQ is close enough

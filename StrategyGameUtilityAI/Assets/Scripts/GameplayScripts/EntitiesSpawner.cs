@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class EnititiesSpawner : MonoBehaviour
+public class EntitiesSpawner : MonoBehaviour
 {
     public Transform EntitiesParent;
     public GameObject TreePrefab;
@@ -12,20 +13,18 @@ public class EnititiesSpawner : MonoBehaviour
     [SerializeField] private int treesCount;
     [SerializeField] private int oresCount;
     [SerializeField] private int capturePointsCount;
-    //[SerializeField] private int rangeX;
-    //[SerializeField] private int rangeZ;
     [SerializeField] private Vector3 posRangeNormal;
     [SerializeField] private Vector3 posRangeFlags;
 
-
     private List<GameObject> activeObjects;
     private Vector3 newPos;
+
 
     void Start()
     {
         activeObjects = new List<GameObject>();
 
-        GenerateEntities();
+        //GenerateEntities();
     }
 
     private void Update()
@@ -39,6 +38,7 @@ public class EnititiesSpawner : MonoBehaviour
         //}
     }
 
+    [ContextMenu("EntitiesSpawner/Generate Entities")]
     public void GenerateEntities()
     {
         for (int i = 0; i < treesCount; i++)
@@ -65,6 +65,16 @@ public class EnititiesSpawner : MonoBehaviour
 
             // Place CPs more in the middle of the map
             PlaceEntity(activeObjects[i], newPos, posRangeNormal);
+        }
+    }
+
+    [ContextMenu("EntitiesSpawner/Remove Entities")]
+    public void RemoveAllEntities()
+    {
+        for (int i = 0; i < activeObjects.Count; i++)
+        {
+            Destroy(activeObjects[i].gameObject);
+            activeObjects.RemoveAt(i);
         }
     }
 

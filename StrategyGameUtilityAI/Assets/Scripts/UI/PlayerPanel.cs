@@ -11,6 +11,7 @@ public class PlayerPanel : MonoBehaviour
     public GameObject BlueOre;
     public GameObject BlueFood;
     public GameObject BlueSoldiers;
+    public GameObject BlueFlagsCount;
 
     // Player red data
     public GameObject PlayerRed;
@@ -18,6 +19,8 @@ public class PlayerPanel : MonoBehaviour
     public GameObject RedOre;
     public GameObject RedFood;
     public GameObject RedSoldiers;
+    public GameObject RedFlagsCount;
+
 
     // Panel components
     private Player playerRed;
@@ -26,10 +29,12 @@ public class PlayerPanel : MonoBehaviour
     private Text blueOreText;
     private Text blueFoodText;
     private Text blueSoldierText;
+    private Text blueFlagCountText;
     private Text redWoodText;
     private Text redOreText;
     private Text redFoodText;
     private Text redSoldierText;
+    private Text redFlagCountText;
 
 
     void Start()
@@ -41,11 +46,13 @@ public class PlayerPanel : MonoBehaviour
         blueOreText = BlueOre.GetComponent<Text>();
         blueFoodText = BlueFood.GetComponent<Text>();
         blueSoldierText = BlueSoldiers.GetComponent<Text>();
+        blueFlagCountText = BlueFlagsCount.GetComponent<Text>();
 
         redWoodText = RedWood.GetComponent<Text>();
         redOreText = RedOre.GetComponent<Text>();
         redFoodText = RedFood.GetComponent<Text>();
         redSoldierText = RedSoldiers.GetComponent<Text>();
+        redFlagCountText = RedFlagsCount.GetComponent<Text>();
     }
 
     void Update()
@@ -54,10 +61,12 @@ public class PlayerPanel : MonoBehaviour
         blueOreText.text = playerBlue._PlayerInventory.OreCount.ToString();
         blueFoodText.text = playerBlue._PlayerInventory.FoodCount.ToString();
         blueSoldierText.text = playerBlue._CurrentSoldiersCount.ToString();
+        blueFlagCountText.text = playerBlue._CapturedCPs.Count.ToString();
 
         redWoodText.text = playerRed._PlayerInventory.WoodCount.ToString();
         redOreText.text = playerRed._PlayerInventory.OreCount.ToString();
         redFoodText.text = playerRed._PlayerInventory.FoodCount.ToString();
         redSoldierText.text = playerRed._CurrentSoldiersCount.ToString();
+        redFlagCountText.text = playerRed._CapturedCPs.Count.ToString();
     }
 }

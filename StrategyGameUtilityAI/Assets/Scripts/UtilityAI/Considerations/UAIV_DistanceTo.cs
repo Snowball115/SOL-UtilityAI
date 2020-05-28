@@ -19,6 +19,8 @@ public class UAIV_DistanceTo : UtilityValue
     {
         base.UpdateCurrentValue();
 
+        if (target == null) return;
+
         _CurrentValue = (target.transform.position - _agent.transform.position).magnitude;
     }
 }

@@ -50,7 +50,7 @@ public class CaptureFlags : UtilityAction
         }
 
         // Move to next flag
-        if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < 1.0f)
+        if (_agent._AgentController._NavAgent.remainingDistance < 1.0f)
         {
             _agent._AgentController._NavAgent.destination = waypoints[waypointIndex].transform.position;
 
