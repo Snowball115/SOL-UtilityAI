@@ -29,7 +29,7 @@ public class Soldier : UtilityAgent
         // Utility AI setup
 
         // ****** VALUES ******
-        UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
+        UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, _AgentController._AgentStats.HealthPoints);
         UAIV_SoldierFriendlyCount friendlySoldierCount = new UAIV_SoldierFriendlyCount(this, 4);
         UAIV_SoldierEnemyCount enemySoldierCount = new UAIV_SoldierEnemyCount(this, 3);
         UAIV_DistanceToEnemy distanceToEnemy = new UAIV_DistanceToEnemy(this, _AgentController._Senses._ViewRange);

@@ -69,19 +69,30 @@ public class AgentController : MonoBehaviour
 
     void Update()
     {
-        // Slowly consume food (only civilians)
-        if (_Role == Enums.AgentRoles.CIVILIAN && _AgentData.Food > 0) _AgentData.Food -= Time.deltaTime * 0.35f;
-
-        //if (_AgentData.Energy > 0) _AgentData.Energy -= 0.02f;
+        // Slowly consume food and energy (only civilians)
+        if (_Role == Enums.AgentRoles.CIVILIAN) 
+        {
+            if (_AgentData.Food > 0) _AgentData.Food -= Time.deltaTime * 0.35f;
+            if (_AgentData.Energy > 0) _AgentData.Energy -= Time.deltaTime;
+        }
     }
 
     // Agent eats food
     public void EatFood()
     {
-        while (_AgentData.Food <= 100.0f && _PlayerOwner._PlayerInventory.FoodCount > 0)
+        while (_AgentData.Food <= _AgentStats.FoodPoints && _PlayerOwner._PlayerInventory.FoodCount > 0)
         {
             _AgentData.Food++;
             _PlayerOwner.RemoveFromInventory(Enums.ResourceType.FOOD);
+        }
+    }
+
+    // Agent takes a rest for a while
+    public void Rest()
+    {
+        while (_AgentData.Energy <= _AgentStats.EnergyPoints)
+        {
+            _AgentData.Energy++;
         }
     }
 
@@ -90,7 +101,7 @@ public class AgentController : MonoBehaviour
     {
         if (_AgentData.Health < _AgentStats.HealthPoints)
         {
-            _AgentData.Health += 1.0f;
+            _AgentData.Health++;
         }
     }
 

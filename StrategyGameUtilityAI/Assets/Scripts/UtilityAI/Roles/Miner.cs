@@ -9,6 +9,7 @@ public class Miner : UtilityAgent
     [Header("---- Curves ----")]
     public soAnimationCurve _HealthCurve;
     public soAnimationCurve _FoodCurve;
+    public soAnimationCurve _EnergyCurve;
     public soAnimationCurve _MinePlacedCurve;
     public soAnimationCurve _OreCountCurve;
     public soAnimationCurve _InventorySizeCurve;
@@ -24,8 +25,9 @@ public class Miner : UtilityAgent
         // Utility AI setup
 
         // ****** VALUES ******
-        UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, 100);
-        UAIV_AgentFood agentFood = new UAIV_AgentFood(this, 100);
+        UAIV_AgentHealth agentHealth = new UAIV_AgentHealth(this, _AgentController._AgentStats.HealthPoints);
+        UAIV_AgentFood agentFood = new UAIV_AgentFood(this, _AgentController._AgentStats.FoodPoints);
+        UAIV_AgentEnergy agentEnergy = new UAIV_AgentEnergy(this, _AgentController._AgentStats.EnergyPoints);
         UAIV_MinePlaced minePlaced = new UAIV_MinePlaced(this, 1);
         UAIV_ResourceCount oreCount = new UAIV_ResourceCount(GameCache._Cache.GetData("Ore").tag, this, 1);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
@@ -33,6 +35,7 @@ public class Miner : UtilityAgent
         // ****** SCORERS ******
         UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
         UtilityScorer scorer_AgentFood = new UtilityScorer(agentFood, _FoodCurve);
+        UtilityScorer scorer_AgentEnergy = new UtilityScorer(agentEnergy, _EnergyCurve);
         UtilityScorer scorer_OreBoolCheck = new UtilityScorer(minePlaced, _MinePlacedCurve);
         UtilityScorer scorer_OreCount = new UtilityScorer(oreCount, _OreCountCurve);
         UtilityScorer scorer_InventorySize = new UtilityScorer(inventorySize, _InventorySizeCurve);
@@ -51,11 +54,15 @@ public class Miner : UtilityAgent
         eatFoodAction.AddScorer(scorer_AgentFood);
         eatFoodAction.SetWeight(2);
 
+        SleepAndRest sleepRestAction = new SleepAndRest("Mine", this, 0.0f);
+        sleepRestAction.AddScorer(scorer_AgentEnergy);
+
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchOres);
         _AgentActions.Add(mineOreAction);
         _AgentActions.Add(deliverResourceAction);
         _AgentActions.Add(eatFoodAction);
+        _AgentActions.Add(sleepRestAction);
     }
 
     protected override void Update()

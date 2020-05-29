@@ -17,6 +17,7 @@ public class Building : MonoBehaviour
         _PlayerTeam = _PlayerOwner._PlayerTeam;
     }
 
+    // Retrieve damage
     public void GetDamaged(float damage)
     {
         _LifePoints -= damage;
@@ -24,6 +25,7 @@ public class Building : MonoBehaviour
         if (_LifePoints <= 0) DestroyBuilding();
     }
 
+    // Destroy building
     private void DestroyBuilding()
     {
         _PlayerOwner._PlayerBuildings.Remove(this.gameObject);
