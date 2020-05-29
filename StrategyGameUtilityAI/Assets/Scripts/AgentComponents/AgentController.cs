@@ -63,8 +63,16 @@ public class AgentController : MonoBehaviour
         _NavAgent.speed = _AgentData.MoveSpeed;
 
         // Change material colour depending on the player team
-        if (_Team == Enums.Teams.BLUE) GetComponent<MeshRenderer>().material.color = Color.blue;
-        else GetComponent<MeshRenderer>().material.color = Color.red;
+        switch (_Team)
+        {
+            case Enums.Teams.BLUE:
+                GetComponent<MeshRenderer>().material.color = Color.blue;
+                break;
+
+            case Enums.Teams.RED:
+                GetComponent<MeshRenderer>().material.color = Color.red;
+                break;
+        }
     }
 
     void Update()
