@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Distance to a friendly flag in surroundings
+/// Distance to friendly flag in surrounding
 /// </summary>
 public class UAIV_DistanceToFriendlyFlag : UtilityValue
 {

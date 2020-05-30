@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Player inventory class
+/// </summary>
 public class PlayerInventory : MonoBehaviour
 {
+    // Resources count
     public int WoodCount;
     public int OreCount;
     public int FoodCount;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Let the agent deliver his resources to a target position
+/// Deliver resources to target position action
 /// </summary>
 public class DeliverResources : UtilityAction
 {
@@ -36,9 +36,10 @@ public class DeliverResources : UtilityAction
     {
         base.Execute();
 
-        // Walk towards delivery position
+        // Walk to delivery position
         _agent._AgentController._NavAgent.destination = deliverPos;
 
+        // If close enough deliver resources to player
         if ((deliverPos - _agent.transform.position).sqrMagnitude < reachingDistance)
         {
             _agent._AgentController._Inventory.TransferItems(_agent._AgentController._PlayerOwner);

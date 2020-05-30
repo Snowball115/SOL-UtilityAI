@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Player class
+/// </summary>
 public class Player : MonoBehaviour
 {
     // The headquarters of this player faction

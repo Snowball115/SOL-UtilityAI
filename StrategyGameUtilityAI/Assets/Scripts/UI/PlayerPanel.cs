@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Panel that shows both player's data on screen
+/// </summary>
 public class PlayerPanel : MonoBehaviour
 {
     // Player blue data
@@ -20,7 +21,6 @@ public class PlayerPanel : MonoBehaviour
     public GameObject RedFood;
     public GameObject RedSoldiers;
     public GameObject RedFlagsCount;
-
 
     // Panel components
     private Player playerRed;

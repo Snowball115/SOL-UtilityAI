@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,8 +6,10 @@ using UnityEngine;
 /// </summary>
 public class GameCache : Singleton<GameCache>
 {
+    // Cache dictionary
     public static GenericCache<string, GameObject> _Cache = new GenericCache<string, GameObject>();
 
+    // Capture point list for soldiers to use
     private static CapturePoint[] _capturePointsInScene;
     public static List<GameObject> _CapturePointsList;
 
@@ -33,6 +33,7 @@ public class GameCache : Singleton<GameCache>
         _capturePointsInScene = MonoBehaviour.FindObjectsOfType<CapturePoint>();
         _CapturePointsList = new List<GameObject>();
 
+        // Transfer colliders into gameObject list
         foreach (CapturePoint cp in _capturePointsInScene)
         {
             _CapturePointsList.Add(cp.gameObject);

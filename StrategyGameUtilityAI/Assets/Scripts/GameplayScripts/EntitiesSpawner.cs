@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Spawn and randomly place entities on map
+/// </summary>
 public class EntitiesSpawner : MonoBehaviour
 {
     public Transform EntitiesParent;
@@ -23,19 +26,6 @@ public class EntitiesSpawner : MonoBehaviour
     void Start()
     {
         activeObjects = new List<GameObject>();
-
-        //GenerateEntities();
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    for (int i = 0; i < activeObjects.Count; i++)
-        //    {
-        //        CheckIfObjectsIntersect(activeObjects[i], newPos);
-        //    }
-        //}
     }
 
     [ContextMenu("EntitiesSpawner/Generate Entities")]
@@ -90,16 +80,5 @@ public class EntitiesSpawner : MonoBehaviour
         newPos.x = Random.Range(-rangeVector.x, rangeVector.z);
         newPos.z = Random.Range(-rangeVector.x, rangeVector.z);
         go.transform.position = newPos;
-    }
-
-    private void CheckIfObjectsIntersect(GameObject go, Vector3 newPos)
-    {
-        for (int i = 0; i < activeObjects.Count; i++)
-        {
-            if (go.GetComponent<BoxCollider>().bounds.Intersects(activeObjects[i].GetComponent<BoxCollider>().bounds))
-            {
-                PlaceEntity(go, newPos, posRangeNormal);
-            }
-        }
     }
 }

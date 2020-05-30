@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Action for mining ores
@@ -38,6 +36,7 @@ public class MineOre : UtilityAction
 
         _agent._AgentController._NavAgent.destination = closestOre.transform.position;
 
+        // Mine ore if in mining range
         if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < miningRange)
         {
             _agent._AgentController._Inventory.Add(closestOre.GetComponent<EntityController>().GetMined());

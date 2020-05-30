@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Agent sensing component
+/// </summary>
 public class AgentSenses : MonoBehaviour
 {
     // What the agent determines as visible
@@ -25,6 +25,7 @@ public class AgentSenses : MonoBehaviour
         GetObjectsInView();
     }
 
+    // Show objects as gizmos in editor
     void OnDrawGizmosSelected()
     {
         // Show view range
@@ -120,6 +121,7 @@ public class AgentSenses : MonoBehaviour
         return count;
     }
 
+    // Return closest enemy
     public GameObject GetClosestEnemy()
     {
         Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
@@ -129,31 +131,6 @@ public class AgentSenses : MonoBehaviour
             if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
             {
                 if (_VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam) closestObjCol = _VisibleObjects[i];
-            }
-        }
-
-        closestObj = closestObjCol.gameObject;
-
-        return closestObj;
-    }
-
-    public GameObject GetClosestEnemy(GameObject go)
-    {
-        Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
-
-        float distance = 0;
-        float tmpDistance = Mathf.Infinity;
-
-        for (int i = 0; i < _VisibleObjects.Length; i++)
-        {
-            distance = (transform.position - _VisibleObjects[i].transform.position).sqrMagnitude;
-
-            if (distance < tmpDistance &&
-                go.CompareTag(_VisibleObjects[i].gameObject.tag) &&
-                _VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam)
-            {
-                tmpDistance = distance;
-                closestObjCol = _VisibleObjects[i];
             }
         }
 

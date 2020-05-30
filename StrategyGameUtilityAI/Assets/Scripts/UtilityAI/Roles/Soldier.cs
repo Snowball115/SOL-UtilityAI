@@ -76,7 +76,7 @@ public class Soldier : UtilityAgent
         _AgentActions.Add(attackHQAction);
     }
 
-    // Agent saves all CapturePoints on the map
+    // Saving all CapturePoints on the map
     private void GetAllCapturePoints()
     {
         capturePointsInScene = new List<GameObject>();

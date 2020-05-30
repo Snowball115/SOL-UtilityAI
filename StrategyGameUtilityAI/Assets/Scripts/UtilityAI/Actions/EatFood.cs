@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Eat food action
+/// </summary>
 public class EatFood : UtilityAction
 {
     private GameObject playerHQ;

@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Get agents current health points
+/// </summary>
 public class UAIV_AgentHealth : UtilityValue
 {
     public UAIV_AgentHealth(UtilityAgent agent, float maxInputValue) : base(agent, maxInputValue) { }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -30,6 +29,7 @@ public class Patrol : UtilityAction
 
         if (waypoints.Count == 0) return;
 
+        // Walk to next waypoint if old one is reached
         if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < 0.5f)
         {
             _agent._AgentController._NavAgent.destination = waypoints[waypointIndex].transform.position;

@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// Action for farming fields
+/// Farming fields action
 /// </summary>
 public class FarmField : UtilityAction
 {
@@ -34,11 +32,12 @@ public class FarmField : UtilityAction
     public override void Execute()
     {
         base.Execute();
-
-        // Move to farm and start farming (GIVES FOR EXACTLY ONE FRAME A NULL REFERENCE ERROR - WHY?)
+        
         if (farmPos == null) return;
+
         _agent._AgentController._NavAgent.destination = farmPos.transform.position;
 
+        // Move to farm and start farming if close enough
         if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < miningRange)
         {
             _agent._AgentController._Inventory.Add(farmPos.GetComponent<EntityController>().GetMined());

@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Agent resting action
+/// </summary>
 public class SleepAndRest : UtilityAction
 {
     private GameObject placeToRest;
@@ -28,6 +29,7 @@ public class SleepAndRest : UtilityAction
 
         _agent._AgentController._NavAgent.destination = placeToRest.transform.position;
 
+        // If close enough start resting
         if ((placeToRest.transform.position - _agent.transform.position).sqrMagnitude < reachingDistance)
         {
             timer += Time.deltaTime;

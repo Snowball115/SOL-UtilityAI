@@ -11,7 +11,7 @@ public class UtilityValue
     // Name in editor
     public string _Name;
 
-    // Max value of our input on the x-axis of the animation curve
+    // Max value of our input (on the x-axis of the animation curve)
     public float _MaxValue;
 
     // The current value of our input

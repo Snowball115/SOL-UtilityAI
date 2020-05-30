@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Check if farm is placed or not
 /// </summary>
 public class UAIV_FarmPlaced : UtilityValue

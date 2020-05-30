@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Entity class (e.g. Tree, Ore or Field)
+/// </summary>
 public class EntityController : MonoBehaviour
 {
     // The resource type you'll get from this entity

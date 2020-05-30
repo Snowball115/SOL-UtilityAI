@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Template for agent attributes
+/// </summary>
 [CreateAssetMenu(menuName = "Agent Stats")]
 public class soAgentStatsTemplate : ScriptableObject
 {

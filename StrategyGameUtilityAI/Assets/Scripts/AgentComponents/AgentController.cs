@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Class that holds all important agent components
+/// </summary>
 public class AgentController : MonoBehaviour
 {
     // The team of this agent

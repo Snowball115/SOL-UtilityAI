@@ -39,7 +39,6 @@ public class DebugPanel : MonoBehaviour
         if (_agentData._CurrentAction != null)
         {
             _actionNameFieldText.text = _agentData._CurrentAction.ToString();
-            //scoreFieldText.text = decimal.Round((decimal)agentData.CurrentAction.UtilityScore, 3).ToString();
             _scoreFieldText.text = _agentData._CurrentAction._UtilityScore.ToString("0.000");
         }
     }

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Heal agent at friendly flag action
+/// </summary>
 public class HealAtFlag : UtilityAction
 {
     private GameObject closestFlag;

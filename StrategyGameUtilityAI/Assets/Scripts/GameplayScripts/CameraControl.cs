@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Quick script to control camera in play mode
@@ -10,6 +8,7 @@ public class CameraControl : MonoBehaviour
     private float yaw;
 
 
+    // Move camera towards a position
     private void MoveCamera(Vector3 targetPos)
     {
         transform.position += targetPos * Time.deltaTime * 30;

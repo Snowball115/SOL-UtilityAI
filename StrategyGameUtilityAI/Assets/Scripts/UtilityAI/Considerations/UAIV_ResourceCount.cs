@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Count a specific resource in the agents surrounding
 /// </summary>
 public class UAIV_ResourceCount : UtilityValue

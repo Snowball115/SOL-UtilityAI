@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Get agent energy count
+/// </summary>
 public class UAIV_AgentEnergy : UtilityValue
 {
     public UAIV_AgentEnergy(UtilityAgent agent, float maxInputValue) : base(agent, maxInputValue) { }

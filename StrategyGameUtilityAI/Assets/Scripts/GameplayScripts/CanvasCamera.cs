@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Simple script to rotate the agent's canvas towards the player's camera
+/// Simple script to rotate the agent's UI canvas towards the player's camera
 /// </summary>
 public class CanvasCamera : MonoBehaviour
 {
     private Camera cam;
+
 
     void Start()
     {

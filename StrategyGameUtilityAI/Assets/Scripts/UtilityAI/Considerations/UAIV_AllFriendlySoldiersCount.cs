@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// All friendly soldiers that are active count
+/// </summary>
 public class UAIV_AllFriendlySoldiersCount : UtilityValue
 {
     public UAIV_AllFriendlySoldiersCount(UtilityAgent agent, float maxInputValue) : base(agent, maxInputValue) { }

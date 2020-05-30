@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Attack enemy action
+/// </summary>
 public class AttackEnemy : UtilityAction
 {
     private GameObject closestEnemy;
@@ -31,7 +34,7 @@ public class AttackEnemy : UtilityAction
 
             _agent._AgentController._NavAgent.destination = closestEnemy.transform.position;
 
-            // Attack enemy if he is close enough
+            // Attack enemy if close enough
             if ((closestEnemy.transform.position - _agent.transform.position).magnitude < _agent._AgentController._AgentData.AttackRange)
             {
                 _agent._AgentController.Attack(_agent._AgentController._AgentData.Attack, closestEnemy);

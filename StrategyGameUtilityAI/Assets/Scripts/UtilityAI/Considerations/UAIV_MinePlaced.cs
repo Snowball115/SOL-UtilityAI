@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
-/// Check if lumberyard is placed or not
+﻿/// <summary>
+/// Check if mine is placed or not
 /// </summary>
 public class UAIV_MinePlaced : UtilityValue
 {

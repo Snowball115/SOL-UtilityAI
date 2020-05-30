@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Agent manager that stores all active agents and updates agents behaviour
+/// </summary>
 public class AgentManager : MonoBehaviour
 {
     // List of active agents of one manager instance

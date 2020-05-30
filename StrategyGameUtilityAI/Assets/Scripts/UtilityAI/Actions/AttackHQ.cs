@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Attack the hostile Headquarters
+/// Attack the hostile Headquarters action
 /// </summary>
 public class AttackHQ : UtilityAction
 {

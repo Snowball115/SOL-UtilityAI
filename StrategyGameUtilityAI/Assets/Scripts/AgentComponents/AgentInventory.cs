@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Agent inventory to store resources
+/// </summary>
 public class AgentInventory : MonoBehaviour
 {
     // Max size of inventory

@@ -36,6 +36,7 @@ public class ChopTree : UtilityAction
 
         _agent._AgentController._NavAgent.destination = closestTree.transform.position;
 
+        // Chop tree if close enough
         if (!_agent._AgentController._NavAgent.pathPending && _agent._AgentController._NavAgent.remainingDistance < miningRange)
         {
             _agent._AgentController._Inventory.Add(closestTree.GetComponent<EntityController>().GetMined());

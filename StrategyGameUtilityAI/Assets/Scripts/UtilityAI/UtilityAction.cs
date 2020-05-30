@@ -10,14 +10,14 @@ public class UtilityAction
     // Name in editor
     public string _Name;
 
-    // Check if action is active
-    public bool isActive { get; private set; }
-
     // The value the action has
     public float _UtilityScore;
 
     // Determines how the action should be prioritized over other actions
     public float _Weight;
+
+    // Check if action is active
+    public bool isActive { get; private set; }
 
     // All scorers that influence the action
     private List<UtilityScorer> _scorers;

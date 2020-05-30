@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Capture Point class (Flags the agent can capture)
+/// </summary>
 public class CapturePoint : MonoBehaviour
 {
     // Image that shows visual capture progress
@@ -65,6 +68,7 @@ public class CapturePoint : MonoBehaviour
     {
         if (other.GetComponent<Soldier>())
         {
+            // Add agent to list if he steps into the trigger
             agentsInTrigger.Add(other.gameObject);
         }
     }
@@ -141,8 +145,10 @@ public class CapturePoint : MonoBehaviour
     {
         if (other.GetComponent<Soldier>() && agentsInTrigger.Contains(other.gameObject))
         {
+            // Remove agent if he leaves trigger
             agentsInTrigger.Remove(other.gameObject);
 
+            // Safety checks for flag and trigger color
             if (_TeamOwner == null)
             {
                 lineRenderer.material.color = Color.white;
