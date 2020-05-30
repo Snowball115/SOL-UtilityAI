@@ -10,6 +10,9 @@ public class UtilityAction
     // Name in editor
     public string _Name;
 
+    // Check if action is active
+    public bool isActive { get; private set; }
+
     // The value the action has
     public float _UtilityScore;
 
@@ -21,9 +24,6 @@ public class UtilityAction
 
     // The Agent this action can access
     protected UtilityAgent _agent;
-
-    // Check if action is active
-    public bool isActive { get; private set; }
 
 
     public UtilityAction(UtilityAgent agent)
