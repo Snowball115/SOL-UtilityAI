@@ -17,7 +17,7 @@ public class UtilityAction
     public float _Weight;
 
     // All scorers that influence the action
-    public List<UtilityScorer> _Scorers;
+    private List<UtilityScorer> _scorers;
 
     // The Agent this action can access
     protected UtilityAgent _agent;
@@ -28,14 +28,14 @@ public class UtilityAction
 
     public UtilityAction(UtilityAgent agent)
     {
-        _Scorers = new List<UtilityScorer>();
+        _scorers = new List<UtilityScorer>();
         _agent = agent;
         _Name = this.GetType().ToString();
     }
 
     public UtilityAction(UtilityAgent agent, float initalScore)
     {
-        _Scorers = new List<UtilityScorer>();
+        _scorers = new List<UtilityScorer>();
         _agent = agent;
         _UtilityScore = initalScore;
         _Name = this.GetType().ToString();
@@ -50,20 +50,20 @@ public class UtilityAction
     // Add scorer to this action
     public void AddScorer(UtilityScorer scorer)
     {
-        _Scorers.Add(scorer);
+        _scorers.Add(scorer);
     }
 
     // Get the average value of all scorer outcomes
     public void EvaluateAllScorers()
     {
         // Check if any scorers exist
-        if (_Scorers.Count == 0) return;
+        if (_scorers.Count == 0) return;
 
         // We don't have to evaluate the whole list if only one scorer exists
-        if (_Scorers.Count == 1)
+        if (_scorers.Count == 1)
         {
-            _Scorers[0].EvaluateScore();
-            _UtilityScore = _Scorers[0]._CurrentScore;
+            _scorers[0].EvaluateScore();
+            _UtilityScore = _scorers[0]._CurrentScore;
             if (_Weight > 0) _UtilityScore *= _Weight;
             return;
         }
@@ -71,14 +71,14 @@ public class UtilityAction
         float average = 0;
 
         // Get average of all scores
-        for (int i = 0; i < _Scorers.Count; i++)
+        for (int i = 0; i < _scorers.Count; i++)
         {
-            _Scorers[i].EvaluateScore();
+            _scorers[i].EvaluateScore();
 
-            average += _Scorers[i]._CurrentScore;
+            average += _scorers[i]._CurrentScore;
         }
 
-        average /= _Scorers.Count;
+        average /= _scorers.Count;
 
         // Apply weight
         if (_Weight != 0) average *= _Weight;
