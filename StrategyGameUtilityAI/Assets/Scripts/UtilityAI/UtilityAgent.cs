@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Main script for agent to work with Utility AI
+/// Utility AI core of agent
 /// </summary>
 public class UtilityAgent : MonoBehaviour
 {
