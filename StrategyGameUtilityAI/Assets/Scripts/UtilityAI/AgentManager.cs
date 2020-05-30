@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AgentManager : MonoBehaviour
 {
-    // Control how often the agents update their behaviour
-    [SerializeField] private float updateInterval;
-
     // List of active agents of one manager instance
     public List<UtilityAgent> _ActiveAgents;
+
+    // Control how often the agents update their behaviour
+    [SerializeField] private float updateInterval;
 
     // Timer and bool to control the update loop
     private float intervalTimer;
