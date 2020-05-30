@@ -13,7 +13,7 @@ public class AgentSenses : MonoBehaviour
     public float _ViewRange;
 
     // Storing all visible objects
-    public Collider[] _VisibleObjects;
+    [SerializeField] private Collider[] _visibleObjects;
 
     // Closest entity for the agent
     private GameObject closestObj;
@@ -47,9 +47,9 @@ public class AgentSenses : MonoBehaviour
     // Get a specific object from array by tag
     public bool ContainsObject(GameObject go)
     {
-        for (int i = 0; i < _VisibleObjects.Length; i++)
+        for (int i = 0; i < _visibleObjects.Length; i++)
         {
-            if (go.CompareTag(_VisibleObjects[i].gameObject.tag)) return true;
+            if (go.CompareTag(_visibleObjects[i].gameObject.tag)) return true;
         }
 
         return false;
@@ -60,11 +60,11 @@ public class AgentSenses : MonoBehaviour
     {
         Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
 
-        for (int i = 0; i < _VisibleObjects.Length; i++)
+        for (int i = 0; i < _visibleObjects.Length; i++)
         {
-            if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
+            if (_visibleObjects[i].gameObject.GetComponent<Soldier>() != null)
             {
-                if (_VisibleObjects[i].gameObject.GetComponent<AgentController>()._Team != playerTeam) return true;
+                if (_visibleObjects[i].gameObject.GetComponent<AgentController>()._Team != playerTeam) return true;
             }
         }
 
@@ -76,10 +76,10 @@ public class AgentSenses : MonoBehaviour
     {
         int count = 0;
 
-        for (int i = 0; i < _VisibleObjects.Length; i++)
+        for (int i = 0; i < _visibleObjects.Length; i++)
         {
             // Searching by tag because other methods somehow don't work
-            if (go.CompareTag(_VisibleObjects[i].gameObject.tag)) count++;
+            if (go.CompareTag(_visibleObjects[i].gameObject.tag)) count++;
         }
 
         return count;
@@ -92,11 +92,11 @@ public class AgentSenses : MonoBehaviour
 
         int count = 0;
 
-        for (int i = 0; i < _VisibleObjects.Length; i++)
+        for (int i = 0; i < _visibleObjects.Length; i++)
         {
-            if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
+            if (_visibleObjects[i].gameObject.GetComponent<Soldier>() != null)
             {
-                if (_VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam) count++;
+                if (_visibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam) count++;
             }
         }
 
@@ -110,11 +110,11 @@ public class AgentSenses : MonoBehaviour
 
         int count = 0;
 
-        for (int i = 0; i < _VisibleObjects.Length; i++)
+        for (int i = 0; i < _visibleObjects.Length; i++)
         {
-            if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
+            if (_visibleObjects[i].gameObject.GetComponent<Soldier>() != null)
             {
-                if (_VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team == playerTeam) count++;
+                if (_visibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team == playerTeam) count++;
             }
         }
 
@@ -126,11 +126,11 @@ public class AgentSenses : MonoBehaviour
     {
         Enums.Teams playerTeam = GetComponent<AgentController>()._Team;
 
-        for (int i = 0; i < _VisibleObjects.Length; i++)
+        for (int i = 0; i < _visibleObjects.Length; i++)
         {
-            if (_VisibleObjects[i].gameObject.GetComponent<Soldier>() != null)
+            if (_visibleObjects[i].gameObject.GetComponent<Soldier>() != null)
             {
-                if (_VisibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam) closestObjCol = _VisibleObjects[i];
+                if (_visibleObjects[i].gameObject.GetComponent<Soldier>()._AgentController._Team != playerTeam) closestObjCol = _visibleObjects[i];
             }
         }
 
@@ -145,14 +145,14 @@ public class AgentSenses : MonoBehaviour
         float distance = 0;
         float tmpDistance = Mathf.Infinity;
 
-        for (int i = 0; i < _VisibleObjects.Length; i++)
+        for (int i = 0; i < _visibleObjects.Length; i++)
         {
-            distance = (transform.position - _VisibleObjects[i].transform.position).sqrMagnitude;
+            distance = (transform.position - _visibleObjects[i].transform.position).sqrMagnitude;
 
-            if (distance < tmpDistance && go.CompareTag(_VisibleObjects[i].gameObject.tag))
+            if (distance < tmpDistance && go.CompareTag(_visibleObjects[i].gameObject.tag))
             {
                 tmpDistance = distance;
-                closestObjCol = _VisibleObjects[i];
+                closestObjCol = _visibleObjects[i];
             }
         }
 
@@ -164,6 +164,6 @@ public class AgentSenses : MonoBehaviour
     // Main function to store all visible objects the agent can see
     private void GetObjectsInView()
     {
-        _VisibleObjects = Physics.OverlapSphere(transform.position, _ViewRange, _VisibleLayer);
+        _visibleObjects = Physics.OverlapSphere(transform.position, _ViewRange, _VisibleLayer);
     }
 }
