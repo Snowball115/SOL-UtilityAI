@@ -14,7 +14,7 @@ public class UtilityAgent : MonoBehaviour
     // Agent manager component
     public AgentManager _AgentManager;
 
-    // List of availabel actions for the agent
+    // List of available actions for the agent
     public List<UtilityAction> _AgentActions;
 
     // Action to use
