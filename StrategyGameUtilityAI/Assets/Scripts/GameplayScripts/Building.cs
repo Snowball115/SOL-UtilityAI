@@ -9,7 +9,7 @@ public class Building : MonoBehaviour
 
     public Enums.Teams _PlayerTeam;
 
-    public float _LifePoints;
+    private float lifePoints;
 
 
     void Start()
@@ -20,9 +20,9 @@ public class Building : MonoBehaviour
     // Retrieve damage
     public void GetDamaged(float damage)
     {
-        _LifePoints -= damage;
+        lifePoints -= damage;
 
-        if (_LifePoints <= 0) DestroyBuilding();
+        if (lifePoints <= 0) DestroyBuilding();
     }
 
     // Destroy building

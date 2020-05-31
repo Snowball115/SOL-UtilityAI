@@ -22,7 +22,7 @@ public class CapturePoint : MonoBehaviour
     private readonly float captureLimit = 10.0f;
 
     // All agents that are trying to capture the CP
-    public List<GameObject> agentsInTrigger;
+    private List<GameObject> agentsInTrigger;
 
     // Flag and circle graphics
     private MeshRenderer flagRenderer;
