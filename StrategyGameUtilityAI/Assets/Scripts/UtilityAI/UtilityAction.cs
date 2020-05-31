@@ -20,7 +20,7 @@ public class UtilityAction
     public bool isActive { get; private set; }
 
     // All scorers that influence the action
-    private List<UtilityScorer> _scorers;
+    [SerializeField] private List<UtilityScorer> _scorers;
 
     // The Agent this action can access
     protected UtilityAgent _agent;
