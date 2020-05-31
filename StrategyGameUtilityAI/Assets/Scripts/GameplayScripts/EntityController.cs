@@ -9,7 +9,7 @@ public class EntityController : MonoBehaviour
     public Enums.ResourceType _ResourceType;
 
     // How many resources can be farmed from this entity
-    public int _ResourcePoints;
+    [SerializeField] private int resourcePoints;
 
 
     // Entity getting mined
@@ -18,9 +18,9 @@ public class EntityController : MonoBehaviour
         ResourceBase resource = new ResourceBase();
         resource._Type = _ResourceType;
 
-        if (_ResourcePoints <= 0) DestroyEntity();
+        if (resourcePoints <= 0) DestroyEntity();
 
-        _ResourcePoints -= 1;
+        resourcePoints -= 1;
 
         return resource;
     }

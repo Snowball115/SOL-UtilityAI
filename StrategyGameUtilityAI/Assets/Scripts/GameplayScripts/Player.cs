@@ -46,8 +46,10 @@ public class Player : MonoBehaviour
     {
         _PlayerInventory = GetComponent<PlayerInventory>();
 
+        // Save player headquarters
         _PlayerBuildings.Add(_PlayerHeadquarters);
 
+        // Set maximum soldiers the player can produce
         _MaxSoldiers = 10;
     }
 
