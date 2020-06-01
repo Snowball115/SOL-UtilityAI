@@ -13,6 +13,7 @@ public class Lumberjack : UtilityAgent
     public soAnimationCurve _LumberyardPlacedCurve;
     public soAnimationCurve _TreeCountCurve;
     public soAnimationCurve _InventorySizeCurve;
+    public soAnimationCurve _EnemySoldierThreatCurve;
 
     // Is a lumberyard placed by the agent?
     public bool isLumberyardPlaced { get; set; }
@@ -31,6 +32,7 @@ public class Lumberjack : UtilityAgent
         UAIV_LumberyardPlaced lumberyardPlaced = new UAIV_LumberyardPlaced(this, 1);
         UAIV_ResourceCount treeCount = new UAIV_ResourceCount(GameCache._Cache.GetData("Tree").tag, this, 4);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
+        UAIV_SoldierEnemyCount enemySoldierCount = new UAIV_SoldierEnemyCount(this, 2.0f);
 
         // ****** SCORERS ******
         UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
@@ -39,6 +41,7 @@ public class Lumberjack : UtilityAgent
         UtilityScorer scorer_LumberyardBoolCheck = new UtilityScorer(lumberyardPlaced, _LumberyardPlacedCurve);
         UtilityScorer scorer_TreeCount = new UtilityScorer(treeCount, _TreeCountCurve);
         UtilityScorer scorer_InventorySize = new UtilityScorer(inventorySize, _InventorySizeCurve);
+        UtilityScorer scorer_enemySoldierThreatLevel = new UtilityScorer(enemySoldierCount, _EnemySoldierThreatCurve);
 
         // ****** ACTIONS ******
         RoamAround roamAction_SearchTrees = new RoamAround(this, 1.0f);
@@ -57,12 +60,17 @@ public class Lumberjack : UtilityAgent
         SleepAndRest sleepRestAction = new SleepAndRest("Lumberyard", this, 0.0f);
         sleepRestAction.AddScorer(scorer_AgentEnergy);
 
+        Hide hideAction = new Hide("Headquarters", this, 0.0f);
+        hideAction.AddScorer(scorer_enemySoldierThreatLevel);
+        hideAction.SetWeight(3);
+
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchTrees);
         _AgentActions.Add(chopTreeAction);
         _AgentActions.Add(deliverResourceAction);
         _AgentActions.Add(eatFoodAction);
         _AgentActions.Add(sleepRestAction);
+        _AgentActions.Add(hideAction);
     }
 
     protected override void Update()

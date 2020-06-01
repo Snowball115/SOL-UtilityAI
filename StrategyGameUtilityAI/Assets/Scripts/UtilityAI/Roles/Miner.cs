@@ -13,6 +13,7 @@ public class Miner : UtilityAgent
     public soAnimationCurve _MinePlacedCurve;
     public soAnimationCurve _OreCountCurve;
     public soAnimationCurve _InventorySizeCurve;
+    public soAnimationCurve _EnemySoldierThreatCurve;
 
     // Is a mine placed by the agent?
     public bool isMinePlaced { get; set; }
@@ -31,6 +32,7 @@ public class Miner : UtilityAgent
         UAIV_MinePlaced minePlaced = new UAIV_MinePlaced(this, 1);
         UAIV_ResourceCount oreCount = new UAIV_ResourceCount(GameCache._Cache.GetData("Ore").tag, this, 1);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
+        UAIV_SoldierEnemyCount enemySoldierCount = new UAIV_SoldierEnemyCount(this, 2.0f);
 
         // ****** SCORERS ******
         UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
@@ -39,6 +41,7 @@ public class Miner : UtilityAgent
         UtilityScorer scorer_OreBoolCheck = new UtilityScorer(minePlaced, _MinePlacedCurve);
         UtilityScorer scorer_OreCount = new UtilityScorer(oreCount, _OreCountCurve);
         UtilityScorer scorer_InventorySize = new UtilityScorer(inventorySize, _InventorySizeCurve);
+        UtilityScorer scorer_enemySoldierThreatLevel = new UtilityScorer(enemySoldierCount, _EnemySoldierThreatCurve);
 
         // ****** ACTIONS ******
         RoamAround roamAction_SearchOres = new RoamAround(this, 1.0f);
@@ -57,12 +60,17 @@ public class Miner : UtilityAgent
         SleepAndRest sleepRestAction = new SleepAndRest("Mine", this, 0.0f);
         sleepRestAction.AddScorer(scorer_AgentEnergy);
 
+        Hide hideAction = new Hide("Headquarters", this, 0.0f);
+        hideAction.AddScorer(scorer_enemySoldierThreatLevel);
+        hideAction.SetWeight(3);
+
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchOres);
         _AgentActions.Add(mineOreAction);
         _AgentActions.Add(deliverResourceAction);
         _AgentActions.Add(eatFoodAction);
         _AgentActions.Add(sleepRestAction);
+        _AgentActions.Add(hideAction);
     }
 
     protected override void Update()

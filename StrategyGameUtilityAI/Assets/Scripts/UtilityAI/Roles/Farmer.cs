@@ -13,6 +13,7 @@ public class Farmer : UtilityAgent
     public soAnimationCurve _FarmPlacedCurve;
     public soAnimationCurve _DistanceToHQCurve;
     public soAnimationCurve _InventorySizeCurve;
+    public soAnimationCurve _EnemySoldierThreatCurve;
 
     // Is a farm placed by the agent?
     public bool isFarmPlaced { get; set; }
@@ -31,6 +32,7 @@ public class Farmer : UtilityAgent
         UAIV_FarmPlaced farmPlaced = new UAIV_FarmPlaced(this, 1);
         UAIV_DistanceTo distanceToHQ = new UAIV_DistanceTo(_AgentController._PlayerOwner.GetBuilding_ByTag(GameCache._Cache.GetData("Headquarters").tag), this, 20);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
+        UAIV_SoldierEnemyCount enemySoldierCount = new UAIV_SoldierEnemyCount(this, 3.0f);
 
         // ****** SCORERS ******
         UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
@@ -39,6 +41,7 @@ public class Farmer : UtilityAgent
         UtilityScorer scorer_FarmBoolCheck = new UtilityScorer(farmPlaced, _FarmPlacedCurve);
         UtilityScorer scorer_DistanceToHQ = new UtilityScorer(distanceToHQ, _DistanceToHQCurve);
         UtilityScorer scorer_InventorySize = new UtilityScorer(inventorySize, _InventorySizeCurve);
+        UtilityScorer scorer_enemySoldierThreatLevel = new UtilityScorer(enemySoldierCount, _EnemySoldierThreatCurve);
 
         // ****** ACTIONS ******
         RoamAround roamAction_SearchFarmSpot = new RoamAround(this, 0.0f);
@@ -57,12 +60,17 @@ public class Farmer : UtilityAgent
         SleepAndRest sleepRestAction = new SleepAndRest("Field", this, 0.0f);
         sleepRestAction.AddScorer(scorer_AgentEnergy);
 
+        Hide hideAction = new Hide("Headquarters", this, 0.0f);
+        hideAction.AddScorer(scorer_enemySoldierThreatLevel);
+        hideAction.SetWeight(3);
+
         // ****** REGISTER ACTIONS ******
         _AgentActions.Add(roamAction_SearchFarmSpot);
         _AgentActions.Add(farmFieldAction);
         _AgentActions.Add(deliverResourceAction);
         _AgentActions.Add(eatFoodAction);
         _AgentActions.Add(sleepRestAction);
+        _AgentActions.Add(hideAction);
     }
 
     protected override void Update()
