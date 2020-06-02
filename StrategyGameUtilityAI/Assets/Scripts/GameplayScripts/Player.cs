@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     public List<GameObject> _CapturedCPs;
 
     // Player inventory
-    public PlayerInventory _PlayerInventory;
+    [HideInInspector] public PlayerInventory _PlayerInventory;
 
     // Max and current soldiers count
     public int _MaxSoldiers { get; private set; }
