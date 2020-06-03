@@ -9,7 +9,7 @@ public class Building : MonoBehaviour
 
     public Enums.Teams _PlayerTeam;
 
-    private float lifePoints;
+    [SerializeField] private float lifePoints;
 
 
     void Start()

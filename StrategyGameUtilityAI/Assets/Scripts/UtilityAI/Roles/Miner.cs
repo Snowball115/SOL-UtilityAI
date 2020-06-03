@@ -32,7 +32,7 @@ public class Miner : UtilityAgent
         UAIV_MinePlaced minePlaced = new UAIV_MinePlaced(this, 1);
         UAIV_ResourceCount oreCount = new UAIV_ResourceCount(GameCache._Cache.GetData("Ore").tag, this, 1);
         UAIV_InventorySize inventorySize = new UAIV_InventorySize(this, _AgentController._Inventory._MaxInventorySize);
-        UAIV_SoldierEnemyCount enemySoldierCount = new UAIV_SoldierEnemyCount(this, 2.0f);
+        UAIV_SoldierEnemyCount enemySoldierCount = new UAIV_SoldierEnemyCount(this, 3.0f);
 
         // ****** SCORERS ******
         UtilityScorer scorer_AgentHealth = new UtilityScorer(agentHealth, _HealthCurve);
