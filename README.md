@@ -9,3 +9,7 @@ This project was created during the time at the university.
 Unity version: 2019.3.0f6
 
 # Screenshots
+
+![Screen01](https://github.com/Snowball115/SOL-AIBehaviourTree-Assignment/blob/master/Screenshots/Screen01.png)
+![Screen02](https://github.com/Snowball115/SOL-AIBehaviourTree-Assignment/blob/master/Screenshots/Screen02.png)
+![Screen03](https://github.com/Snowball115/SOL-AIBehaviourTree-Assignment/blob/master/Screenshots/Screen03.png)
